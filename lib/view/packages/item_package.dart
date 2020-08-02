@@ -22,7 +22,7 @@ class ItemPackage extends StatelessWidget {
       this.onOpen,
       this.onDownload});
 
-  _build() {
+  _build3() {
     return Container(
       padding: EdgeInsets.all(0.0),
       margin: EdgeInsets.all(4.0),
@@ -93,9 +93,8 @@ class ItemPackage extends StatelessWidget {
                     child: TextComp(
                         value: '${package.latest.version}',
                         color: Colors.white,
-                        maxLine: 1,
                         fontWeight: FontWeight.bold,
-                        align: TextAlign.center,
+                        align: TextAlign.left,
                         size: 12.0),
                     radious: 30,
                   ),
@@ -113,7 +112,7 @@ class ItemPackage extends StatelessWidget {
     // TODO: implement build
     size = MediaQuery.of(context).size;
     return InkWell(
-      child: _build(),
+      child: _build3(),
       onTap: onOpen,
     );
   }
