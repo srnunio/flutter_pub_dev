@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/241032126/connectivity.iml" filepath="$PROJECT_DIR$/.idea/modules/241032126/connectivity.iml" group="android/connectivity" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-398211500/connectivity_for_web.iml" filepath="$PROJECT_DIR$/.idea/modules/-398211500/connectivity_for_web.iml" group="android/connectivity_for_web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/128953422/connectivity_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/128953422/connectivity_macos.iml" group="android/connectivity_macos" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/901586892/fluttertoast.iml" filepath="$PROJECT_DIR$/.idea/modules/901586892/fluttertoast.iml" group="android/fluttertoast" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1450891909/share.iml" filepath="$PROJECT_DIR$/.idea/modules/1450891909/share.iml" group="android/share" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1589235444/url_launcher.iml" filepath="$PROJECT_DIR$/.idea/modules/1589235444/url_launcher.iml" group="android/url_launcher" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2054747130/url_launcher_linux.iml" filepath="$PROJECT_DIR$/.idea/modules/-2054747130/url_launcher_linux.iml" group="android/url_launcher_linux" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-912452981/url_launcher_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/-912452981/url_launcher_macos.iml" group="android/url_launcher_macos" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1221577154/url_launcher_web.iml" filepath="$PROJECT_DIR$/.idea/modules/1221577154/url_launcher_web.iml" group="android/url_launcher_web" />
+    </modules>
+  </component>
+</project>
