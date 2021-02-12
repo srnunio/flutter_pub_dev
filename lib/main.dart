@@ -1,33 +1,30 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_package/view/styles.dart';
-
-import 'core/utils/Translations.dart';
-import 'core/utils/utils.dart';
+import 'package:flutter_package/src/domain/core/navigation/navigation_service.dart';
+import 'package:flutter_package/src/infrastructure/core/network_builder.dart';
+import 'package:flutter_package/src/injection/injection_config.dart';
+import 'package:flutter_package/src/l18n.dart';
 import 'router.dart';
-
-final navigatorKey = GlobalKey<NavigatorState>();
+import 'src/utils/theme.dart';
+import 'src/utils/util.dart';
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Translations.load(await Utils.defaultLocale());
+  await I18n.load(await Util.defaultLocale());
+  final network = NetworkBuilder();
+  InjectorConfig.init(network.build());
   runApp(PubFlutter());
 }
 
 class PubFlutter extends StatelessWidget {
   var supportedLocales = <Locale>[
     const Locale('pt', 'PT'),
-    const Locale('en', 'US'),
-    Translations.current.currentLanguage
+    const Locale('en', 'EN'),
+    I18n.instance.currentLanguage
   ];
 
   var localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    const TranslationsDelegate(),
+    const I18nDelegate(),
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate
   ];
@@ -35,7 +32,7 @@ class PubFlutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
+      navigatorKey: inject<NavigationService>().navigator,
       supportedLocales: supportedLocales,
       localizationsDelegates: localizationsDelegates,
       localeResolutionCallback:
@@ -50,8 +47,8 @@ class PubFlutter extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      theme: Styles.themeLight(),
-      onGenerateRoute: Router.generateRoute,
+      theme: CustomTheme.themeBuild(),
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }

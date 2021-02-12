@@ -3,10 +3,10 @@
   "try_again": "Try again",
   "connection_failed": "Connection failed",
   "no_internet_access": "No internet access",
+  "server_failure": "A temporary error has occurred, please try again",
   "app": "Flutter Packages",
   "no_results_found": "No results found",
   "error_readme": "unavailable information",
-  "empty_packages": "No packages found",
   "update_view": "Swipes down to update",
   "search_package": "Search package flutter",
   "search_invalidates": "Search invalidates",
@@ -17,6 +17,9 @@
   "darkmode": "Dark Mode",
   "versions": "Versions",
   "about": "About",
-  "topo": "Go to the top"
+  "topo": "Go to the top",
+  "likes": "Likes",
+  "popularity": "Popularity",
+  "points": "Pub points"
 
 }

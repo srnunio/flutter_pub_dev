@@ -3,10 +3,10 @@
   "try_again": "Tentar novamente",
   "connection_failed": "Falha na conexão",
   "no_internet_access": "Sem ligação a internet",
+  "server_failure": "Ocorreu um erro temporário , por favor tenta novamente ",
   "app": "Flutter Packages",
   "no_results_found": "Nenhum resultado encontrado",
   "error_readme": "Informação indisponível",
-  "empty_packages": "Nenhum pacote encontrado",
   "update_view": "Desliza para baixo para actualizar",
   "search_package": "Pesquisa pacotes flutter",
   "search_invalidates": "Pesquisa inválida",
@@ -17,7 +17,10 @@
   "darkmode": "Modo noturno",
   "versions": "Versões",
   "about": "Sobre",
-  "topo": "Ir ao topo"
+  "topo": "Ir ao topo",
+  "likes": "Gostos",
+  "popularity": "Popularidade",
+  "points": "Pontos"
 
 
 }
