@@ -1,29 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_package/model/domain/package.dart';
-import 'package:flutter_package/view/packages/all_packages.dart';
-import 'package:flutter_package/view/packages/details_package.dart';
-import 'package:flutter_package/view/settings_screen.dart';
-import 'package:flutter_package/view/splash_view_screen.dart';
+import 'package:flutter_package/src/presentation/packages/packages_screen.dart';
+import 'package:flutter_package/src/presentation/search/search_screen.dart';
+import 'package:flutter_package/src/presentation/settings_screen.dart';
+import 'package:flutter_package/src/presentation/splash_view_screen.dart';
 
-class Router {
-  static const RouterPackageViewScreen = 'PackageViewScreen';
-  static const RouterPackageHomeScreen = 'PackageHomeScreen';
-  static const RouterSettingScreen= 'SettingScreen';
+import 'src/presentation/packages/detail_package_screen.dart';
 
+class AnimationRouterPager extends MaterialPageRoute {
+  WidgetBuilder builder;
+
+  AnimationRouterPager({this.builder}) : super(builder: builder);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return FadeTransition(opacity: animation, child: child);
+  }
+}
+
+class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => SplashScreen());
-      case RouterPackageHomeScreen:
-        return MaterialPageRoute(builder: (_) => PackageHomeScreen());
-      case RouterPackageViewScreen:
-        var package = settings.arguments as Package;
-        return MaterialPageRoute(builder: (_) => DetailsPackage(package));
-        case RouterSettingScreen:
-        return MaterialPageRoute(builder: (_) => SettingScreen());
+        return AnimationRouterPager(builder: (_) => SplashScreen());
+      case PackagesScreen.route:
+        return AnimationRouterPager(builder: (_) => PackagesScreen());
+      case DetailPackageScreen.route:
+        var name = settings.arguments as String;
+        return AnimationRouterPager(builder: (_) => DetailPackageScreen(name));
+      case SettingScreen.route:
+        return AnimationRouterPager(builder: (_) => SettingScreen());
+      case SearchScreen.route:
+        return AnimationRouterPager(builder: (_) => SearchScreen());
       default:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return AnimationRouterPager(builder: (_) => SplashScreen());
     }
   }
 }
