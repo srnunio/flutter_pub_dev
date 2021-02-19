@@ -5,9 +5,16 @@
 ##### available on play store (https://shorturl.at/xFJS1)
 ##### official website (https://pub.dev/packages) 
 
+
 #### Find and use packages to build Dart and Flutter apps.
 This application does not require user authentication and data in this application comes from the https://pub.dartlang.org/api/
- 
+
+## Getting Started 🚀
+
+- Clone the repo
+- Install the dependicies
+- Run it
+
 ## Features
 
 - **List packages**
@@ -22,7 +29,7 @@ This application does not require user authentication and data in this applicati
 - **Open package on github**
 - **Share link package** on ![pub.dev](https://pub.dev/packages)
 
-## Screenshots
+## 📸 Screenshots
 
 
 <p float="left;padding=10px">
