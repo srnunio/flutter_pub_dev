@@ -24,10 +24,10 @@ class Score {
   Map<String, dynamic> toMap() {
     // ignore: unnecessary_cast
     return {
-      'maxPoints': this.maxPoints,
-      'likeCount': this.likeCount,
-      'popularityScore': this.popularityScore,
-      'grantedPoints': this.grantedPoints,
+      'maxPoints': this.maxPoints??0,
+      'likeCount': this.likeCount??0,
+      'popularityScore': this.popularityScore??0,
+      'grantedPoints': this.grantedPoints??0,
     } as Map<String, dynamic>;
   }
 
@@ -37,7 +37,8 @@ class Score {
 
 extension Scorex on Score {
   String getPopularity() {
-    var result = (popularityScore * 100).roundToDouble();
+    var result =
+        (popularityScore != null) ? (popularityScore * 100).roundToDouble() : 0;
     return '${result}%';
   }
 }

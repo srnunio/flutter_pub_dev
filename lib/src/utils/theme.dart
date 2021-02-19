@@ -41,7 +41,7 @@ class CustomTheme {
       accentColor: primary,
       primaryColor: primary,
       backgroundColor: backgroundColor,
-      scaffoldBackgroundColor: placeholderColor,
+      scaffoldBackgroundColor: backgroundColor,
       dialogBackgroundColor: backgroundColor,
       fontFamily: 'Font',
       iconTheme: IconThemeData(color: primary),

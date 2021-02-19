@@ -36,7 +36,6 @@ class _SettingState extends State<_SettingView>
   }
 
   onGoGit() async {
-
     try {
       Util.openLink(url: Constants.GITHUB);
     } catch (ex) {}
@@ -59,12 +58,15 @@ class _SettingState extends State<_SettingView>
     return Scaffold(
       body: SafeArea(
           child: Scaffold(
+        backgroundColor: CustomTheme.backgroundColor,
         appBar: AppBar(
           elevation: 0.0,
+          brightness: CustomTheme.brightness,
           backgroundColor: CustomTheme.backgroundColor,
           title: Txt(
             'about'.translate,
-            textStyle: (_) => _.copyWith(fontWeight: FontWeight.bold),
+            textStyle: (_) => _.copyWith(
+                fontWeight: FontWeight.bold, color: CustomTheme.titleColor),
           ),
         ),
         body: Container(

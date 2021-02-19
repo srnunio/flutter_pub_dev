@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_package/src/domain/core/navigation/navigation_service.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/packages/packages_screen.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
-
 class SplashScreen extends StatefulWidget {
   static const route = '/';
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -32,22 +33,27 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomTheme.backgroundColor,
-      body: Container(
-        color: CustomTheme.backgroundColor,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Center(
-              child: Image.asset(
-                'assets/images/dartlogo.png',
-                width: 120,
-                height: 120,
-                fit: BoxFit.cover,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light.copyWith(
+            systemNavigationBarColor: CustomTheme.backgroundColor,
+            statusBarIconBrightness: CustomTheme.brightness),
+        child: Container(
+          color: CustomTheme.backgroundColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Image.asset(
+                  'assets/images/dartlogo.png',
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

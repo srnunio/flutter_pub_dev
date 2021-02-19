@@ -1,13 +1,13 @@
 import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_package/src/presentation/search/search_screen.dart';
 import 'package:flutter_package/src/utils/uihelper.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
-import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
@@ -134,6 +134,11 @@ class PackagesScreenState extends State<PackagesScreen>
         brightness: CustomTheme.brightness,
         centerTitle: false,
         actions: <Widget>[
+          IconButton(
+              icon: CustomIcon(icon: 'search'),
+              onPressed: () {
+                _model.navigateToPushNamed(routeName: SearchScreen.route);
+              }),
           IconButton(
               icon: CustomIcon(icon: 'settings'),
               onPressed: () {

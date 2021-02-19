@@ -2,6 +2,7 @@ import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
 import 'package:flutter_package/src/utils/uihelper.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
@@ -78,6 +79,45 @@ class _Title extends BaseComponent {
   }
 }
 
+class _TitleDependecie extends BaseComponent {
+  final Dependencie dependencie;
+
+  _TitleDependecie({@required this.dependencie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Txt(
+            dependencie.name,
+            textAlign: TextAlign.left,
+            textStyle: (_) => _.copyWith(
+                fontWeight: FontWeight.bold, color: CustomTheme.primary),
+          ),
+          Txt(
+            ':',
+            textAlign: TextAlign.center,
+            textStyle: (_) => _.copyWith(
+                fontWeight: FontWeight.bold, color: CustomTheme.primary),
+          ),
+          UIHelper.horizontalSpaceSmall(),
+          Expanded(
+              child: Txt(
+            dependencie.version,
+            textAlign: TextAlign.left,
+            textColor: CustomTheme.subtitleColor,
+          )),
+        ],
+      ),
+      padding: EdgeInsets.all(4.0),
+    );
+  }
+}
+
 class DetailPackageScreen extends StatefulWidget {
   static const route = '/detail_package_screen';
   final String name;
@@ -120,12 +160,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               Expanded(
                   child: _Title(
                 title: 'likes'.translate.toUpperCase(),
-                value: '${_model.score.likeCount}',
+                value: '${_model.score.likeCount??0}',
               )),
               Expanded(
                   child: _Title(
                 title: 'points'.translate.toUpperCase(),
-                value: '${_model.score.grantedPoints}',
+                value: '${_model.score.grantedPoints??0}',
               )),
               Expanded(
                   child: _Title(
@@ -206,7 +246,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   _buildReadme() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(_model.loadingReadme? 16.0 : 0.0),
+      padding: EdgeInsets.all(_model.loadingReadme ? 16.0 : 0.0),
       margin: EdgeInsets.only(top: 8.0),
       decoration:
           decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
@@ -231,6 +271,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 'Readme',
                 textStyle: (_) => _.copyWith(
                   fontWeight: FontWeight.bold,
+                  color: CustomTheme.titleColor,
                   fontSize: 18,
                 ),
               ),
@@ -257,14 +298,11 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                               ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
                             ]),
                             onTapLink: (text, href, title) {
-                              print('onTapLink:text:${text}');
-                              print('onTapLink:href:${href}');
-                              print('onTapLink:title:${title}');
                               Util.openLink(url: href);
                             },
                           )
                         : Container(
-                      padding:  EdgeInsets.all(16.0),
+                            padding: EdgeInsets.all(16.0),
                             child: _TapInfo(
                               title: 'error_readme'.translate,
                               onTap: () {
@@ -279,13 +317,51 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
+  _buildDependencies() {
+    if (_model.package.dependencies.isEmpty) return empty;
+
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 8.0),
+      decoration:
+          decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        childrenPadding: EdgeInsets.all(0.0),
+        tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
+        title: Txt(
+          'dependencies'.translate,
+          textStyle: (_) => _.copyWith(
+            fontWeight: FontWeight.bold,
+            color: CustomTheme.titleColor,
+            fontSize: 18,
+          ),
+        ),
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: List.generate(
+                      _model.package.dependencies.length,
+                      (index) => _TitleDependecie(
+                          dependencie: _model.package.dependencies[index]))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   _build() {
     if (_model.isBusy && !_model.hasData) {
       return Center(child: CustomProgress());
     }
     if (_model.hasError && !_model.hasData) {
       return FailureMessageView(
-        icon: 'bug',
         isColor: true,
         sizeIcon: 80,
         message: _message,
@@ -296,7 +372,6 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     }
     if (!_model.hasData) {
       return FailureMessageView(
-        icon: 'bug',
         isColor: true,
         sizeIcon: 80,
         message: _message,
@@ -337,6 +412,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 ],
               ),
             ),
+            _buildDependencies(),
             _buildVersions(),
             _buildScore(),
             _buildReadme()
@@ -350,6 +426,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   Widget build(BuildContext context) {
     return Observer(
         builder: (_) => Scaffold(
+              backgroundColor: CustomTheme.placeholderColor,
               appBar: AppBar(
                 brightness: CustomTheme.brightness,
                 centerTitle: false,

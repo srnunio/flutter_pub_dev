@@ -59,6 +59,7 @@ class PackageService extends IPackageService {
   Future<Either<RequestFailure, Package>> getPackageName(
       {String namePackage}) async {
     try {
+      print('namePackage: ${namePackage}');
       final response = await dio.get('$path/$namePackage',
           options: Options(
             headers: {
@@ -66,12 +67,11 @@ class PackageService extends IPackageService {
               'Accept': 'application/json',
             },
           ));
+      print('${response.statusCode}');
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
       var package = Package.from(response.data);
-
-      print('${package.versions}');
 
       return Right(package);
     } on DioError catch (e) {

@@ -23,6 +23,12 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
       (_$packageComputed ??= Computed<Package>(() => super.package,
               name: '_DetailPackageViewModel.package'))
           .value;
+  Computed<Score> _$scoreComputed;
+
+  @override
+  Score get score => (_$scoreComputed ??= Computed<Score>(() => super.score,
+          name: '_DetailPackageViewModel.score'))
+      .value;
   Computed<String> _$readmeComputed;
 
   @override
@@ -42,6 +48,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   bool get hasReadme =>
       (_$hasReadmeComputed ??= Computed<bool>(() => super.hasReadme,
               name: '_DetailPackageViewModel.hasReadme'))
+          .value;
+  Computed<bool> _$hasScoreComputed;
+
+  @override
+  bool get hasScore =>
+      (_$hasScoreComputed ??= Computed<bool>(() => super.hasScore,
+              name: '_DetailPackageViewModel.hasScore'))
           .value;
   Computed<bool> _$loadingReadmeComputed;
 
@@ -63,6 +76,21 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   set _package(Package value) {
     _$_packageAtom.reportWrite(value, super._package, () {
       super._package = value;
+    });
+  }
+
+  final _$_scoreAtom = Atom(name: '_DetailPackageViewModel._score');
+
+  @override
+  Score get _score {
+    _$_scoreAtom.reportRead();
+    return super._score;
+  }
+
+  @override
+  set _score(Score value) {
+    _$_scoreAtom.reportWrite(value, super._score, () {
+      super._score = value;
     });
   }
 
@@ -128,6 +156,14 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     return _$loadReadmeAsyncAction.run(() => super.loadReadme());
   }
 
+  final _$loadScoreAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadScore');
+
+  @override
+  Future<void> loadScore() {
+    return _$loadScoreAsyncAction.run(() => super.loadScore());
+  }
+
   final _$_DetailPackageViewModelActionController =
       ActionController(name: '_DetailPackageViewModel');
 
@@ -148,9 +184,11 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
 failure: ${failure},
 hasError: ${hasError},
 package: ${package},
+score: ${score},
 readme: ${readme},
 hasData: ${hasData},
 hasReadme: ${hasReadme},
+hasScore: ${hasScore},
 loadingReadme: ${loadingReadme}
     ''';
   }

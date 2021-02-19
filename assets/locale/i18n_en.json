@@ -4,13 +4,13 @@
   "connection_failed": "Connection failed",
   "no_internet_access": "No internet access",
   "server_failure": "A temporary error has occurred, please try again",
-  "app": "Flutter Packages",
+  "app": "Packages",
   "no_results_found": "No results found",
   "error_readme": "unavailable information",
   "update_view": "Swipes down to update",
   "search_package": "Search package flutter",
   "search_invalidates": "Search invalidates",
-  "app_desc": "This is an example using the pub.dev api where the goal is to list the packages",
+  "app_desc": "Find and use packages to build Dart and Flutter apps.",
   "git_desc": "Source code on Github",
   "store_desc": "View in google store",
   "website": "Website",
@@ -20,6 +20,7 @@
   "topo": "Go to the top",
   "likes": "Likes",
   "popularity": "Popularity",
-  "points": "Pub points"
-
+  "points": "Pub points",
+  "dependencies": "Dependencies",
+  "search_desc": "Write package name"
 }

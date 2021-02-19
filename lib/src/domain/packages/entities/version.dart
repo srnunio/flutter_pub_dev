@@ -19,7 +19,7 @@ class Version {
     return new Version(
       version: map['version'] as String,
       archive_url: map['archive_url'] as String,
-      pubspec:    Pubspec.fromMap(map['pubspec']),
+      pubspec: Pubspec.fromMap(map['pubspec']),
     );
   }
 }

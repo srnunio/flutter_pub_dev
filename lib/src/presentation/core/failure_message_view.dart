@@ -25,7 +25,7 @@ class FailureMessageView extends BaseComponent {
       {@required String message,
       this.onTap,
       this.textButton = 'try_again',
-      this.icon = 'try_again',
+      this.icon ,
       this.isHideButton = false,
       this.reference = true,
       this.button,
@@ -53,6 +53,7 @@ class FailureMessageView extends BaseComponent {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

@@ -18,4 +18,18 @@ class Dependencie{
       version: map['version'] as String,
     );
   }
+
+  static List<Dependencie> getDependencies(
+      Map<String, dynamic> dependencies) {
+    try {
+      var entries = dependencies.entries.toList();
+      entries.removeWhere((element) => (element.value is Map));
+      return entries
+          .map((e) => Dependencie(version: e.value, name: e.key))
+          .toList();
+    } catch (e) {
+      return List<Dependencie>();
+    }
+  }
 }
+

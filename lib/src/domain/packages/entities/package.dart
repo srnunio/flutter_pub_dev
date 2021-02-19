@@ -1,17 +1,26 @@
 import 'dart:convert';
 
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
+import 'package:flutter_package/src/utils/util.dart';
 
+import 'dependencie.dart';
 import 'version.dart';
 
 class Package {
-  String name;
-  String package_url;
-  String url;
-  List<Version> versions;
-  Version latest;
+  final String name;
+  final String package_url;
+  final String url;
+  final List<Version> versions;
+  final Version latest;
+  final List<Dependencie> dependencies;
 
-  Package({this.name, this.package_url, this.url, this.latest, this.versions});
+  const Package(
+      {this.name,
+      this.package_url,
+      this.url,
+      this.latest,
+      this.versions,
+      this.dependencies});
 
   Map<String, dynamic> toMap() {
     return {
@@ -38,9 +47,11 @@ class Package {
       package_url: map['package_url'] as String,
       url: map['url'] as String,
       latest: Version.fromMap(map['latest']),
-      versions: List.from(map['versions'])
-          .map((e) => Version.fromMap(e))
-          .toList(),
+      dependencies:
+          Dependencie.getDependencies(map['latest']['pubspec']['dependencies']),
+      versions: (!map.containsKey('versions'))
+          ? []
+          : List.from(map['versions']).map((e) => Version.fromMap(e)).toList(),
     );
   }
 }

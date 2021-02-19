@@ -15,18 +15,14 @@ class ItemPackage extends StatelessWidget {
   Function onTap;
   Size size;
 
-  ItemPackage(
-      {this.package,
-      this.onLink,
-      this.onShare,
-      this.onTap});
+  ItemPackage({this.package, this.onLink, this.onShare, this.onTap});
 
   _build() {
     return Container(
       padding: EdgeInsets.all(0.0),
       margin: EdgeInsets.all(4.0),
       decoration:
-          decoration(color: CustomTheme.backgroundColor, borderRadius: 8.0),
+          decoration(color: CustomTheme.placeholderColor, borderRadius: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -91,7 +87,7 @@ class ItemPackage extends StatelessWidget {
                     size: 18,
                     color: Colors.black,
                   ),
-                  onTap:() => onLink(package.latest.pubspec.homepage),
+                  onTap: () => onLink(package.latest.pubspec.homepage),
                 ),
                 SizedBox(
                   height: 40,

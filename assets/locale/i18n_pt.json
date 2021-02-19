@@ -4,13 +4,13 @@
   "connection_failed": "Falha na conexão",
   "no_internet_access": "Sem ligação a internet",
   "server_failure": "Ocorreu um erro temporário , por favor tenta novamente ",
-  "app": "Flutter Packages",
+  "app": "Packages",
   "no_results_found": "Nenhum resultado encontrado",
   "error_readme": "Informação indisponível",
   "update_view": "Desliza para baixo para actualizar",
   "search_package": "Pesquisa pacotes flutter",
   "search_invalidates": "Pesquisa inválida",
-  "app_desc": "Este é um exemplo usando a api do pub.dev onde o objectivo é listar os pacotes",
+  "app_desc": "Encontre e use pacotes para criar aplicativos Dart e Flutter",
   "git_desc": "Código fonte no Github",
   "store_desc": "Ver na Google store",
   "website": "Website",
@@ -20,7 +20,9 @@
   "topo": "Ir ao topo",
   "likes": "Gostos",
   "popularity": "Popularidade",
-  "points": "Pontos"
+  "points": "Pontos",
+  "dependencies": "Dependências",
+  "search_desc": "Escreva o nome do pacote"
 
 
 }

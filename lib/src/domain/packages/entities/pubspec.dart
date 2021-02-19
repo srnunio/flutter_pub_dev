@@ -31,7 +31,6 @@ class Pubspec {
       'description': this.description,
       'repository': this.repository,
       'homepage': this.homepage,
-      'environment': this.environment,
       'dependencies': this.dependencies,
       'dev_dependencies': this.dev_dependencies,
     };
@@ -45,7 +44,6 @@ class Pubspec {
       description: map['description'] as String,
       repository: map['repository'] as String,
       homepage: map['homepage'] as String,
-      environment: Environment.fromMap(map['environment']),
     );
   }
 }
