@@ -20,7 +20,7 @@ class PubFlutter extends StatelessWidget {
   var supportedLocales = <Locale>[
     const Locale('pt', 'PT'),
     const Locale('en', 'EN'),
-    I18n.instance.currentLanguage
+    I18n.instance!.currentLanguage
   ];
 
   var localizationsDelegates = <LocalizationsDelegate<dynamic>>[
@@ -36,9 +36,9 @@ class PubFlutter extends StatelessWidget {
       supportedLocales: supportedLocales,
       localizationsDelegates: localizationsDelegates,
       localeResolutionCallback:
-          (Locale locale, Iterable<Locale> supportedLocales) {
+          (locale, Iterable<Locale> supportedLocales) {
         for (Locale supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode ||
+          if (supportedLocale.languageCode == locale!.languageCode ||
               supportedLocale.countryCode == locale.countryCode) {
             return supportedLocale;
           }
