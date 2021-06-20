@@ -4,36 +4,40 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('parseData', () {
     var package = Package.from({
-      "name": "waveform",
+      "name": "ijk_player_recorder",
       "latest": {
-        "version": "0.0.1-nightly.38",
+        "version": "0.0.5",
         "pubspec": {
-          "description": "A new Flutter package project.",
-          "homepage": "https://github.com/hydro-sdk/waveform",
-          "name": "waveform",
-          "version": "0.0.1-nightly.38",
+          "name": "ijk_player_recorder",
+          "description": "IJKPlayerRecorder",
+          "version": "0.0.5",
+          "homepage": null,
+          "environment": {"sdk": ">=2.12.0 <3.0.0", "flutter": ">=1.20.0"},
           "dependencies": {
-            "args": "^1.6.0",
-            "git": "^1.0.1",
-            "github": "^7.0.4",
-            "http": "^0.12.2",
-            "hydro_sdk_version": "^1.2.0",
-            "meta": "^1.3.0-nullsafety.3",
-            "yaml": "^2.2.1",
-            "yaml_modify": "^0.1.3",
-            "flutter": {"sdk": "flutter"}
+            "flutter": {"sdk": "flutter"},
+            "path_provider": "^2.0.2"
           },
           "dev_dependencies": {
             "flutter_test": {"sdk": "flutter"}
           },
-          "environment": {"sdk": ">=2.7.0 <3.0.0"},
-          "flutter": null
+          "flutter": {
+            "plugin": {
+              "platforms": {
+                "android": {
+                  "package": "com.hi.ijk_player_recorder",
+                  "pluginClass": "IjkPlayerRecorderPlugin"
+                },
+                "ios": {"pluginClass": "IjkPlayerRecorderPlugin"}
+              }
+            }
+          }
         },
         "archive_url":
-            "https://pub.dartlang.org/packages/waveform/versions/0.0.1-nightly.38.tar.gz",
-        "package_url": "https://pub.dartlang.org/api/packages/waveform",
+            "https://pub.dartlang.org/packages/ijk_player_recorder/versions/0.0.5.tar.gz",
+        "package_url":
+            "https://pub.dartlang.org/api/packages/ijk_player_recorder",
         "url":
-            "https://pub.dartlang.org/api/packages/waveform/versions/0.0.1-nightly.38"
+            "https://pub.dartlang.org/api/packages/ijk_player_recorder/versions/0.0.5"
       }
     });
   });
