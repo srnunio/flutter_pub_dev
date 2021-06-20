@@ -3,17 +3,18 @@ import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/util.dart';
 
 class CustomTheme {
-  static Color backgroundColor;
-  static Color placeholderColor;
-  static Color titleColor;
-  static Color subtitleColor;
-  static Color colorIcon;
-  static Color progress;
+  static Color? backgroundColor;
+  static Color? placeholderColor;
+  static Color? titleColor;
+  static Color? subtitleColor;
+  static Color? colorIcon;
+  static Color? progress;
 
   static Color get primary => Util.parseColor('#00428D');
-  static ThemeData _themeData;
 
-  static Brightness get brightness => _themeData.brightness;
+  static ThemeData? _themeData;
+
+  static Brightness get brightness => _themeData!.brightness;
 
   static ThemeData themeBuild() {
     backgroundColor = Colors.white;
@@ -50,6 +51,6 @@ class CustomTheme {
           color: backgroundColor,
           iconTheme: IconThemeData(color: primary)),
     );
-    return _themeData;
+    return _themeData!;
   }
 }
