@@ -7,6 +7,7 @@ BoxDecoration decoration(
     double borderRadius = 0,
     DecorationImage? image,
     BoxShape shape = BoxShape.rectangle}) {
+
   return BoxDecoration(
       image: image,
       color: (color == null) ? CustomTheme.placeholderColor : color,
