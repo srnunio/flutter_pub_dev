@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
 BoxDecoration decoration(
-    {Color color,
-    BoxBorder border,
+    {Color? color,
+    BoxBorder? border,
     double borderRadius = 0,
-    DecorationImage image,
+    DecorationImage? image,
     BoxShape shape = BoxShape.rectangle}) {
   return BoxDecoration(
       image: image,
-      color: color ?? CustomTheme.placeholderColor,
+      color: (color == null) ? CustomTheme.placeholderColor : color,
       shape: shape,
       border: border,
       borderRadius: (shape == BoxShape.rectangle)
@@ -18,16 +18,16 @@ BoxDecoration decoration(
 }
 
 TextStyle styleText({
-  Color color,
-  double size,
-  FontWeight fontWeight,
-  TextDecoration decoration,
-  String font,
+  Color? color,
+  double size = 16.0,
+  FontWeight fontWeight = FontWeight.normal,
+  TextDecoration? decoration,
+  String font = 'Font',
 }) {
   return TextStyle(
-      fontFamily: font ?? 'Font',
-      fontSize: size ?? 16,
+      fontFamily: font,
+      fontSize: size,
       color: color ?? CustomTheme.titleColor,
       decoration: decoration,
-      fontWeight: fontWeight ?? FontWeight.normal);
+      fontWeight: fontWeight);
 }

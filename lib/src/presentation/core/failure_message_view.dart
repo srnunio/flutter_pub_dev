@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,43 +10,43 @@ import 'base_widget.dart';
 
 class FailureMessageView extends BaseComponent {
   final String textButton;
-  final Function onTap;
-  bool isHideButton;
-  String icon;
+  final Function()? onTap;
+  bool showButton;
+  String? icon;
   final double sizeIcon;
   final bool reference;
   final bool isColor;
-  final Widget button;
+  final Widget? button;
 
-  bool get hasIcon => (icon != null && icon.isNotEmpty);
+  bool get hasIcon => (icon != null && icon!.isNotEmpty);
 
   FailureMessageView(
-      {@required String message,
+      {required String message,
       this.onTap,
       this.textButton = 'try_again',
-      this.icon ,
-      this.isHideButton = false,
+      this.icon,
+      this.showButton = false,
       this.reference = true,
       this.button,
       this.isColor = false,
       this.sizeIcon = 50.0})
       : super(value: message);
 
-  Center _center({Widget child}) {
+  Center _center({required Widget child}) {
     return Center(
       child: child,
     );
   }
 
   _icon() {
-    return (hasIcon)
-        ? _center(
-            child: CustomIcon(
-            icon: icon,
-            size: sizeIcon,
-            isColor: isColor,
-          ))
-        : empty;
+    if (!hasIcon) return empty;
+
+    return _center(
+        child: CustomIcon(
+      icon: icon!,
+      size: sizeIcon,
+      isColor: isColor,
+    ));
   }
 
   @override
@@ -70,9 +69,7 @@ class FailureMessageView extends BaseComponent {
             ),
           ),
           UIHelper.verticalSpaceSmall(),
-          isHideButton
-              ? empty
-              : button ??
+           if(button != null && showButton)
                   InkWell(
                     onTap: onTap,
                     child: Container(

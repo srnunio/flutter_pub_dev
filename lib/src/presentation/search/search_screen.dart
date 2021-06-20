@@ -54,7 +54,7 @@ class SearchScreenState extends State<SearchScreen>
           isColor: true,
           sizeIcon: 80,
           message: _message,
-          isHideButton: _model.hasError,
+          showButton: _model.hasError,
           onTap: () {
             _model.load(query: _query);
           },
@@ -64,7 +64,7 @@ class SearchScreenState extends State<SearchScreen>
         return FailureMessageView(
           isColor: true,
           sizeIcon: 80,
-          isHideButton: !_model.hasError,
+          showButton: !_model.hasError,
           message: _message,
           onTap: () {
             _model.load(query: _query);

@@ -6,11 +6,12 @@ import 'package:flutter_svg/svg.dart';
 import 'base_widget.dart';
 
 class CustomIcon extends BaseComponent {
-  double size;
-  Color color;
+  double? size;
+  Color? color;
   final isColor;
 
-  CustomIcon({this.size, this.color, @required String icon, this.isColor = false})
+  CustomIcon(
+      {this.size, this.color, required String icon, this.isColor = false})
       : super(value: icon);
 
   @override
@@ -22,18 +23,19 @@ class CustomIcon extends BaseComponent {
       height: size,
       width: size,
       color: color,
-
     );
   }
 }
 
-
 class SvgImage extends BaseComponent {
-  double height;
-  double width;
+  final double height;
+  final double width;
 
-  SvgImage({this.height, this.width, String icon,})
-      : super(value: icon);
+  SvgImage({
+    required this.height,
+    required this.width,
+    required String icon,
+  }) : super(value: icon);
 
   @override
   Widget build(BuildContext context) {
