@@ -31,7 +31,7 @@ abstract class Mapper {
         : List.from(map['versions']).map((e) => versionFromMap(e)).toList();
 
     var dependencies =
-        (!map.containsKey('dependencies') || map['dependencies'] == null)
+        (map['latest']['pubspec']['dependencies'] == null)
             ? <Dependencie>[]
             : _getDependencies(map['latest']['pubspec']['dependencies']);
 

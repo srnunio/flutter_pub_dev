@@ -66,8 +66,6 @@ class PackageService extends IPackageService {
               'Accept': 'application/json',
             },
           ));
-      print('${response.statusCode}');
-
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
       var package = Mapper.packageFromMap(response.data);

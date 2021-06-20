@@ -157,7 +157,7 @@ class PackagesScreenState extends State<PackagesScreen>
         ),
       ),
       body: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
         child: _build(),
       ),
     );
