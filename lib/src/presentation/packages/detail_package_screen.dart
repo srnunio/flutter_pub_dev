@@ -138,10 +138,14 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     _model.load(widget.name);
   }
 
-  String get _message => _model.failure.when<String>(
-      networkError: () => 'no_internet_access',
-      empty: () => 'no_results_found',
-      serverError: () => 'server_failure');
+  String _message() {
+    if (!_model.hasError) return '';
+
+    return _model.failure!.when<String>(
+        networkError: () => 'no_internet_access',
+        empty: () => 'no_results_found',
+        serverError: () => 'server_failure');
+  }
 
   _buildScore() {
     return Container(
@@ -159,12 +163,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               Expanded(
                   child: _Title(
                 title: 'likes'.translate.toUpperCase(),
-                value: '${_model.score.likeCount??0}',
+                value: '${_model.score.likeCount ?? 0}',
               )),
               Expanded(
                   child: _Title(
                 title: 'points'.translate.toUpperCase(),
-                value: '${_model.score.grantedPoints??0}',
+                value: '${_model.score.grantedPoints ?? 0}',
               )),
               Expanded(
                   child: _Title(
@@ -296,6 +300,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                               ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
                             ]),
                             onTapLink: (text, href, title) {
+                              if (href == null) return;
                               Util.openLink(url: href);
                             },
                           )
@@ -362,7 +367,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return FailureMessageView(
         isColor: true,
         sizeIcon: 80,
-        message: _message,
+        message: _message(),
         onTap: () {
           _model.load(widget.name);
         },
@@ -372,7 +377,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return FailureMessageView(
         isColor: true,
         sizeIcon: 80,
-        message: _message,
+        message: _message(),
         onTap: () {
           _model.load(widget.name);
         },
@@ -442,8 +447,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                               icon: 'share',
                               size: 20,
                             ),
-                            onPressed: () => Util.shareProject(
-                                context: context, package: _model.package)),
+                            onPressed: () =>
+                                Util.shareProject(package: _model.package)),
                         IconButton(
                             icon: CustomIcon(
                               icon: 'github',
