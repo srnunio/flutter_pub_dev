@@ -7,20 +7,19 @@ class DefaultNavigationService extends NavigationService {
 
   @override
   Future<dynamic> navigateToPushNamed(String routeName,
-      {Object arguments}) async {
-    return await navigator.currentState
+      {Object? arguments}) async {
+    return await navigator.currentState!
         .pushNamed(routeName, arguments: arguments);
   }
 
   @override
   Future<dynamic> navigateToPushNamedAndRemoveUntil(String routeName) async {
-    print('navigateToPushNamedAndRemoveUntil: ${routeName}');
-    return await navigator.currentState
+    return await navigator.currentState!
         .pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false);
   }
 
   @override
-  Future navigateToPop({Object object}) async {
-    return navigator.currentState.pop(object);
+  Future navigateToPop({Object? object}) async {
+    return navigator.currentState!.pop(object);
   }
 }

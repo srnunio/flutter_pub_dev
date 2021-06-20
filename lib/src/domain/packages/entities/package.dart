@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
-import 'package:flutter_package/src/utils/util.dart';
-
 import 'dependencie.dart';
 import 'version.dart';
 
@@ -15,12 +11,12 @@ class Package {
   final List<Dependencie> dependencies;
 
   const Package(
-      {this.name,
-      this.package_url,
-      this.url,
-      this.latest,
-      this.versions,
-      this.dependencies});
+      {required this.name,
+        required this.package_url,
+        required this.url,
+        required this.latest,
+        required this.versions,
+        required this.dependencies});
 
   Map<String, dynamic> toMap() {
     return {
@@ -33,10 +29,12 @@ class Package {
   }
 
   factory Package.fromMap(Map<String, dynamic> map) {
-    return new Package(
+    return   Package(
       name: map['name'] as String,
       package_url: map['package_url'] as String,
       url: map['url'] as String,
+      versions: [],
+      dependencies: [],
       latest: Version.fromMap(map['latest']),
     );
   }

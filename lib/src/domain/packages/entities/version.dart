@@ -5,7 +5,7 @@ class Version {
   String archive_url;
   Pubspec pubspec;
 
-  Version({this.version, this.archive_url, this.pubspec});
+  Version({required this.version, required this.archive_url, required this.pubspec});
 
   Map<String, dynamic> toMap() {
     return {

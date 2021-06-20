@@ -1,8 +1,7 @@
-import 'dart:convert';
+
 
 import 'dependencie.dart';
 import 'environment.dart';
-import 'version.dart';
 
 class Pubspec {
   String name;
@@ -15,14 +14,14 @@ class Pubspec {
   List<Dependencie> dev_dependencies;
 
   Pubspec(
-      {this.name,
-      this.version,
-      this.description,
-      this.homepage,
-      this.repository,
-      this.environment,
-      this.dependencies,
-      this.dev_dependencies});
+      {required this.name,
+        required this.version,
+        required this.description,
+        required this.homepage,
+        required this.repository,
+        required this.environment,
+        required this.dependencies,
+        required this.dev_dependencies});
 
   Map<String, dynamic> toMap() {
     return {
@@ -44,6 +43,9 @@ class Pubspec {
       description: map['description'] as String,
       repository: map['repository'] as String,
       homepage: map['homepage'] as String,
+      dev_dependencies: [],
+      dependencies: [],
+      environment: Environment.empty
     );
   }
 }

@@ -2,7 +2,7 @@ class Dependencie{
   String name;
   String version;
 
-  Dependencie({this.name, this.version});
+  Dependencie({required this.name, required this.version});
 
   Map<String, dynamic> toMap() {
     return {
@@ -28,7 +28,7 @@ class Dependencie{
           .map((e) => Dependencie(version: e.value, name: e.key))
           .toList();
     } catch (e) {
-      return List<Dependencie>();
+      return [];
     }
   }
 }

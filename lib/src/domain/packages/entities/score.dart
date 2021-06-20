@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Score {
   final int grantedPoints;
   final int maxPoints;
@@ -7,10 +5,10 @@ class Score {
   final double popularityScore;
 
   const Score(
-      {@required this.maxPoints,
-      @required this.grantedPoints,
-      @required this.likeCount,
-      @required this.popularityScore});
+      {required this.maxPoints,
+      required this.grantedPoints,
+      required this.likeCount,
+      required this.popularityScore});
 
   factory Score.fromMap(Map<String, dynamic> map) {
     return new Score(
@@ -24,10 +22,10 @@ class Score {
   Map<String, dynamic> toMap() {
     // ignore: unnecessary_cast
     return {
-      'maxPoints': this.maxPoints??0,
-      'likeCount': this.likeCount??0,
-      'popularityScore': this.popularityScore??0,
-      'grantedPoints': this.grantedPoints??0,
+      'maxPoints': this.maxPoints ?? 0,
+      'likeCount': this.likeCount ?? 0,
+      'popularityScore': this.popularityScore ?? 0,
+      'grantedPoints': this.grantedPoints ?? 0,
     } as Map<String, dynamic>;
   }
 
@@ -37,8 +35,7 @@ class Score {
 
 extension Scorex on Score {
   String getPopularity() {
-    var result =
-        (popularityScore != null) ? (popularityScore * 100).roundToDouble() : 0;
-    return '${result}%';
+    var result = (popularityScore * 100).roundToDouble();
+    return '$result%';
   }
 }
