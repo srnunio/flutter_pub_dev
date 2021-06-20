@@ -6,7 +6,6 @@ import 'package:flutter_package/src/utils/uihelper.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
-import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
