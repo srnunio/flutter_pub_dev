@@ -27,30 +27,4 @@ class Package {
       'latest': this.latest,
     };
   }
-
-  factory Package.fromMap(Map<String, dynamic> map) {
-    return   Package(
-      name: map['name'] as String,
-      package_url: '',
-      url: '',
-      versions: [],
-      dependencies: [],
-      latest: Version.fromMap(map['latest']),
-    );
-  }
-
-  factory Package.from(Map<String, dynamic> map) {
-
-    return new Package(
-      name: map['name'] as String,
-      package_url: '',
-      url: '',
-      latest: Version.fromMap(map['latest']),
-      dependencies:
-          Dependencie.getDependencies(map['latest']['pubspec']['dependencies']),
-      versions: (!map.containsKey('versions'))
-          ? []
-          : List.from(map['versions']).map((e) => Version.fromMap(e)).toList(),
-    );
-  }
 }

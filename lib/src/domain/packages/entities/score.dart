@@ -10,14 +10,6 @@ class Score {
       required this.likeCount,
       required this.popularityScore});
 
-  factory Score.fromMap(Map<String, dynamic> map) {
-    return new Score(
-      maxPoints: map['maxPoints'] as int,
-      grantedPoints: map['grantedPoints'] as int,
-      likeCount: map['likeCount'] as int,
-      popularityScore: map['popularityScore'] as double,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     // ignore: unnecessary_cast

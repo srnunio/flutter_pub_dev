@@ -15,11 +15,5 @@ class Version {
     };
   }
 
-  factory Version.fromMap(Map<String, dynamic> map) {
-    return new Version(
-      version: map['version'] as String,
-      archive_url: map['archive_url'] as String,
-      pubspec: Pubspec.fromMap(map['pubspec']),
-    );
-  }
+
 }

@@ -33,15 +33,5 @@ class Pubspec {
     };
   }
 
-  factory Pubspec.fromMap(Map<String, dynamic> map) {
-    return new Pubspec(
-        name: map['name'] as String,
-        version: map['version'] as String,
-        description: map['description'] as String,
-        repository: '',
-        homepage: (map['homepage'] != null) ? map['homepage'] as String : '',
-        dev_dependencies: [],
-        dependencies: [],
-        environment: Environment.empty);
-  }
+
 }

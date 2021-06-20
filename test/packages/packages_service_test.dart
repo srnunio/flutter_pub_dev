@@ -1,9 +1,10 @@
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
+import 'package:flutter_package/src/infrastructure/core/mapper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('parseData', () {
-    var package = Package.from({
+    var package = Mapper.packageFromMap({
       "name": "ijk_player_recorder",
       "latest": {
         "version": "0.0.5",

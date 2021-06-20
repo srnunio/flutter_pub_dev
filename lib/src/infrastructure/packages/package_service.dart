@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -6,6 +6,7 @@ import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/i_package_service.dart';
+import 'package:flutter_package/src/infrastructure/core/mapper.dart';
 
 class PackageService extends IPackageService {
   PackageService(Dio dio) : super(dio);
@@ -26,7 +27,7 @@ class PackageService extends IPackageService {
 
       var packages = List.from(response.data['packages']).map<Package>((data) {
         // print('data: ${json.encode(data)}');
-        return Package.fromMap(data);
+        return Mapper.packageFromMap(data);
       }).toList();
 
       return (packages.isEmpty)
@@ -69,7 +70,7 @@ class PackageService extends IPackageService {
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
-      var package = Package.from(response.data);
+      var package = Mapper.packageFromMap(response.data);
 
       return Right(package);
     } on DioError catch (e) {
@@ -108,7 +109,7 @@ class PackageService extends IPackageService {
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
-      var score = Score.fromMap(response.data);
+      var score = Mapper.scoreFromMap(response.data);
 
       return Right(score);
     } on DioError catch (e) {

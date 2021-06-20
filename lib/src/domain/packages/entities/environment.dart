@@ -9,12 +9,6 @@ class Environment {
     };
   }
 
-  factory Environment.fromMap(Map<String, dynamic> map) {
-    return new Environment(
-      sdk: map['sdk'] as String,
-    );
-  }
-
   static Environment get empty => Environment(sdk: '');
 }
 
