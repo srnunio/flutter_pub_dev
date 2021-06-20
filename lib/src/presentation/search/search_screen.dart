@@ -27,7 +27,7 @@ class SearchScreenState extends State<SearchScreen>
 
   TextEditingController _editingController = new TextEditingController();
 
-  bool get hasQuery => (_query != null && _query.isNotEmpty);
+  bool get hasQuery => (_query.isNotEmpty);
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class SearchScreenState extends State<SearchScreen>
 
   String get _message => (!_model.hasError)
       ? 'no_results_found'
-      : _model.failure.when<String>(
+      : _model.failure!.when<String>(
           networkError: () => 'no_internet_access',
           empty: () => 'no_results_found',
           serverError: () => 'server_failure');

@@ -40,12 +40,11 @@ dependencies:
   data_connection_checker: ^0.3.4
 
   # Dependency Injection
-  get_it: ^5.0.3
-  injectable: ^1.0.5
+  get_it: ^7.1.2
 
   #utils
   fluttertoast: ^7.1.5
-  share: ^0.6.3+5
+  share: ^2.0.4
   dartz: ^0.10.0-nullsafety.1
   intl: ^0.17.0
 

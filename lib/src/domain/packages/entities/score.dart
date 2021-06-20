@@ -22,10 +22,10 @@ class Score {
   Map<String, dynamic> toMap() {
     // ignore: unnecessary_cast
     return {
-      'maxPoints': this.maxPoints ?? 0,
-      'likeCount': this.likeCount ?? 0,
-      'popularityScore': this.popularityScore ?? 0,
-      'grantedPoints': this.grantedPoints ?? 0,
+      'maxPoints': this.maxPoints ,
+      'likeCount': this.likeCount ,
+      'popularityScore': this.popularityScore ,
+      'grantedPoints': this.grantedPoints,
     } as Map<String, dynamic>;
   }
 

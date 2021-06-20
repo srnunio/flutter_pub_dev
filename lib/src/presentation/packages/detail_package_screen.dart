@@ -163,12 +163,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               Expanded(
                   child: _Title(
                 title: 'likes'.translate.toUpperCase(),
-                value: '${_model.score.likeCount ?? 0}',
+                value: '${_model.score.likeCount}',
               )),
               Expanded(
                   child: _Title(
                 title: 'points'.translate.toUpperCase(),
-                value: '${_model.score.grantedPoints ?? 0}',
+                value: '${_model.score.likeCount}',
               )),
               Expanded(
                   child: _Title(

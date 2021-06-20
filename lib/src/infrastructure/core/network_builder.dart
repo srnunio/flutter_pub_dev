@@ -14,7 +14,7 @@ class NetworkBuilder {
 
   Dio build() {
     final dio = Dio();
-    dio.options.baseUrl = _baseUrl??apiBaseUrl;
+    dio.options.baseUrl = (_baseUrl.isEmpty) ? apiBaseUrl : _baseUrl;
     final defaultClient = DefaultHttpClientAdapter();
     defaultClient.onHttpClientCreate = (httpClient) {
       httpClient.badCertificateCallback = (_, host, __) => host == apiBaseUrl;
