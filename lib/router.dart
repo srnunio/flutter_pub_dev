@@ -10,7 +10,7 @@ import 'src/presentation/packages/detail_package_screen.dart';
 class AnimationRouterPager extends MaterialPageRoute {
   WidgetBuilder builder;
 
-  AnimationRouterPager({this.builder}) : super(builder: builder);
+  AnimationRouterPager({required this.builder}) : super(builder: builder);
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,

@@ -10,7 +10,7 @@ class SearchService extends ISearchService {
 
   @override
   Future<Either<RequestFailure, List<String>>> searchPackage(
-      {int page, String query}) async {
+      {required int page, required String query}) async {
     query = query.trim().toLowerCase();
 
     try {
@@ -36,13 +36,13 @@ class SearchService extends ISearchService {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT ||
-          e.type == DioErrorType.SEND_TIMEOUT) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout ||
+          e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
       }
 
-      if (e.response.statusCode == 500) {
+      if (e.response == null ||  e.response!.statusCode == 500) {
         return Left(RequestFailure.serverError());
       }
 

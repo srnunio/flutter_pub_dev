@@ -1,35 +1,34 @@
-
+import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'base_widget.dart';
-import 'custom_progress.dart';
 
 class CustomRefresh extends BaseComponent {
   final bool enablePullDown;
   final bool enablePullUp;
   final RefreshController refresh;
-  final VoidCallback onRefresh;
-  final VoidCallback onLoading;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onLoading;
   final Widget child;
 
   CustomRefresh(
       {this.enablePullDown = true,
       this.enablePullUp = true,
-      @required this.refresh,
+      required this.refresh,
       this.onRefresh,
       this.onLoading,
-      @required this.child});
+      required this.child})
+      : super(value: '');
 
   @override
   Widget build(BuildContext context) {
-
     return SmartRefresher(
       enablePullDown: enablePullDown,
       enablePullUp: enablePullUp,
       physics: ClampingScrollPhysics(),
       footer: CustomFooter(
-        builder: (BuildContext context, LoadStatus mode) {
-          Widget body;
+        builder: (context, mode) {
+          Widget body = empty;
           if (mode == LoadStatus.loading) {
             body = Container(
               child: CustomProgress(),

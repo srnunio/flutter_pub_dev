@@ -6,8 +6,8 @@ class SideRounded extends StatelessWidget {
   final Color color;
 
   const SideRounded({
-    Key key,
-    this.child,
+    Key? key,
+    required this.child,
     this.color = Colors.black,
     this.radious = 29,
   }) : super(key: key);

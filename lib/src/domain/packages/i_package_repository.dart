@@ -11,10 +11,10 @@ abstract class IPackageRepository {
 
   final IPackageService service;
 
-  Future<Either<RequestFailure, Package>> getPackageName({@required String namePackage});
+  Future<Either<RequestFailure, Package>> getPackageName({required String namePackage});
 
-  Future<Either<RequestFailure, List<Package>>> getPackages({@required int page});
+  Future<Either<RequestFailure, List<Package>>> getPackages({required int page});
 
-  Future<Either<RequestFailure, Score>> getScorePackage({@required String namePackage});
+  Future<Either<RequestFailure, Score>> getScorePackage({required String namePackage});
 
 }

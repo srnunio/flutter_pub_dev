@@ -9,13 +9,18 @@ import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
 class ItemPackage extends StatelessWidget {
-  Package package;
-  ValueChanged<String> onLink;
-  Function onShare;
-  Function onTap;
-  Size size;
+  final Package package;
+  final ValueChanged<String> onLink;
+  final Function() onShare;
+  final Function() onTap;
 
-  ItemPackage({this.package, this.onLink, this.onShare, this.onTap});
+  Size size = Size(0.0, 0.0);
+
+  ItemPackage(
+      {required this.package,
+      required this.onLink,
+      required this.onShare,
+      required this.onTap});
 
   _build() {
     return Container(

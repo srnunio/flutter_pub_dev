@@ -20,7 +20,7 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
   ObservableList<Package> _packages = ObservableList.of([]);
 
   @observable
-  RequestFailure failure = null;
+  RequestFailure? failure = null;
 
   @computed
   bool get hasError => failure != null;

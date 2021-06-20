@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,7 +33,7 @@ class Util {
     return col;
   }
 
-  static openLink({String url}) async {
+  static openLink({required String url}) async {
     try {
       if (await canLaunch(url)) {
         await launch(
@@ -47,11 +45,9 @@ class Util {
     } catch (ex) {}
   }
 
-  static shareProject({BuildContext context, Package package}) {
+  static shareProject({required Package package}) {
     var url = package.latest.archive_url
         .replaceAll('/versions/${package.latest.version}.tar.gz', '');
     Share.share(url);
   }
-
-
 }

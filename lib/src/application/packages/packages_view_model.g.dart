@@ -9,21 +9,21 @@ part of 'packages_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PackagesViewModel on _PackagesViewModel, Store {
-  Computed<bool> _$hasErrorComputed;
+  Computed<bool>? _$hasErrorComputed;
 
   @override
   bool get hasError =>
       (_$hasErrorComputed ??= Computed<bool>(() => super.hasError,
               name: '_PackagesViewModel.hasError'))
           .value;
-  Computed<List<Package>> _$packagesComputed;
+  Computed<List<Package>>? _$packagesComputed;
 
   @override
   List<Package> get packages =>
       (_$packagesComputed ??= Computed<List<Package>>(() => super.packages,
               name: '_PackagesViewModel.packages'))
           .value;
-  Computed<bool> _$hasDataComputed;
+  Computed<bool>? _$hasDataComputed;
 
   @override
   bool get hasData => (_$hasDataComputed ??= Computed<bool>(() => super.hasData,
@@ -48,13 +48,13 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
   final _$failureAtom = Atom(name: '_PackagesViewModel.failure');
 
   @override
-  RequestFailure get failure {
+  RequestFailure? get failure {
     _$failureAtom.reportRead();
     return super.failure;
   }
 
   @override
-  set failure(RequestFailure value) {
+  set failure(RequestFailure? value) {
     _$failureAtom.reportWrite(value, super.failure, () {
       super.failure = value;
     });

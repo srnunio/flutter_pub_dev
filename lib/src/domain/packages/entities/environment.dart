@@ -1,7 +1,7 @@
-class Environment{
+class Environment {
   String sdk;
 
-  Environment({this.sdk});
+  Environment({required this.sdk});
 
   Map<String, dynamic> toMap() {
     return {
@@ -9,9 +9,9 @@ class Environment{
     };
   }
 
-  factory Environment.fromMap(Map<String, dynamic> map) {
-    return new Environment(
-      sdk: map['sdk'] as String,
-    );
-  }
+  static Environment get empty => Environment(sdk: '');
+}
+
+extension EnvironmentEx on Environment {
+  bool get hasData => (sdk.isNotEmpty);
 }

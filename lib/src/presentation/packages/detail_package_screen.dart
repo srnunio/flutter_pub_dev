@@ -9,7 +9,6 @@ import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
-import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
@@ -23,7 +22,7 @@ class _TapInfo extends BaseComponent {
   final String title;
   final VoidCallback onTap;
 
-  _TapInfo({@required this.title, this.onTap});
+  _TapInfo({required this.title, required this.onTap}) : super(value: '');
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _Title extends BaseComponent {
   final String title;
   final String value;
 
-  _Title({@required this.title, @required this.value});
+  _Title({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +78,10 @@ class _Title extends BaseComponent {
   }
 }
 
-class _TitleDependecie extends BaseComponent {
+class _TitleDependencie extends BaseComponent {
   final Dependencie dependencie;
 
-  _TitleDependecie({@required this.dependencie});
+  _TitleDependencie({required this.dependencie});
 
   @override
   Widget build(BuildContext context) {
@@ -139,10 +138,14 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     _model.load(widget.name);
   }
 
-  String get _message => _model.failure.when<String>(
-      networkError: () => 'no_internet_access',
-      empty: () => 'no_results_found',
-      serverError: () => 'server_failure');
+  String _message() {
+    if (!_model.hasError) return '';
+
+    return _model.failure!.when<String>(
+        networkError: () => 'no_internet_access',
+        empty: () => 'no_results_found',
+        serverError: () => 'server_failure');
+  }
 
   _buildScore() {
     return Container(
@@ -160,12 +163,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               Expanded(
                   child: _Title(
                 title: 'likes'.translate.toUpperCase(),
-                value: '${_model.score.likeCount??0}',
+                value: '${_model.score.likeCount}',
               )),
               Expanded(
                   child: _Title(
                 title: 'points'.translate.toUpperCase(),
-                value: '${_model.score.grantedPoints??0}',
+                value: '${_model.score.likeCount}',
               )),
               Expanded(
                   child: _Title(
@@ -217,7 +220,6 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   var item = _model.package.versions[index];
 
                   return Chip(
-                      // labelPadding: EdgeInsets.zero,
                       padding: EdgeInsets.zero,
                       backgroundColor: CustomTheme.placeholderColor,
                       label: Container(
@@ -298,6 +300,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                               ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
                             ]),
                             onTapLink: (text, href, title) {
+                              if (href == null) return;
                               Util.openLink(url: href);
                             },
                           )
@@ -346,7 +349,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
                       _model.package.dependencies.length,
-                      (index) => _TitleDependecie(
+                      (index) => _TitleDependencie(
                           dependencie: _model.package.dependencies[index]))
                   .toList(),
             ),
@@ -364,7 +367,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return FailureMessageView(
         isColor: true,
         sizeIcon: 80,
-        message: _message,
+        message: _message(),
         onTap: () {
           _model.load(widget.name);
         },
@@ -374,7 +377,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return FailureMessageView(
         isColor: true,
         sizeIcon: 80,
-        message: _message,
+        message: _message(),
         onTap: () {
           _model.load(widget.name);
         },
@@ -444,8 +447,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                               icon: 'share',
                               size: 20,
                             ),
-                            onPressed: () => Util.shareProject(
-                                context: context, package: _model.package)),
+                            onPressed: () =>
+                                Util.shareProject(package: _model.package)),
                         IconButton(
                             icon: CustomIcon(
                               icon: 'github',

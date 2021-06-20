@@ -12,9 +12,9 @@ abstract class IPackageService extends ApiService {
 
   final String path = 'packages';
 
-  Future<Either<RequestFailure, List<Package>>> getPackages({@required int page});
+  Future<Either<RequestFailure, List<Package>>> getPackages({required int page});
 
-  Future<Either<RequestFailure, Package>> getPackageName({@required String namePackage});
+  Future<Either<RequestFailure, Package>> getPackageName({required String namePackage});
 
-  Future<Either<RequestFailure, Score>> getScorePackage({@required String namePackage});
+  Future<Either<RequestFailure, Score>> getScorePackage({required String namePackage});
 }

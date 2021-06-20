@@ -19,7 +19,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
   ObservableList<String> _results = ObservableList.of([]);
 
   @observable
-  RequestFailure failure = null;
+  RequestFailure? failure = null;
 
   @computed
   bool get hasError => failure != null;
@@ -49,7 +49,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
   }
 
   @action
-  Future<void> load({@required String query, bool refresh = false}) async {
+  Future<void> load({required String query, bool refresh = false}) async {
     if (isBusy) {
       return;
     }

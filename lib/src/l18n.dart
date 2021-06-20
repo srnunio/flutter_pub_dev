@@ -7,20 +7,20 @@ import 'package:flutter/widgets.dart';
 class I18n {
   I18n(this._locale);
 
-  Locale _locale;
+  Locale? _locale;
 
-  static Map<dynamic, dynamic> _localizedValues;
+  static Map<dynamic, dynamic>? _localizedValues;
 
-  static I18n _current;
+  static I18n? _current;
 
-  static I18n get instance => _current;
+  static I18n? get instance => _current;
 
-  static I18n of(BuildContext context) {
+  static I18n? of(BuildContext context) {
     return Localizations.of<I18n>(context, I18n);
   }
 
   static String text(String key) {
-    return _localizedValues[key] ?? '** $key not found';
+    return _localizedValues![key] ?? '** $key not found';
   }
 
   static Future<I18n> load(Locale locale) async {
@@ -45,7 +45,7 @@ class I18n {
 
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
 
-  Locale get currentLanguage => _filterLocale(_locale);
+  Locale get currentLanguage => _filterLocale(_locale!);
 }
 
 class I18nDelegate extends LocalizationsDelegate<I18n> {

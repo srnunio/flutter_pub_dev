@@ -4,16 +4,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/application/search/search_view_model.dart';
 import 'package:flutter_package/src/domain/search/i_search_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
-import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
-import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/presentation/packages/detail_package_screen.dart';
 import 'package:flutter_package/src/presentation/search/search_item.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/l18n.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
 
 class SearchScreen extends StatefulWidget {
   static const route = '/search_screen';
@@ -30,7 +27,7 @@ class SearchScreenState extends State<SearchScreen>
 
   TextEditingController _editingController = new TextEditingController();
 
-  bool get hasQuery => (_query != null && _query.isNotEmpty);
+  bool get hasQuery => (_query.isNotEmpty);
 
   @override
   void initState() {
@@ -39,7 +36,7 @@ class SearchScreenState extends State<SearchScreen>
 
   String get _message => (!_model.hasError)
       ? 'no_results_found'
-      : _model.failure.when<String>(
+      : _model.failure!.when<String>(
           networkError: () => 'no_internet_access',
           empty: () => 'no_results_found',
           serverError: () => 'server_failure');
@@ -54,7 +51,7 @@ class SearchScreenState extends State<SearchScreen>
           isColor: true,
           sizeIcon: 80,
           message: _message,
-          isHideButton: _model.hasError,
+          showButton: _model.hasError,
           onTap: () {
             _model.load(query: _query);
           },
@@ -64,7 +61,7 @@ class SearchScreenState extends State<SearchScreen>
         return FailureMessageView(
           isColor: true,
           sizeIcon: 80,
-          isHideButton: !_model.hasError,
+          showButton: !_model.hasError,
           message: _message,
           onTap: () {
             _model.load(query: _query);

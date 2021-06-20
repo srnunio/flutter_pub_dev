@@ -8,9 +8,9 @@ abstract class NavigationService {
   NavigationService(this.navigator);
 
   @override
-  Future<dynamic> navigateToPushNamed(String routeName, {Object arguments});
+  Future<dynamic> navigateToPushNamed(String routeName, {Object? arguments});
 
   Future<dynamic> navigateToPushNamedAndRemoveUntil(String routeName);
 
-  Future<dynamic> navigateToPop({Object object});
+  Future<dynamic> navigateToPop({Object? object});
 }

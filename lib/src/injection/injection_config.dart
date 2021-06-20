@@ -14,7 +14,7 @@ import 'package:flutter_package/src/infrastructure/search/search_repository.dart
 import 'package:flutter_package/src/infrastructure/search/search_service.dart';
 import 'package:get_it/get_it.dart';
 
-T inject<T>() => InjectorConfig.getInstance().get<T>();
+T inject<T extends Object>() => InjectorConfig.getInstance().get<T>();
 
 final _injector = GetIt.instance;
 
