@@ -42,7 +42,7 @@ class PackagesScreenState extends State<PackagesScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Txt(
-              _message.translate,
+              _message().translate,
               textAlign: TextAlign.center,
               textColor: Colors.black,
             ),
@@ -64,10 +64,14 @@ class PackagesScreenState extends State<PackagesScreen>
     );
   }
 
-  String get _message => _model.failure.when<String>(
-      networkError: () => 'no_internet_access',
-      empty: () => 'no_results_found',
-      serverError: () => 'server_failure');
+  String   _message (){
+    if(!_model.hasError) return '';
+
+    return _model.failure!.when<String>(
+        networkError: () => 'no_internet_access',
+        empty: () => 'no_results_found',
+        serverError: () => 'server_failure');
+  }
 
   _build() {
     return Observer(builder: (_) {
