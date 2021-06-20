@@ -1,11 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
-import 'package:flutter_package/src/domain/core/api_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/i_package_service.dart';
@@ -15,7 +11,7 @@ class PackageService extends IPackageService {
 
   @override
   Future<Either<RequestFailure, List<Package>>> getPackages(
-      {@required int page}) async {
+      {required int page}) async {
     try {
       final response = await dio.get('${path}?page=${page}',
           options: Options(
@@ -57,7 +53,7 @@ class PackageService extends IPackageService {
 
   @override
   Future<Either<RequestFailure, Package>> getPackageName(
-      {String namePackage}) async {
+      {required String namePackage}) async {
     try {
       print('namePackage: ${namePackage}');
       final response = await dio.get('$path/$namePackage',
@@ -98,7 +94,7 @@ class PackageService extends IPackageService {
 
   @override
   Future<Either<RequestFailure, Score>> getScorePackage(
-      {String namePackage}) async {
+      {required String namePackage}) async {
     try {
       final response = await dio.get('$path/$namePackage/score',
           options: Options(

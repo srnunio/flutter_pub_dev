@@ -10,7 +10,7 @@ class SearchService extends ISearchService {
 
   @override
   Future<Either<RequestFailure, List<String>>> searchPackage(
-      {int page, String query}) async {
+      {required int page, required String query}) async {
     query = query.trim().toLowerCase();
 
     try {

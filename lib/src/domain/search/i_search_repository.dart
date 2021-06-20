@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'i_search_service.dart';
 
@@ -10,5 +8,5 @@ abstract class ISearchRepository {
   final ISearchService service;
 
   Future<Either<RequestFailure, List<String>>> searchPackage(
-      {@required int page, @required String query});
+      {required int page, required String query});
 }

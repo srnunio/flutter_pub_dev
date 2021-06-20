@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
@@ -11,16 +10,16 @@ class PackageRepository extends IPackageRepository {
 
   @override
   Future<Either<RequestFailure, Package>> getPackageName(
-          {String namePackage}) async =>
+          {required String namePackage}) async =>
       await service.getPackageName(namePackage: namePackage);
 
   @override
   Future<Either<RequestFailure, List<Package>>> getPackages(
-          {@required int page}) async =>
+          {required int page}) async =>
       await service.getPackages(page: page);
 
   @override
   Future<Either<RequestFailure, Score>> getScorePackage(
-          {String namePackage}) async =>
+          {required String namePackage}) async =>
       await service.getScorePackage(namePackage: namePackage);
 }

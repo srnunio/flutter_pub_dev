@@ -5,7 +5,7 @@ import 'package:flutter_package/src/infrastructure/core/network_builder.dart';
 
 class DefaultAdvancedService extends IAdvancedService {
   @override
-  Future<Either<RequestFailure, String>> getReadme({String gitPath}) async {
+  Future<Either<RequestFailure, String>> getReadme({String? gitPath}) async {
     if (gitPath == null || gitPath.isEmpty)
       return Left(RequestFailure.serverError());
 

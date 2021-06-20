@@ -5,7 +5,7 @@ const String host = 'pub.dartlang.org';
 const String apiBaseUrl = 'https://$host/api/';
 
 class NetworkBuilder {
-  String _baseUrl;
+  String _baseUrl = '';
 
   void setBaseUrl(String baseUrl) {
     ArgumentError.checkNotNull(baseUrl, 'baseUrl');
