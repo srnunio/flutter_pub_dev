@@ -3,16 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
 import 'package:flutter_package/src/utils/uihelper.dart';
-import 'package:flutter_package/src/domain/packages/entities/package.dart';
-import 'package:flutter_package/src/presentation/core/side_rounded.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
-import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
 class SearchItem extends BaseComponent {
-  Function onTap;
+  Function() onTap;
 
-  SearchItem({@required String name, this.onTap}) : super(value: name);
+  SearchItem({required String name, required this.onTap}) : super(value: name);
 
   _build() {
     return Container(
