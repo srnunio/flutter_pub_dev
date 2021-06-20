@@ -12,8 +12,7 @@ class DetailPackageViewModel = _DetailPackageViewModel
     with _$DetailPackageViewModel;
 
 abstract class _DetailPackageViewModel extends BaseViewModel with Store {
-  _DetailPackageViewModel(this._repository, this._advancedService)
-      : assert(_repository != null);
+  _DetailPackageViewModel(this._repository, this._advancedService);
 
   final IPackageRepository _repository;
 
@@ -32,7 +31,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   bool _loadingReadme = false;
 
   @observable
-  RequestFailure failure = null;
+  RequestFailure? failure = null;
 
   @computed
   bool get hasError => failure != null;
@@ -99,7 +98,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
         gitPath: package.latest.pubspec.homepage);
     _loadingReadme = false;
     response.fold(
-        (failure) => this._readme = null, (data) => this._readme = data);
+        (failure) => this._readme = '', (data) => this._readme = data);
   }
 
   @action

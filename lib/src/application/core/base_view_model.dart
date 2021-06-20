@@ -23,13 +23,13 @@ abstract class _BaseViewModel with Store {
 
   void onRefresh({bool value = false}) {
     if (value) {
-      WidgetsBinding.instance
+      WidgetsBinding.instance!
           .addPostFrameCallback((_) => refresh.requestRefresh());
     } else {
-      WidgetsBinding.instance.addPostFrameCallback(
+      WidgetsBinding.instance!.addPostFrameCallback(
           (_) => refresh.refreshCompleted(resetFooterState: true));
 
-      WidgetsBinding.instance
+      WidgetsBinding.instance!
           .addPostFrameCallback((_) => refresh.loadComplete());
     }
   }
@@ -40,21 +40,21 @@ abstract class _BaseViewModel with Store {
   }
 
   Future<dynamic> navigateToPushNamedAndRemoveUntil(
-      {@required String routeName}) async {
+      {required String routeName}) async {
     return await _navigation.navigateToPushNamedAndRemoveUntil(routeName);
   }
 
   Future<dynamic> navigateToPushNamed(
-      {@required String routeName, Object arguments}) async {
+      {required String routeName, Object? arguments}) async {
     return await _navigation.navigateToPushNamed(routeName,
         arguments: arguments);
   }
 
-  Future<dynamic> navigateToPop({Object obj}) async {
+  Future<dynamic> navigateToPop({Object? obj}) async {
     return await _navigation.navigateToPop(object: obj);
   }
 
-  VoidCallback _onFailure;
+  VoidCallback? _onFailure;
 
-  VoidCallback _onBusy;
+  VoidCallback? _onBusy;
 }
