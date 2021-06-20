@@ -9,7 +9,6 @@ import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
-import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
@@ -23,7 +22,7 @@ class _TapInfo extends BaseComponent {
   final String title;
   final VoidCallback onTap;
 
-  _TapInfo({@required this.title, this.onTap});
+  _TapInfo({required this.title, required this.onTap}) : super(value: '');
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _Title extends BaseComponent {
   final String title;
   final String value;
 
-  _Title({@required this.title, @required this.value});
+  _Title({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +78,10 @@ class _Title extends BaseComponent {
   }
 }
 
-class _TitleDependecie extends BaseComponent {
+class _TitleDependencie extends BaseComponent {
   final Dependencie dependencie;
 
-  _TitleDependecie({@required this.dependencie});
+  _TitleDependencie({required this.dependencie});
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +216,6 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   var item = _model.package.versions[index];
 
                   return Chip(
-                      // labelPadding: EdgeInsets.zero,
                       padding: EdgeInsets.zero,
                       backgroundColor: CustomTheme.placeholderColor,
                       label: Container(
@@ -346,7 +344,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
                       _model.package.dependencies.length,
-                      (index) => _TitleDependecie(
+                      (index) => _TitleDependencie(
                           dependencie: _model.package.dependencies[index]))
                   .toList(),
             ),
