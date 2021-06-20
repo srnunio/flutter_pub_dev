@@ -27,7 +27,7 @@ class CustomRefresh extends BaseComponent {
       enablePullUp: enablePullUp,
       physics: ClampingScrollPhysics(),
       footer: CustomFooter(
-        builder: (BuildContext context, LoadStatus mode) {
+        builder: (context, mode) {
           Widget body = empty;
           if (mode == LoadStatus.loading) {
             body = Container(

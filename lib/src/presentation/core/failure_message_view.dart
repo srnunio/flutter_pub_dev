@@ -63,7 +63,7 @@ class FailureMessageView extends BaseComponent {
           (hasIcon) ? UIHelper.verticalSpaceSmall() : empty,
           _center(
             child: Txt(
-              value.translate,
+              value!.translate,
               textColor: CustomTheme.titleColor,
               textAlign: TextAlign.center,
             ),

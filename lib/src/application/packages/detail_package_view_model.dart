@@ -19,7 +19,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   final IAdvancedService _advancedService;
 
   @observable
-  Package _package;
+  Package? _package;
 
   @observable
   Score _score = Score.default_;
@@ -37,7 +37,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   bool get hasError => failure != null;
 
   @computed
-  Package get package => _package;
+  Package get package => _package!;
 
   @computed
   Score get score => _score;

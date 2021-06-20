@@ -9,54 +9,54 @@ part of 'detail_package_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
-  Computed<bool> _$hasErrorComputed;
+  Computed<bool>? _$hasErrorComputed;
 
   @override
   bool get hasError =>
       (_$hasErrorComputed ??= Computed<bool>(() => super.hasError,
               name: '_DetailPackageViewModel.hasError'))
           .value;
-  Computed<Package> _$packageComputed;
+  Computed<Package>? _$packageComputed;
 
   @override
   Package get package =>
       (_$packageComputed ??= Computed<Package>(() => super.package,
               name: '_DetailPackageViewModel.package'))
           .value;
-  Computed<Score> _$scoreComputed;
+  Computed<Score>? _$scoreComputed;
 
   @override
   Score get score => (_$scoreComputed ??= Computed<Score>(() => super.score,
           name: '_DetailPackageViewModel.score'))
       .value;
-  Computed<String> _$readmeComputed;
+  Computed<String>? _$readmeComputed;
 
   @override
   String get readme =>
       (_$readmeComputed ??= Computed<String>(() => super.readme,
               name: '_DetailPackageViewModel.readme'))
           .value;
-  Computed<bool> _$hasDataComputed;
+  Computed<bool>? _$hasDataComputed;
 
   @override
   bool get hasData => (_$hasDataComputed ??= Computed<bool>(() => super.hasData,
           name: '_DetailPackageViewModel.hasData'))
       .value;
-  Computed<bool> _$hasReadmeComputed;
+  Computed<bool>? _$hasReadmeComputed;
 
   @override
   bool get hasReadme =>
       (_$hasReadmeComputed ??= Computed<bool>(() => super.hasReadme,
               name: '_DetailPackageViewModel.hasReadme'))
           .value;
-  Computed<bool> _$hasScoreComputed;
+  Computed<bool>? _$hasScoreComputed;
 
   @override
   bool get hasScore =>
       (_$hasScoreComputed ??= Computed<bool>(() => super.hasScore,
               name: '_DetailPackageViewModel.hasScore'))
           .value;
-  Computed<bool> _$loadingReadmeComputed;
+  Computed<bool>? _$loadingReadmeComputed;
 
   @override
   bool get loadingReadme =>
@@ -67,13 +67,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   final _$_packageAtom = Atom(name: '_DetailPackageViewModel._package');
 
   @override
-  Package get _package {
+  Package? get _package {
     _$_packageAtom.reportRead();
     return super._package;
   }
 
   @override
-  set _package(Package value) {
+  set _package(Package? value) {
     _$_packageAtom.reportWrite(value, super._package, () {
       super._package = value;
     });
@@ -128,13 +128,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   final _$failureAtom = Atom(name: '_DetailPackageViewModel.failure');
 
   @override
-  RequestFailure get failure {
+  RequestFailure? get failure {
     _$failureAtom.reportRead();
     return super.failure;
   }
 
   @override
-  set failure(RequestFailure value) {
+  set failure(RequestFailure? value) {
     _$failureAtom.reportWrite(value, super.failure, () {
       super.failure = value;
     });

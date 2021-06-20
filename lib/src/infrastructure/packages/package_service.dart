@@ -35,13 +35,13 @@ class PackageService extends IPackageService {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT ||
-          e.type == DioErrorType.SEND_TIMEOUT) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout ||
+          e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
       }
 
-      if (e.response.statusCode == 500) {
+      if (e.response == null ||  e.response!.statusCode == 500) {
         return Left(RequestFailure.serverError());
       }
 
@@ -75,13 +75,13 @@ class PackageService extends IPackageService {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT ||
-          e.type == DioErrorType.SEND_TIMEOUT) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout ||
+          e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
       }
 
-      if (e.response.statusCode == 500) {
+      if (e.response == null || e.response!.statusCode == 500) {
         return Left(RequestFailure.serverError());
       }
 
@@ -114,13 +114,13 @@ class PackageService extends IPackageService {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT ||
-          e.type == DioErrorType.SEND_TIMEOUT) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout ||
+          e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
       }
 
-      if (e.response.statusCode == 500) {
+      if (e.response == null ||  e.response!.statusCode == 500) {
         return Left(RequestFailure.serverError());
       }
 
