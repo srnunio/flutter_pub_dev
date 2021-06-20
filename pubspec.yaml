@@ -48,6 +48,9 @@ dependencies:
   dartz: ^0.10.0-nullsafety.1
   intl: ^0.17.0
 
+  # Testing
+  mockito: ^5.0.10
+
 
 
 dev_dependencies:

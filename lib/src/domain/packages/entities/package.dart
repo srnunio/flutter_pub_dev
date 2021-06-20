@@ -31,8 +31,8 @@ class Package {
   factory Package.fromMap(Map<String, dynamic> map) {
     return   Package(
       name: map['name'] as String,
-      package_url: map['package_url'] as String,
-      url: map['url'] as String,
+      package_url: '',
+      url: '',
       versions: [],
       dependencies: [],
       latest: Version.fromMap(map['latest']),
@@ -40,10 +40,11 @@ class Package {
   }
 
   factory Package.from(Map<String, dynamic> map) {
+
     return new Package(
       name: map['name'] as String,
-      package_url: map['package_url'] as String,
-      url: map['url'] as String,
+      package_url: '',
+      url: '',
       latest: Version.fromMap(map['latest']),
       dependencies:
           Dependencie.getDependencies(map['latest']['pubspec']['dependencies']),

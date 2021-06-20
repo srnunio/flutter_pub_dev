@@ -1,9 +1,9 @@
 import 'package:flutter_package/src/domain/packages/entities/pubspec.dart';
 
 class Version {
-  String version;
-  String archive_url;
-  Pubspec pubspec;
+  final String version;
+  final String archive_url;
+  final Pubspec pubspec;
 
   Version({required this.version, required this.archive_url, required this.pubspec});
 
