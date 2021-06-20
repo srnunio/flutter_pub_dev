@@ -12,6 +12,7 @@ import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/presentation/packages/item_package.dart';
 import 'package:flutter_package/src/l18n.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../settings_screen.dart';
 import 'detail_package_screen.dart';
@@ -36,6 +37,7 @@ class PackagesScreenState extends State<PackagesScreen>
   _viewFailure() {
     return Center(
       child: Container(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,8 +66,8 @@ class PackagesScreenState extends State<PackagesScreen>
     );
   }
 
-  String   _message (){
-    if(!_model.hasError) return '';
+  String _message() {
+    if (!_model.hasError) return '';
 
     return _model.failure!.when<String>(
         networkError: () => 'no_internet_access',
@@ -97,32 +99,31 @@ class PackagesScreenState extends State<PackagesScreen>
 
       return CustomRefresh(
         refresh: _model.refresh,
-        child: GridView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 5.0,
-                crossAxisCount: 2,
-                childAspectRatio: 1.0),
-            itemCount: _model.packages.length,
-            itemBuilder: (context, index) {
-              var package = _model.packages[index];
-              return Container(
-                child: ItemPackage(
-                  onTap: () async {
-                    _model.navigateToPushNamed(
-                        routeName: DetailPackageScreen.route,
-                        arguments: package.name);
-                  },
-                  onLink: (url) async {
-                    Util.openLink(url: url);
-                  },
-                  onShare: () async {},
-                  package: package,
-                ),
-              );
-            }),
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: 4,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          itemCount: _model.packages.length,
+          itemBuilder: (context, index) {
+            var package = _model.packages[index];
+
+            return Container(
+              child: ItemPackage(
+                onTap: () async {
+                  _model.navigateToPushNamed(
+                      routeName: DetailPackageScreen.route,
+                      arguments: package.name);
+                },
+                onLink: (url) async {
+                  Util.openLink(url: url);
+                },
+                onShare: () async {},
+                package: package,
+              ),
+            );
+          },
+          staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+        ),
         enablePullDown: true,
         onRefresh: () => _model.load(refresh: true),
         onLoading: () => _model.load(),
@@ -155,7 +156,10 @@ class PackagesScreenState extends State<PackagesScreen>
               color: CustomTheme.primary, fontWeight: FontWeight.bold),
         ),
       ),
-      body: _build(),
+      body: Container(
+        margin: EdgeInsets.all(10.0),
+        child: _build(),
+      ),
     );
   }
 

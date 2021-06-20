@@ -25,7 +25,6 @@ class ItemPackage extends StatelessWidget {
   _build() {
     return Container(
       padding: EdgeInsets.all(0.0),
-      margin: EdgeInsets.all(4.0),
       decoration:
           decoration(color: CustomTheme.placeholderColor, borderRadius: 8.0),
       child: Column(
@@ -33,43 +32,42 @@ class ItemPackage extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-              child: Container(
+          Container(
             padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    'assets/images/dartlogo.png',
-                    height: 40,
-                    width: 40,
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: CustomTheme.backgroundColor,
-                  ),
-                ),
-                Txt(
-                  '${package.name}',
-                  textAlign: TextAlign.center,
-                  textStyle: (_) => _.copyWith(
-                      color: CustomTheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0),
-                  maxLine: 1,
-                ),
-                UIHelper.verticalSpaceSmall(),
-                Txt(
-                  '${package.latest.pubspec.description}',
-                  textAlign: TextAlign.center,
-                  textStyle: (_) => _.copyWith(
-                      color: CustomTheme.subtitleColor, fontSize: 12.0),
-                  maxLine: 2,
-                ),
-              ],
+            margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Image.asset(
+              'assets/images/dartlogo.png',
+              height: 40,
+              width: 40,
             ),
-          )),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: CustomTheme.backgroundColor,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Txt(
+              '${package.name}',
+              textAlign: TextAlign.center,
+              textStyle: (_) => _.copyWith(
+                  color: CustomTheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0),
+              maxLine: 3,
+            ),
+          ),
+          UIHelper.verticalSpaceSmall(),
+          Container(
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Txt(
+              '${package.latest.pubspec.description}',
+              textAlign: TextAlign.center,
+              textStyle: (_) =>
+                  _.copyWith(color: CustomTheme.subtitleColor, fontSize: 14.0),
+              maxLine: 3,
+            ),
+          ),
           UIHelper.verticalSpaceSmall(),
           Container(
             margin: EdgeInsets.only(left: 10.0),
@@ -101,12 +99,12 @@ class ItemPackage extends StatelessWidget {
                     color: CustomTheme.primary,
                     child: Txt(
                       '${package.latest.version}',
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       textStyle: (_) => _.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 12.0),
-                      maxLine: 1,
+                      maxLine: 2,
                     ),
                     radious: 30,
                   ),
