@@ -2,7 +2,7 @@
 
 ![Badge](https://img.shields.io/static/v1?label=playstore&message=v0.0.7&color=blue&?style=flat) ![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=green&?style=flat) ![Badge](https://img.shields.io/static/v1?label=android&message=4.1&color=darkgreen&?style=flat) ![Badge](https://img.shields.io/static/v1?label=iOS&message=13.0&color=orange&?style=flat) ![Badge](https://img.shields.io/static/v1?label=status&message=completed&color=green&?style=flat) 
  
-##### available on play store (https://shorturl.at/xFJS1)
+##### available on play store (https://play.google.com/store/apps/details?id=nunioz.app.pub_dev)
 ##### official website (https://pub.dev/packages) 
 
 
