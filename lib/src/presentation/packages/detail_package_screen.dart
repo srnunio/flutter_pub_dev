@@ -18,6 +18,7 @@ import 'package:flutter_package/src/l18n.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 
+/// [_TapInfo] title action visualization model
 class _TapInfo extends BaseComponent {
   final String title;
   final VoidCallback onTap;
@@ -43,6 +44,7 @@ class _TapInfo extends BaseComponent {
   }
 }
 
+/// [_Title] vertical title visualization model
 class _Title extends BaseComponent {
   final String title;
   final String value;
@@ -78,6 +80,7 @@ class _Title extends BaseComponent {
   }
 }
 
+/// [_TitleDependencie] dependency visualization model
 class _TitleDependencie extends BaseComponent {
   final Dependencie dependencie;
 
@@ -117,6 +120,7 @@ class _TitleDependencie extends BaseComponent {
   }
 }
 
+/// [DetailPackageScreen]  viewing package details
 class DetailPackageScreen extends StatefulWidget {
   static const route = '/detail_package_screen';
   final String name;
@@ -132,22 +136,17 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   DetailPackageViewModel _model = DetailPackageViewModel(
       inject<IPackageRepository>(), inject<IAdvancedService>());
 
-  @override
-  void initState() {
-    super.initState();
-    _model.load(widget.name);
-  }
-
+  /// get error message
   String _message() {
     if (!_model.hasError) return '';
-
     return _model.failure!.when<String>(
         networkError: () => 'no_internet_access',
         empty: () => 'no_results_found',
         serverError: () => 'server_failure');
   }
 
-  _buildScore() {
+  /// responsible for viewing the score
+  _bodyScore() {
     return Container(
       padding: EdgeInsets.all(16.0),
       margin: EdgeInsets.only(top: 8.0),
@@ -182,9 +181,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
-  _buildVersions() {
-    if (_model.package.versions == null || _model.package.versions.isEmpty)
-      return empty;
+  /// responsible for viewing the versions
+  _bodyVersions() {
+    if (_model.package.versions.isEmpty) return empty;
 
     return Container(
       padding: EdgeInsets.all(0.0),
@@ -203,49 +202,53 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           ),
         ),
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                direction: Axis.horizontal,
-                runSpacing: 0.0,
-                spacing: 10.0,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children:
-                    List.generate(_model.package.versions.length, (index) {
-                  var item = _model.package.versions[index];
+          Container(
+            padding: EdgeInsets.only(left: 2.0, right: 4.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  direction: Axis.horizontal,
+                  runSpacing: 0.0,
+                  spacing: 5.0,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children:
+                      List.generate(_model.package.versions.length, (index) {
+                    var item = _model.package.versions[index];
 
-                  return Chip(
-                      padding: EdgeInsets.zero,
-                      backgroundColor: CustomTheme.placeholderColor,
-                      label: Container(
-                        constraints: BoxConstraints(maxWidth: 65),
-                        child: Center(
-                          child: Txt(
-                            item.version,
-                            textStyle: (style) => style.copyWith(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
+                    return Chip(
+                        padding: EdgeInsets.zero,
+                        backgroundColor: CustomTheme.placeholderColor,
+                        label: Container(
+                          constraints: BoxConstraints(maxWidth: 65),
+                          child: Center(
+                            child: Txt(
+                              item.version,
+                              textStyle: (style) => style.copyWith(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLine: 1,
+                              textAlign: TextAlign.center,
                             ),
-                            maxLine: 1,
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ));
-                }).toList(),
-              )
-            ],
+                        ));
+                  }).toList(),
+                )
+              ],
+            ),
           )
         ],
       ),
     );
   }
 
-  _buildReadme() {
+  /// responsible for viewing the readme
+  _bodyReadme() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(_model.loadingReadme ? 16.0 : 0.0),
@@ -320,7 +323,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
-  _buildDependencies() {
+  /// responsible for viewing the dependencies
+  _bodyDependencies() {
     if (_model.package.dependencies.isEmpty) return empty;
 
     return Container(
@@ -359,6 +363,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
+  /// viewing
   _build() {
     if (_model.isBusy && !_model.hasData) {
       return Center(child: CustomProgress());
@@ -415,10 +420,10 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 ],
               ),
             ),
-            _buildDependencies(),
-            _buildVersions(),
-            _buildScore(),
-            _buildReadme()
+            _bodyDependencies(),
+            _bodyVersions(),
+            _bodyScore(),
+            _bodyReadme()
           ],
         ),
       ),
@@ -426,53 +431,60 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(
-        builder: (_) => Scaffold(
-              backgroundColor: CustomTheme.placeholderColor,
-              appBar: AppBar(
-                brightness: CustomTheme.brightness,
-                centerTitle: false,
-                actions: (_model.hasData)
-                    ? <Widget>[
-                        IconButton(
-                            icon: CustomIcon(
-                              icon: 'download',
-                              size: 20,
-                            ),
-                            onPressed: () => Util.openLink(
-                                url: _model.package.latest.archive_url)),
-                        IconButton(
-                            icon: CustomIcon(
-                              icon: 'share',
-                              size: 20,
-                            ),
-                            onPressed: () =>
-                                Util.shareProject(package: _model.package)),
-                        IconButton(
-                            icon: CustomIcon(
-                              icon: 'github',
-                              size: 20,
-                            ),
-                            onPressed: () => Util.openLink(
-                                url: _model.package.latest.pubspec.homepage))
-                      ]
-                    : [],
-                elevation: 0.0,
-                title: Txt(
-                  'app'.translate,
-                  textStyle: (_) => _.copyWith(
-                      color: CustomTheme.titleColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0),
-                ),
-              ),
-              body: _build(),
-            ));
+  void initState() {
+    super.initState();
+    _model.load(widget.name);
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (_) {
+      return Scaffold(
+        backgroundColor: CustomTheme.placeholderColor,
+        appBar: AppBar(
+          brightness: CustomTheme.brightness,
+          centerTitle: false,
+          actions: <Widget>[
+            if (_model.hasData)
+              IconButton(
+                  icon: CustomIcon(
+                    icon: 'download',
+                    size: 20,
+                  ),
+                  onPressed: () =>
+                      Util.openLink(url: _model.package.latest.archive_url)),
+            if (_model.hasData)
+              IconButton(
+                  icon: CustomIcon(
+                    icon: 'share',
+                    size: 20,
+                  ),
+                  onPressed: () => Util.shareProject(package: _model.package)),
+            if (_model.hasData)
+              IconButton(
+                  icon: CustomIcon(
+                    icon: 'github',
+                    size: 20,
+                  ),
+                  onPressed: () => Util.openLink(
+                      url: _model.package.latest.pubspec.homepage))
+          ],
+          elevation: 0.0,
+          title: Txt(
+            'app'.translate,
+            textStyle: (_) => _.copyWith(
+                color: CustomTheme.titleColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0),
+          ),
+        ),
+        body: _build(),
+      );
+    });
   }
 }
