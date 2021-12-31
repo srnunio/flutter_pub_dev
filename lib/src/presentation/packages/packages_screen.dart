@@ -28,12 +28,17 @@ class PackagesScreenState extends State<PackagesScreen>
     with SingleTickerProviderStateMixin {
   PackagesViewModel _model = PackagesViewModel(inject<IPackageRepository>());
 
-  @override
-  void initState() {
-    super.initState();
-    _model.load();
+  /// get error message
+  String _message() {
+    if (!_model.hasError) return '';
+
+    return _model.failure!.when<String>(
+        networkError: () => 'no_internet_access',
+        empty: () => 'no_results_found',
+        serverError: () => 'server_failure');
   }
 
+  /// when data empty or has error
   _viewFailure() {
     return Center(
       child: Container(
@@ -66,20 +71,14 @@ class PackagesScreenState extends State<PackagesScreen>
     );
   }
 
-  String _message() {
-    if (!_model.hasError) return '';
-
-    return _model.failure!.when<String>(
-        networkError: () => 'no_internet_access',
-        empty: () => 'no_results_found',
-        serverError: () => 'server_failure');
-  }
-
+  /// viewing
   _build() {
     return Observer(builder: (_) {
-      if (_model.isBusy && !_model.hasData) {
+      /// when loading and data empty
+      if (_model.isBusy && !_model.hasData)
         return Center(child: CustomProgress());
-      }
+
+      /// when data empty and has error
       if (_model.hasError && !_model.hasData) {
         return CustomRefresh(
           refresh: _model.refresh,
@@ -88,6 +87,8 @@ class PackagesScreenState extends State<PackagesScreen>
           onRefresh: () => _model.load(refresh: true),
         );
       }
+
+      /// when data empty
       if (!_model.hasData) {
         return CustomRefresh(
           refresh: _model.refresh,
@@ -97,6 +98,7 @@ class PackagesScreenState extends State<PackagesScreen>
         );
       }
 
+      /// list results
       return CustomRefresh(
         refresh: _model.refresh,
         child: StaggeredGridView.countBuilder(
@@ -129,6 +131,12 @@ class PackagesScreenState extends State<PackagesScreen>
         onLoading: () => _model.load(),
       );
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model.load();
   }
 
   @override
