@@ -6,6 +6,7 @@ import 'package:flutter_package/src/utils/uihelper.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
+/// [SearchItem]
 class SearchItem extends BaseComponent {
   Function() onTap;
 

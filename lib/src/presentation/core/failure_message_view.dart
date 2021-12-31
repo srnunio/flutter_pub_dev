@@ -11,7 +11,6 @@ import 'base_widget.dart';
 class FailureMessageView extends BaseComponent {
   final String textButton;
   final Function()? onTap;
-  bool showButton;
   String? icon;
   final double sizeIcon;
   final bool reference;
@@ -25,7 +24,6 @@ class FailureMessageView extends BaseComponent {
       this.onTap,
       this.textButton = 'try_again',
       this.icon,
-      this.showButton = false,
       this.reference = true,
       this.button,
       this.isColor = false,
@@ -69,23 +67,23 @@ class FailureMessageView extends BaseComponent {
             ),
           ),
           UIHelper.verticalSpaceSmall(),
-           if(button != null && showButton)
-                  InkWell(
-                    onTap: onTap,
-                    child: Container(
-                      width: 200,
-                      padding: EdgeInsets.all(8.0),
-                      child: _center(
-                        child: Txt(
-                          '${textButton}'.translate,
-                          textStyle: (_) => _.copyWith(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+          if (button != null && onTap != null)
+            InkWell(
+              onTap: onTap,
+              child: Container(
+                width: 200,
+                padding: EdgeInsets.all(8.0),
+                child: _center(
+                  child: Txt(
+                    '${textButton}'.translate,
+                    textStyle: (_) => _.copyWith(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )
+                  ),
+                ),
+              ),
+            )
         ],
       ),
     );

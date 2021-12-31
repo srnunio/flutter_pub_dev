@@ -12,6 +12,7 @@ import 'package:flutter_package/src/presentation/search/search_item.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/l18n.dart';
 
+/// [SearchScreen]
 class SearchScreen extends StatefulWidget {
   static const route = '/search_screen';
 
@@ -51,7 +52,6 @@ class SearchScreenState extends State<SearchScreen>
           isColor: true,
           sizeIcon: 80,
           message: _message,
-          showButton: _model.hasError,
           onTap: () {
             _model.load(query: _query);
           },
@@ -61,11 +61,12 @@ class SearchScreenState extends State<SearchScreen>
         return FailureMessageView(
           isColor: true,
           sizeIcon: 80,
-          showButton: !_model.hasError,
           message: _message,
-          onTap: () {
-            _model.load(query: _query);
-          },
+          onTap: _model.hasError
+              ? () {
+                  _model.load(query: _query);
+                }
+              : null,
         );
       }
 
