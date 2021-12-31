@@ -30,11 +30,8 @@ class SearchScreenState extends State<SearchScreen>
 
   bool get hasQuery => (_query.isNotEmpty);
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
+  /// get error message
   String get _message => (!_model.hasError)
       ? 'no_results_found'
       : _model.failure!.when<String>(
@@ -42,11 +39,15 @@ class SearchScreenState extends State<SearchScreen>
           empty: () => 'no_results_found',
           serverError: () => 'server_failure');
 
+  /// viewing
   _build() {
     return Observer(builder: (_) {
+
+      /// when loading and data empty
       if (_model.isBusy && !_model.hasData) {
         return Center(child: CustomProgress());
       }
+      /// when data empty and has error
       if (_model.hasError && !_model.hasData) {
         return FailureMessageView(
           isColor: true,
@@ -57,6 +58,7 @@ class SearchScreenState extends State<SearchScreen>
           },
         );
       }
+      /// when data empty
       if (!_model.hasData) {
         return FailureMessageView(
           isColor: true,
@@ -70,6 +72,7 @@ class SearchScreenState extends State<SearchScreen>
         );
       }
 
+      /// list results
       return CustomRefresh(
         refresh: _model.refresh,
         child: ListView.builder(
@@ -95,13 +98,13 @@ class SearchScreenState extends State<SearchScreen>
     });
   }
 
+  /// update query
   void updateSearchQuery(String newQuery) {
-    setState(() {
-      _query = newQuery;
-    });
+    setState(() =>  _query = newQuery);
   }
 
-  _field() {
+  /// search field
+  _bodyField() {
     var hintText = I18n.text('search_desc');
 
     return Container(
@@ -145,6 +148,16 @@ class SearchScreenState extends State<SearchScreen>
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -155,14 +168,10 @@ class SearchScreenState extends State<SearchScreen>
             elevation: 0,
             leading: BackButton(),
             automaticallyImplyLeading: false,
-            title: _field(),
+            title: _bodyField(),
           )),
       body: _build(),
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }
