@@ -70,8 +70,11 @@ dev_dependencies:
 flutter:
   fonts:
     - family: Font
-    - fonts:
-        - asset: fonts/light.ttf
+      fonts:
+        - asset: assets/fonts/DINNextRoundedLTPro-Bold.otf
+        - asset: assets/fonts/DINNextRoundedLTPro-Regular.otf
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

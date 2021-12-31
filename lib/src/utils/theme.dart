@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/util.dart';
 
+import 'constants.dart';
+
 class CustomTheme {
   static Color? backgroundColor;
   static Color? placeholderColor;
@@ -44,7 +46,7 @@ class CustomTheme {
       backgroundColor: backgroundColor,
       scaffoldBackgroundColor: backgroundColor,
       dialogBackgroundColor: backgroundColor,
-      fontFamily: 'Font',
+      fontFamily: fontName,
       iconTheme: IconThemeData(color: primary),
       appBarTheme: AppBarTheme(
           brightness: Brightness.dark,

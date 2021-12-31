@@ -22,21 +22,21 @@ class _SettingState extends State<SettingScreen>
   /// see github
   onGoGit() async {
     try {
-      Util.openLink(url: Constants.GITHUB);
+      Util.openLink(url: GITHUB);
     } catch (ex) {}
   }
 
   /// see playstore
   onGoPlayStore() async {
     try {
-      Util.openLink(url: Constants.PLAYSTORE);
+      Util.openLink(url: PLAYSTORE);
     } catch (ex) {}
   }
 
   /// see website
   onGoWebsite() async {
     try {
-      Util.openLink(url: Constants.PUBDEV);
+      Util.openLink(url: PUBDEV);
     } catch (ex) {}
   }
 
@@ -80,7 +80,7 @@ class _SettingState extends State<SettingScreen>
                             _.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Txt(
-                        'v${Constants.VERSION_APP}',
+                        'v${VERSION_APP}',
                         textStyle: (_) => _.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.0,
