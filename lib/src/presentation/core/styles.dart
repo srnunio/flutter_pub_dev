@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
+/// custom decoration
 BoxDecoration decoration(
     {Color? color,
     BoxBorder? border,
@@ -18,6 +19,7 @@ BoxDecoration decoration(
           : null);
 }
 
+/// custom text style
 TextStyle styleText({
   Color? color,
   double size = 16.0,
