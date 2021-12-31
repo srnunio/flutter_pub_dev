@@ -76,12 +76,10 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
   uses-material-design: true
   assets:
     - assets/locale/
     - assets/icons/
     - assets/images/
-
-
-#    flutter packages pub run build_runner build --delete-conflicting-outputs
 
