@@ -2,7 +2,7 @@ import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
+import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
@@ -82,7 +82,7 @@ class _Title extends BaseComponent {
 
 /// [_TitleDependencie] dependency visualization model
 class _TitleDependencie extends BaseComponent {
-  final Dependencie dependencie;
+  final Dependency dependencie;
 
   _TitleDependencie({required this.dependencie});
 

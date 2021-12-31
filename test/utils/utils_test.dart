@@ -1,4 +1,4 @@
-import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
+import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -32,7 +32,7 @@ void main() {
     entries.removeWhere((element) => (element.value is Map));
 
     var dependencies = entries
-        .map((e) => Dependencie(version: (e.value as String), name: e.key))
+        .map((e) => Dependency(version: (e.value as String), name: e.key))
         .toList();
 
     print(dependencies);

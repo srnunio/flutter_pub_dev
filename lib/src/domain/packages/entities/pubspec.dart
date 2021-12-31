@@ -1,4 +1,4 @@
-import 'dependencie.dart';
+import 'dependency.dart';
 import 'environment.dart';
 
 class Pubspec {
@@ -8,8 +8,8 @@ class Pubspec {
   final String homepage;
   final String repository;
   final Environment environment;
-  final List<Dependencie> dependencies;
-  final List<Dependencie> dev_dependencies;
+  final List<Dependency> dependencies;
+  final List<Dependency> dev_dependencies;
 
   Pubspec(
       {required this.name,

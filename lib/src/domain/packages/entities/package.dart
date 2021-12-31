@@ -1,5 +1,5 @@
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
-import 'dependencie.dart';
+import 'dependency.dart';
 import 'version.dart';
 
 class Package {
@@ -8,7 +8,7 @@ class Package {
   final String url;
   final List<Version> versions;
   final Version latest;
-  final List<Dependencie> dependencies;
+  final List<Dependency> dependencies;
 
   const Package(
       {required this.name,

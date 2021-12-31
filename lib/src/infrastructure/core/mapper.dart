@@ -1,30 +1,34 @@
-import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
+import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/domain/packages/entities/environment.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/packages/entities/pubspec.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
 
+/// [Mapper] parsed values
 abstract class Mapper {
-  Dependencie dependencyFromMap(Map<String, dynamic> map) {
-    return new Dependencie(
+  /// [dependencyFromMap] parse map to dependency object
+  Dependency dependencyFromMap(Map<String, dynamic> map) {
+    return new Dependency(
       name: map['name'] as String,
       version: map['version'] as String,
     );
   }
 
-  static List<Dependencie> _getDependencies(Map<String, dynamic> dependencies) {
+  /// [_getDependencies] returns a list of dependency
+  static List<Dependency> _getDependencies(Map<String, dynamic> dependencies) {
     try {
       var entries = dependencies.entries.toList();
       entries.removeWhere((element) => (element.value is Map));
       return entries
-          .map((e) => Dependencie(version: e.value, name: e.key))
+          .map((e) => Dependency(version: e.value, name: e.key))
           .toList();
     } catch (e) {
       return [];
     }
   }
 
+  /// [packageFromMap] parse map to package object
   static Package packageFromMap(Map<String, dynamic> map) {
     var versions = (!map.containsKey('versions') || map['versions'] == null)
         ? <Version>[]
@@ -32,7 +36,7 @@ abstract class Mapper {
 
     var dependencies =
         (map['latest']['pubspec']['dependencies'] == null)
-            ? <Dependencie>[]
+            ? <Dependency>[]
             : _getDependencies(map['latest']['pubspec']['dependencies']);
 
     var package_url =
@@ -48,12 +52,13 @@ abstract class Mapper {
     );
   }
 
+  /// [environmentFromMap] parse map to environment object
   static Environment environmentFromMap(Map<String, dynamic> map) {
     return new Environment(
       sdk: map['sdk'] as String,
     );
   }
-
+  /// [pubspecFromMap] parse map to pubspec object
   static Pubspec pubspecFromMap(Map<String, dynamic> map) {
     return Pubspec(
         name: map['name'] as String,
@@ -67,6 +72,7 @@ abstract class Mapper {
         environment: Environment.empty);
   }
 
+  /// [scoreFromMap] parse map to score object
   static Score scoreFromMap(Map<String, dynamic> map) {
     return Score(
       maxPoints: map['maxPoints'] as int,
@@ -76,6 +82,7 @@ abstract class Mapper {
     );
   }
 
+  /// [versionFromMap] parse map to version object
   static Version versionFromMap(Map<String, dynamic> map) {
     return new Version(
       version: map['version'] as String,

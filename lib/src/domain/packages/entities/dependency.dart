@@ -1,8 +1,8 @@
-class Dependencie{
+class Dependency{
   String name;
   String version;
 
-  Dependencie({required this.name, required this.version});
+  Dependency({required this.name, required this.version});
   Map<String, dynamic> toMap() {
     return {
       'name': this.name,
