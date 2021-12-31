@@ -4,16 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1793472424/android.connectivity.iml" filepath="$PROJECT_DIR$/.idea/modules/1793472424/android.connectivity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-826841667/android.connectivity_for_web.iml" filepath="$PROJECT_DIR$/.idea/modules/-826841667/android.connectivity_for_web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1489070162/android.connectivity_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/1489070162/android.connectivity_macos.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1399421229/android.fluttertoast.iml" filepath="$PROJECT_DIR$/.idea/modules/-1399421229/android.fluttertoast.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2141453383/android.share.iml" filepath="$PROJECT_DIR$/.idea/modules/2141453383/android.share.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/655496793/android.url_launcher.iml" filepath="$PROJECT_DIR$/.idea/modules/655496793/android.url_launcher.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1112824073/android.url_launcher_linux.iml" filepath="$PROJECT_DIR$/.idea/modules/1112824073/android.url_launcher_linux.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-232394611/android.url_launcher_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/-232394611/android.url_launcher_macos.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1723461357/android.url_launcher_web.iml" filepath="$PROJECT_DIR$/.idea/modules/1723461357/android.url_launcher_web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1560347799/android.url_launcher_windows.iml" filepath="$PROJECT_DIR$/.idea/modules/1560347799/android.url_launcher_windows.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-719362859/com.example.FlutterToast.android.fluttertoast.iml" filepath="$PROJECT_DIR$/.idea/modules/-719362859/com.example.FlutterToast.android.fluttertoast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-419568423/io.flutter.plugins.share.android.share.iml" filepath="$PROJECT_DIR$/.idea/modules/-419568423/io.flutter.plugins.share.android.share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-564137546/io.flutter.plugins.urllauncher.android.url_launcher.iml" filepath="$PROJECT_DIR$/.idea/modules/-564137546/io.flutter.plugins.urllauncher.android.url_launcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1704901281/url_launcher_linux-2.0.0.android.url_launcher_linux.iml" filepath="$PROJECT_DIR$/.idea/modules/1704901281/url_launcher_linux-2.0.0.android.url_launcher_linux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1934017824/url_launcher_macos-2.0.0.android.url_launcher_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/-1934017824/url_launcher_macos-2.0.0.android.url_launcher_macos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-55790334/url_launcher_web-2.0.1.android.url_launcher_web.iml" filepath="$PROJECT_DIR$/.idea/modules/-55790334/url_launcher_web-2.0.1.android.url_launcher_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1813828368/url_launcher_windows-2.0.0.android.url_launcher_windows.iml" filepath="$PROJECT_DIR$/.idea/modules/-1813828368/url_launcher_windows-2.0.0.android.url_launcher_windows.iml" />
     </modules>
   </component>
 </project>
