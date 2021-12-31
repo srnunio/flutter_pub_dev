@@ -2,7 +2,7 @@ import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/presentation/search/search_screen.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
@@ -48,10 +48,10 @@ class PackagesScreenState extends State<PackagesScreen>
               textAlign: TextAlign.center,
               textColor: Colors.black,
             ),
-            UIHelper.verticalSpaceSmall(),
+            verticalSpaceSmall(),
             CustomIcon(icon: 'swip', size: 80),
-            UIHelper.verticalSpaceSmall(),
-            UIHelper.verticalSpaceSmall(),
+            verticalSpaceSmall(),
+            verticalSpaceSmall(),
             Txt(
               'update_view'.translate,
               textAlign: TextAlign.center,

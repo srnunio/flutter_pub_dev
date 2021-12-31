@@ -1,7 +1,7 @@
 import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
@@ -56,9 +56,9 @@ class FailureMessageView extends BaseComponent {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          (hasIcon) ? UIHelper.verticalSpaceSmall() : empty,
+          (hasIcon) ? verticalSpaceSmall() : empty,
           _icon(),
-          (hasIcon) ? UIHelper.verticalSpaceSmall() : empty,
+          (hasIcon) ? verticalSpaceSmall() : empty,
           _center(
             child: Txt(
               value!.translate,
@@ -66,7 +66,7 @@ class FailureMessageView extends BaseComponent {
               textAlign: TextAlign.center,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
+          verticalSpaceSmall(),
           if (button != null && onTap != null)
             InkWell(
               onTap: onTap,

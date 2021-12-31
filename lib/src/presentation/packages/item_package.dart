@@ -1,7 +1,7 @@
 import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/presentation/core/side_rounded.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
@@ -57,7 +57,7 @@ class ItemPackage extends StatelessWidget {
               maxLine: 3,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
+          verticalSpaceSmall(),
           Container(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
             child: Txt(
@@ -68,7 +68,7 @@ class ItemPackage extends StatelessWidget {
               maxLine: 3,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
+          verticalSpaceSmall(),
           Container(
             margin: EdgeInsets.only(left: 10.0),
             child: Row(

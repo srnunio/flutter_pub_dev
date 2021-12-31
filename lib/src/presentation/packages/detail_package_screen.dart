@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependencie.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
@@ -106,7 +106,7 @@ class _TitleDependencie extends BaseComponent {
             textStyle: (_) => _.copyWith(
                 fontWeight: FontWeight.bold, color: CustomTheme.primary),
           ),
-          UIHelper.horizontalSpaceSmall(),
+          horizontalSpaceSmall(),
           Expanded(
               child: Txt(
             dependencie.version,
@@ -286,7 +286,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    UIHelper.verticalSpaceSmall(),
+                    verticalSpaceSmall(),
                     (_model.hasReadme)
                         ? Markdown(
                             selectable: true,
@@ -412,7 +412,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                       fontSize: 24,
                     ),
                   ),
-                  UIHelper.verticalSpaceSmall(),
+                  verticalSpaceSmall(),
                   Txt(
                     '${_model.package.latest.pubspec.description}',
                     textStyle: (_) => _.copyWith(),

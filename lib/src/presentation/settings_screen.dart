@@ -2,13 +2,13 @@ import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/l18n.dart';
 import '../utils/constants.dart';
-import '../utils/uihelper.dart';
+import '../utils/size.dart';
 
 class SettingScreen extends StatelessWidget {
   static const route = '/settings_screen';
@@ -120,11 +120,11 @@ class _SettingState extends State<_SettingView>
                   ),
                 ],
               ),
-              UIHelper.verticalSpaceMedium(),
+              verticalSpaceMedium(),
               Divider(
                 color: CustomTheme.placeholderColor,
               ),
-              UIHelper.verticalSpaceMedium(),
+              verticalSpaceMedium(),
               InkWell(
                 onTap: onGoGit,
                 child: Container(
@@ -143,7 +143,7 @@ class _SettingState extends State<_SettingView>
                   ),
                 ),
               ),
-              UIHelper.verticalSpaceMedium(),
+              verticalSpaceMedium(),
               InkWell(
                 onTap: onGoWebsite,
                 child: Container(
@@ -162,7 +162,7 @@ class _SettingState extends State<_SettingView>
                   ),
                 ),
               ),
-              UIHelper.verticalSpaceMedium(),
+              verticalSpaceMedium(),
               Divider(color: CustomTheme.placeholderColor),
             ],
           ),

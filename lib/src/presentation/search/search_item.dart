@@ -2,7 +2,7 @@ import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 
@@ -35,7 +35,7 @@ class SearchItem extends BaseComponent {
               color: CustomTheme.backgroundColor,
             ),
           ),
-          UIHelper.horizontalSpaceSmall(),
+          horizontalSpaceSmall(),
           Expanded(
               child: Txt(
             '${value}',
