@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/search/i_search_repository.dart';

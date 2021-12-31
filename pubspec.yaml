@@ -1,6 +1,6 @@
 name: flutter_package
-description: Este é um exemplo usando a api do pub.dev onde o objectivo é listar os pacotes
-author: Edvaldo Martins <edvaldonuniomartins@gmail.com>
+description: This is an example using the pub.dev where the purpose is to list the packages
+author:  Edvaldo Martins <edvaldomartins.developer@gmail.com>
 homepage: https://github.com/EdvaldoMartins/flutter_package_pub_dev
 
 version: 1.0.0+1

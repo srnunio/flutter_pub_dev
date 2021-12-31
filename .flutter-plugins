@@ -1,8 +1,10 @@
 # This is a generated file; do not edit or check into version control.
 fluttertoast=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-7.1.8/
 share=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/share-2.0.4/
-url_launcher=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.6/
-url_launcher_linux=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-2.0.0/
-url_launcher_macos=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-2.0.0/
-url_launcher_web=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.1/
-url_launcher_windows=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-2.0.0/
+url_launcher=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.17/
+url_launcher_android=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.13/
+url_launcher_ios=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_ios-6.0.13/
+url_launcher_linux=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-2.0.2/
+url_launcher_macos=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-2.0.2/
+url_launcher_web=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.5/
+url_launcher_windows=/Users/edvaldo/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-2.0.2/
