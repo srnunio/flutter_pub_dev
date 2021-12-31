@@ -10,43 +10,30 @@ import 'package:flutter_package/src/l18n.dart';
 import '../utils/constants.dart';
 import '../utils/size.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends StatefulWidget {
   static const route = '/settings_screen';
 
   @override
-  Widget build(BuildContext context) {
-    return _SettingView();
-  }
+  _SettingState createState() => _SettingState();
 }
 
-class _SettingView extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _SettingState();
-  }
-}
-
-class _SettingState extends State<_SettingView>
+class _SettingState extends State<SettingScreen>
     with SingleTickerProviderStateMixin {
-  _SettingState();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  /// see github
   onGoGit() async {
     try {
       Util.openLink(url: Constants.GITHUB);
     } catch (ex) {}
   }
 
+  /// see playstore
   onGoPlayStore() async {
     try {
       Util.openLink(url: Constants.PLAYSTORE);
     } catch (ex) {}
   }
 
+  /// see website
   onGoWebsite() async {
     try {
       Util.openLink(url: Constants.PUBDEV);

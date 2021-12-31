@@ -30,7 +30,6 @@ class SearchScreenState extends State<SearchScreen>
 
   bool get hasQuery => (_query.isNotEmpty);
 
-
   /// get error message
   String get _message => (!_model.hasError)
       ? 'no_results_found'
@@ -42,11 +41,10 @@ class SearchScreenState extends State<SearchScreen>
   /// viewing
   _build() {
     return Observer(builder: (_) {
-
       /// when loading and data empty
-      if (_model.isBusy && !_model.hasData) {
+      if (_model.isBusy && !_model.hasData)
         return Center(child: CustomProgress());
-      }
+
       /// when data empty and has error
       if (_model.hasError && !_model.hasData) {
         return FailureMessageView(
@@ -58,6 +56,7 @@ class SearchScreenState extends State<SearchScreen>
           },
         );
       }
+
       /// when data empty
       if (!_model.hasData) {
         return FailureMessageView(
@@ -100,7 +99,7 @@ class SearchScreenState extends State<SearchScreen>
 
   /// update query
   void updateSearchQuery(String newQuery) {
-    setState(() =>  _query = newQuery);
+    setState(() => _query = newQuery);
   }
 
   /// search field
@@ -173,5 +172,4 @@ class SearchScreenState extends State<SearchScreen>
       body: _build(),
     );
   }
-
 }
