@@ -22,7 +22,10 @@
   "popularity": "Popularidade",
   "points": "Pontos",
   "dependencies": "Dependências",
-  "search_desc": "Escreva o nome do pacote"
-
-
+  "search_desc": "Escreva o nome do pacote",
+  "language": "Idiomas",
+  "portuguese": "Português",
+  "english": "Inglês",
+  "dark_mode": "Modo escuro",
+  "light_mode": "Modo claro"
 }

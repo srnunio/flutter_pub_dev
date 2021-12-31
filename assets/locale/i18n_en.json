@@ -22,5 +22,10 @@
   "popularity": "Popularity",
   "points": "Pub points",
   "dependencies": "Dependencies",
-  "search_desc": "Write package name"
+  "search_desc": "Write package name",
+  "language": "Language",
+  "portuguese": "Portuguese",
+  "english": "English",
+  "dark_mode": "Dark mode",
+  "light_mode": "Light mode"
 }

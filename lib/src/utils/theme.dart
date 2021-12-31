@@ -49,7 +49,7 @@ class CustomTheme {
       fontFamily: fontName,
       iconTheme: IconThemeData(color: primary),
       appBarTheme: AppBarTheme(
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           color: backgroundColor,
           iconTheme: IconThemeData(color: primary)),
     );
