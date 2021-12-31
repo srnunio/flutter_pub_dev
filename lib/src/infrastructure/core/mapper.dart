@@ -6,7 +6,7 @@ import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
 
 abstract class Mapper {
-  Dependencie dependencieFromMap(Map<String, dynamic> map) {
+  Dependencie dependencyFromMap(Map<String, dynamic> map) {
     return new Dependencie(
       name: map['name'] as String,
       version: map['version'] as String,
