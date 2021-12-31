@@ -2,7 +2,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 const String host = 'pub.dartlang.org';
-const String apiBaseUrl = 'https://$host/api/';
+const String apiBaseUrl = 'https://$host/api';
 
 class NetworkBuilder {
   String _baseUrl = '';

@@ -15,7 +15,7 @@ class PackageService extends IPackageService {
   Future<Either<RequestFailure, List<Package>>> getPackages(
       {required int page}) async {
     try {
-      final response = await dio.get('${path}?page=${page}',
+      final response = await dio.get('$path?page=$page',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -26,7 +26,6 @@ class PackageService extends IPackageService {
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
       var packages = List.from(response.data['packages']).map<Package>((data) {
-        // print('data: ${json.encode(data)}');
         return Mapper.packageFromMap(data);
       }).toList();
 
@@ -50,7 +49,6 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('getPackages: $error');
       return left(RequestFailure.serverError());
     }
   }
@@ -88,7 +86,6 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('$error');
       return left(RequestFailure.serverError());
     }
   }
@@ -127,7 +124,6 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('$error');
       return left(RequestFailure.serverError());
     }
   }
