@@ -87,9 +87,8 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @action
   Future<void> load(String namePackage, {bool refresh = false}) async {
-    if (isBusy) {
-      return;
-    }
+    if (isBusy) return;
+
     if (refresh) onRefresh(value: refresh);
 
     setBusy(true);
