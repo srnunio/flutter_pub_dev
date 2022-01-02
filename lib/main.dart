@@ -7,8 +7,6 @@ import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'router.dart';
-import 'src/utils/theme.dart';
-import 'src/utils/util.dart';
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +27,7 @@ class PubFlutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConfigBuilder(
-      builder: (locale) {
+      builder: (locale, theme) {
         return MaterialApp(
           navigatorKey: inject<NavigationService>().navigator,
           supportedLocales: <Locale>[
@@ -50,7 +48,10 @@ class PubFlutter extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
-          theme: CustomTheme.themeBuild(),
+          theme: theme,
+          themeMode: theme.brightness == Brightness.light
+              ? ThemeMode.light
+              : ThemeMode.dark,
           onGenerateRoute: AppRouter.generateRoute,
         );
       },
