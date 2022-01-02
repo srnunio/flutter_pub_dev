@@ -14,7 +14,7 @@ import 'package:flutter_package/src/presentation/packages/item_package.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../settings_screen.dart';
+import '../settings/settings_screen.dart';
 import 'detail_package_screen.dart';
 
 class PackagesScreen extends StatefulWidget {

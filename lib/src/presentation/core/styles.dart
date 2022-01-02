@@ -22,14 +22,14 @@ BoxDecoration decoration(
 /// custom text style
 TextStyle styleText({
   Color? color,
-  double size = 16.0,
+  double fontSize = 16.0,
   FontWeight fontWeight = FontWeight.normal,
   TextDecoration? decoration,
   String? font,
 }) {
   return TextStyle(
       fontFamily: font ?? fontName,
-      fontSize: size,
+      fontSize: fontSize,
       color: color ?? CustomTheme.titleColor,
       decoration: decoration,
       fontWeight: fontWeight);

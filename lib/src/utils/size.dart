@@ -14,6 +14,8 @@ const double kTitleSize = 16.0;
 
 const double kSubtitleSize = 14.0;
 
+const double kBorder = 8.0;
+
 Widget verticalSpaceSmall() {
   return verticalSpace(_VerticalSpaceSmall);
 }
