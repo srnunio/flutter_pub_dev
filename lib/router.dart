@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/packages/packages_screen.dart';
 import 'package:flutter_package/src/presentation/search/search_screen.dart';
-import 'package:flutter_package/src/presentation/settings_screen.dart';
+import 'package:flutter_package/src/presentation/settings/settings_screen.dart';
 import 'package:flutter_package/src/presentation/splash_view_screen.dart';
 
 import 'src/presentation/packages/detail_package_screen.dart';

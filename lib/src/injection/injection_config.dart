@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_package/src/application/settings/config_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/core/navigation/navigation_service.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
@@ -52,5 +53,7 @@ class InjectorConfig {
         () => SearchRepository(_injector.get<ISearchService>()));
   }
 
-  void registerViewModels() {}
+  void registerViewModels() {
+    _injector.registerLazySingleton(() => ConfigViewModel());
+  }
 }
