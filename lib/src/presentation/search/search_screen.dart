@@ -11,7 +11,6 @@ import 'package:flutter_package/src/presentation/packages/detail_package_screen.
 import 'package:flutter_package/src/presentation/search/search_item.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/l18n.dart';
 
 /// [SearchScreen]

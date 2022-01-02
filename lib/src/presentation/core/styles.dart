@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/constants.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
 /// custom decoration
 BoxDecoration decoration(
