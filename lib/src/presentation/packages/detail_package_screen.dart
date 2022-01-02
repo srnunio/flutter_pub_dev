@@ -19,32 +19,6 @@ import 'package:flutter_package/src/l18n.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 
-/// [_TapInfo] title action visualization model
-class _TapInfo extends BaseComponent {
-  final String title;
-  final VoidCallback onTap;
-
-  _TapInfo({required this.title, required this.onTap}) : super(value: '');
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-            child: Txt(
-          title,
-          textAlign: TextAlign.left,
-          textSize: 14.0,
-        )),
-        IconButton(icon: Icon(Icons.refresh), onPressed: onTap)
-      ],
-    );
-  }
-}
-
 /// [_Title] vertical title visualization model
 class _Title extends BaseComponent {
   final String title;
@@ -90,35 +64,40 @@ class _TitleDependency extends BaseComponent {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Txt(
-            dependencie.name,
-            maxLine: 2,
-            textAlign: TextAlign.left,
-            textStyle: (_) =>
-                _.copyWith(fontWeight: FontWeight.bold, color: kPrimaryColor),
+      alignment: Alignment.centerLeft,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Txt(
+                dependencie.name.trim(),
+                maxLine: 2,
+                textAlign: TextAlign.left,
+                textStyle: (_) => _.copyWith(
+                    fontWeight: FontWeight.bold, color: kPrimaryColor),
+              ),
+              Txt(
+                ':',
+                textAlign: TextAlign.center,
+                textStyle: (_) => _.copyWith(
+                    fontWeight: FontWeight.bold, color: kPrimaryColor),
+              ),
+              horizontalSpaceSmall(),
+              Txt(
+                dependencie.version,
+                maxLine: 1,
+                textAlign: TextAlign.left,
+                textColor: kSubtitleTextColor,
+              ),
+            ],
           ),
-          Txt(
-            ':',
-            textAlign: TextAlign.center,
-            textStyle: (_) =>
-                _.copyWith(fontWeight: FontWeight.bold, color: kPrimaryColor),
-          ),
-          horizontalSpaceSmall(),
-          Flexible(
-              child: Txt(
-            dependencie.version,
-            maxLine: 1,
-            textAlign: TextAlign.left,
-            textColor: kSubtitleTextColor,
-          )),
-        ],
+          padding: EdgeInsets.all(4.0),
+        ),
       ),
-      padding: EdgeInsets.all(4.0),
     );
   }
 }
@@ -314,7 +293,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                             icon: 'info',
                             sizeIcon: 80,
                             message: 'error_readme'.translate,
-                            onTap:  _model.loadReadme,
+                            onTap: _model.loadReadme,
                           ))
                   ],
                 )

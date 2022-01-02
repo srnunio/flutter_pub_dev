@@ -35,25 +35,13 @@ class _SettingState extends State<SettingScreen>
   CustomSwitchController _switchThemeController = CustomSwitchController();
 
   /// see github
-  onGoGit() async {
-    try {
-      Util.openLink(url: GITHUB);
-    } catch (ex) {}
-  }
+  onGoGit() => Util.openLink(url: GITHUB);
 
   /// see playstore
-  onGoPlayStore() async {
-    try {
-      Util.openLink(url: PLAYSTORE);
-    } catch (ex) {}
-  }
+  onGoPlayStore() => Util.openLink(url: PLAYSTORE);
 
   /// see website
-  onGoWebsite() async {
-    try {
-      Util.openLink(url: PUBDEV);
-    } catch (ex) {}
-  }
+  onGoWebsite() => Util.openLink(url: PUBDEV);
 
   /// custom action
   _bodyMoreItem(
@@ -89,8 +77,8 @@ class _SettingState extends State<SettingScreen>
   /// [onTapEN] run en translate
   onTapEN(bool value) {
     _model.changeTranslate(languageCode: 'en');
-    _switchPTController.disable();
     _switchENController.enable();
+    _switchPTController.disable();
   }
 
   /// [onTheme] run theme
@@ -153,10 +141,10 @@ class _SettingState extends State<SettingScreen>
 
   /// run configs
   _initialize() {
-    if (_model.languageCode == 'pt') {
+    if (_model.isCurrentLanguage('pt')) {
       _switchPTController.enable();
       _switchENController.disable();
-    } else if (_model.languageCode == 'en') {
+    } else if (_model.isCurrentLanguage('en')) {
       _switchENController.enable();
       _switchPTController.disable();
     }

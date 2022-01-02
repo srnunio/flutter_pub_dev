@@ -173,9 +173,4 @@ class PackagesScreenState extends State<PackagesScreen>
       );
     });
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

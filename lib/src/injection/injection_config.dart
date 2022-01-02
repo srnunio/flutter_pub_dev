@@ -63,6 +63,7 @@ class InjectorConfig {
   }
 
   void registerViewModels() {
-    _injector.registerLazySingleton(() => ConfigViewModel());
+    _injector.registerLazySingleton(
+        () => ConfigViewModel(_injector.get<ConfigDataPreference>()));
   }
 }
