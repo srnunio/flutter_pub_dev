@@ -6,14 +6,20 @@ import 'package:flutter_package/src/infrastructure/core/network_builder.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'router.dart';
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await I18n.load(await Util.defaultLocale());
+
+  var shared = await SharedPreferences.getInstance();
+
   final network = NetworkBuilder();
-  InjectorConfig.init(network.build());
+
+  InjectorConfig.initialize(dio: network.build(), preferences: shared);
+
   await inject<ConfigViewModel>().initialize();
+
   runApp(PubFlutter());
 }
 
