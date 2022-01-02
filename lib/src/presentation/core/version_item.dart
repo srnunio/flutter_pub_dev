@@ -26,6 +26,7 @@ class VersionItem extends StatelessWidget {
                 version.version,
                 style: styleText(
                   fontSize: 12.0,
+                  color: selected ? Colors.white : kTitleTextColor,
                   fontWeight: FontWeight.bold,
                 ),
                 maxLines: 1,

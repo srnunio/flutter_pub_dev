@@ -43,7 +43,7 @@ ThemeData lightTheme() {
   kPlaceholderColor = Colors.grey[200]!;
   kIconColor = Color(0xFF00428D);
   kTitleTextColor = Colors.black;
-  kSubtitleTextColor = Colors.black45;
+  kSubtitleTextColor = Colors.black;
   return ThemeData(
     brightness: Brightness.light,
     textTheme: TextTheme(

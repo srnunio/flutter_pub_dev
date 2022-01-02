@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
+import 'package:flutter_package/src/presentation/core/dependency_item.dart';
 import 'package:flutter_package/src/presentation/core/version_item.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -55,53 +56,6 @@ class _Title extends BaseComponent {
   }
 }
 
-/// [_TitleDependency] dependency visualization model
-class _TitleDependency extends BaseComponent {
-  final Dependency dependencie;
-
-  _TitleDependency({required this.dependencie});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                dependencie.name.trim(),
-                maxLines: 2,
-                textAlign: TextAlign.left,
-                style: styleText(
-                    fontWeight: FontWeight.bold, color: kPrimaryColor),
-              ),
-              Text(
-                ':',
-                textAlign: TextAlign.center,
-                style: styleText(
-                    fontWeight: FontWeight.bold, color: kPrimaryColor),
-              ),
-              horizontalSpaceSmall(),
-              Text(
-                dependencie.version,
-                maxLines: 1,
-                textAlign: TextAlign.left,
-                style: styleText(color: kSubtitleTextColor),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(4.0),
-        ),
-      ),
-    );
-  }
-}
-
 /// [DetailPackageScreen]  viewing package details
 class DetailPackageScreen extends StatefulWidget {
   static const route = '/detail_package_screen';
@@ -117,6 +71,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     with SingleTickerProviderStateMixin {
   DetailPackageViewModel _model = DetailPackageViewModel(
       inject<IPackageRepository>(), inject<IAdvancedService>());
+
+  /// open new package
+  openDependency(String name) {
+    _model.navigateToPushNamed(
+        routeName: DetailPackageScreen.route, arguments: name);
+  }
 
   /// get error message
   String _message() {
@@ -313,11 +273,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-              children: List.generate(
-                      dependencies.length,
-                      (index) =>
-                          _TitleDependency(dependencie: dependencies[index]))
-                  .toList(),
+              children: List.generate(dependencies.length, (index) {
+                return DependencyItem(
+                  dependency: dependencies[index],
+                  openDependency: openDependency,
+                );
+              }).toList(),
             ),
           )
         ],
