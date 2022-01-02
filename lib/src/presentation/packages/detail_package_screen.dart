@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
+import 'package:flutter_package/src/presentation/core/version_item.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
@@ -120,10 +121,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   /// get error message
   String _message() {
     if (!_model.hasError) return '';
-    return _model.failure!.when<String>(
-        networkError: () => 'no_internet_access',
-        empty: () => 'no_results_found',
-        serverError: () => 'server_failure');
+    return _model.failure!
+        .when<String>(
+            networkError: () => 'no_internet_access',
+            empty: () => 'no_results_found',
+            serverError: () => 'server_failure')
+        .translate;
   }
 
   /// responsible for viewing the score
@@ -182,45 +185,26 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
         ),
         children: [
           Container(
-            padding: EdgeInsets.only(left: 2.0, right: 4.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  direction: Axis.horizontal,
-                  runSpacing: 0.0,
-                  spacing: 5.0,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children:
-                      List.generate(_model.package.versions.length, (index) {
-                    var item = _model.package.versions[index];
-
-                    return Chip(
-                        padding: EdgeInsets.zero,
-                        backgroundColor: kPlaceholderColor,
-                        label: Container(
-                          constraints: BoxConstraints(maxWidth: 65),
-                          child: Center(
-                            child: Text(
-                              item.version,
-                              style: styleText(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 1,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ));
-                  }).toList(),
-                )
-              ],
-            ),
-          )
+            margin: EdgeInsets.only(left: 16.0, right: 16.0),
+            child: GridView.count(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: 3,
+                childAspectRatio: 3.0,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 16.0,
+                children:
+                    List.generate(_model.package.versions.length, (index) {
+                  var item = _model.package.versions[index];
+                  var selected = (_model.version.version == item.version);
+                  return VersionItem(
+                    version: item,
+                    onTap: () => _model.setVersion(item),
+                    selected: selected,
+                  );
+                })),
+          ),
+          verticalSpaceMedium()
         ],
       ),
     );
@@ -302,8 +286,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the dependencies
-  _bodyDependencies() {
-    if (_model.package.dependencies.isEmpty) return empty;
+  _bodyDependencies(
+      {required List<Dependency> dependencies, required String title}) {
+    if (dependencies.isEmpty) return empty;
 
     return Container(
       width: double.infinity,
@@ -314,7 +299,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
         childrenPadding: EdgeInsets.all(0.0),
         tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
         title: Text(
-          'dependencies'.translate,
+          title,
           style: styleText(
             fontWeight: FontWeight.bold,
             color: kTitleTextColor,
@@ -329,9 +314,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
-                      _model.package.dependencies.length,
-                      (index) => _TitleDependency(
-                          dependencie: _model.package.dependencies[index]))
+                      dependencies.length,
+                      (index) =>
+                          _TitleDependency(dependencie: dependencies[index]))
                   .toList(),
             ),
           )
@@ -383,7 +368,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(
-                    '${_model.package.name}\t${_model.package.latest.version}',
+                    '${_model.package.name}\t${_model.version.version}',
                     style: styleText(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -391,12 +376,17 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   ),
                   verticalSpaceSmall(),
                   Text(
-                    '${_model.package.latest.pubspec.description}',
+                    '${_model.version.pubspec.description}',
                   ),
                 ],
               ),
             ),
-            _bodyDependencies(),
+            _bodyDependencies(
+                title: 'dependencies'.translate,
+                dependencies: _model.dependencies),
+            _bodyDependencies(
+                title: 'dev_dependencies'.translate,
+                dependencies: _model.dev_dependencies),
             _bodyVersions(),
             _bodyScore(),
             _bodyReadme(theme)

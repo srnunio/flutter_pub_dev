@@ -1,8 +1,10 @@
+import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
+import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,6 +22,9 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @observable
   Package? _package;
+
+  @observable
+  Version? _version;
 
   @observable
   Score _score = Score.default_;
@@ -43,6 +48,15 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Score get score => _score;
 
   @computed
+  Version get version => _version!;
+
+  @computed
+  List<Dependency> get dependencies => _version!.pubspec.dependencies;
+
+  @computed
+  List<Dependency> get dev_dependencies => _version!.pubspec.dev_dependencies;
+
+  @computed
   String get readme => _readme;
 
   @computed
@@ -63,13 +77,16 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   }
 
   @action
+  void setVersion(Version version) {
+    this._version = version;
+  }
+
+  @action
   Future<void> load(String namePackage, {bool refresh = false}) async {
     if (isBusy) {
       return;
     }
-    if (refresh) {
-      onRefresh(value: refresh);
-    }
+    if (refresh) onRefresh(value: refresh);
 
     setBusy(true);
 
@@ -85,6 +102,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
       (failure) => this.failure = failure,
       (data) {
         setPackage(data);
+        setVersion(data.latest);
         loadReadme();
         loadScore();
       },

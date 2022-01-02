@@ -29,6 +29,27 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   Score get score => (_$scoreComputed ??= Computed<Score>(() => super.score,
           name: '_DetailPackageViewModel.score'))
       .value;
+  Computed<Version>? _$versionComputed;
+
+  @override
+  Version get version =>
+      (_$versionComputed ??= Computed<Version>(() => super.version,
+              name: '_DetailPackageViewModel.version'))
+          .value;
+  Computed<List<Dependency>>? _$dependenciesComputed;
+
+  @override
+  List<Dependency> get dependencies => (_$dependenciesComputed ??=
+          Computed<List<Dependency>>(() => super.dependencies,
+              name: '_DetailPackageViewModel.dependencies'))
+      .value;
+  Computed<List<Dependency>>? _$dev_dependenciesComputed;
+
+  @override
+  List<Dependency> get dev_dependencies => (_$dev_dependenciesComputed ??=
+          Computed<List<Dependency>>(() => super.dev_dependencies,
+              name: '_DetailPackageViewModel.dev_dependencies'))
+      .value;
   Computed<String>? _$readmeComputed;
 
   @override
@@ -76,6 +97,21 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   set _package(Package? value) {
     _$_packageAtom.reportWrite(value, super._package, () {
       super._package = value;
+    });
+  }
+
+  final _$_versionAtom = Atom(name: '_DetailPackageViewModel._version');
+
+  @override
+  Version? get _version {
+    _$_versionAtom.reportRead();
+    return super._version;
+  }
+
+  @override
+  set _version(Version? value) {
+    _$_versionAtom.reportWrite(value, super._version, () {
+      super._version = value;
     });
   }
 
@@ -179,12 +215,26 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   }
 
   @override
+  void setVersion(Version version) {
+    final _$actionInfo = _$_DetailPackageViewModelActionController.startAction(
+        name: '_DetailPackageViewModel.setVersion');
+    try {
+      return super.setVersion(version);
+    } finally {
+      _$_DetailPackageViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 failure: ${failure},
 hasError: ${hasError},
 package: ${package},
 score: ${score},
+version: ${version},
+dependencies: ${dependencies},
+dev_dependencies: ${dev_dependencies},
 readme: ${readme},
 hasData: ${hasData},
 hasReadme: ${hasReadme},
