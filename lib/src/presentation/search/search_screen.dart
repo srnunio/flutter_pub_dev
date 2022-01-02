@@ -9,6 +9,8 @@ import 'package:flutter_package/src/presentation/core/failure_message_view.dart'
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/packages/detail_package_screen.dart';
 import 'package:flutter_package/src/presentation/search/search_item.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/l18n.dart';
 
@@ -120,13 +122,13 @@ class SearchScreenState extends State<SearchScreen>
             textInputAction: TextInputAction.search,
             controller: _editingController,
             autofocus: true,
-            cursorColor: CustomTheme.primary,
+            cursorColor: kIconColor,
             decoration: InputDecoration(
               hintText: hintText,
               border: InputBorder.none,
-              hintStyle: styleText(color: CustomTheme.subtitleColor),
+              hintStyle: styleText(color: kSubtitleTextColor),
             ),
-            style: styleText(color: CustomTheme.titleColor),
+            style: styleText(color: kTitleTextColor),
             onChanged: updateSearchQuery,
           )),
           InkWell(
@@ -134,16 +136,16 @@ class SearchScreenState extends State<SearchScreen>
                 Icons.cancel,
                 color: (!hasQuery) ? Colors.grey[300] : null,
               ),
-              onTap: (!hasQuery)
-                  ? null
-                  : () {
-                      _model.clear();
-                      _editingController.clear();
-                      setState(() => _query = '');
-                    }),
+              onTap: (!hasQuery) ? null : _clearData),
         ],
       ),
     );
+  }
+
+  _clearData() {
+    _model.clear();
+    _editingController.clear();
+    setState(() => _query = '');
   }
 
   @override
@@ -158,18 +160,20 @@ class SearchScreenState extends State<SearchScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
-          child: AppBar(
-            backgroundColor: CustomTheme.backgroundColor,
-            brightness: CustomTheme.brightness,
-            elevation: 0,
-            leading: BackButton(),
-            automaticallyImplyLeading: false,
-            title: _bodyField(),
-          )),
-      body: _build(),
-    );
+    return ConfigBuilder(builder: (_, theme) {
+      return Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55),
+            child: AppBar(
+              backgroundColor: kBackgroundColor,
+              brightness: theme.brightness,
+              elevation: 0,
+              leading: BackButton(),
+              automaticallyImplyLeading: false,
+              title: _bodyField(),
+            )),
+        body: _build(),
+      );
+    });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 
 import 'custom_switch.dart';
 
@@ -24,6 +25,7 @@ class TitleSwitch extends BaseComponent {
             controller: controller,
             width: 42.0,
             height: 28.0,
+            activeColor: kPrimaryColor,
             onChange: onTap,
           )
         ],

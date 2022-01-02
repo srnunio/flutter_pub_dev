@@ -1,10 +1,10 @@
 import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
 import 'base_widget.dart';
 
@@ -61,13 +61,13 @@ class FailureMessageView extends BaseComponent {
           (hasIcon) ? verticalSpaceSmall() : empty,
           _center(
             child: Txt(
-              value!.translate,
-              textColor: CustomTheme.titleColor,
+              value!,
+              textColor: kTitleTextColor,
               textAlign: TextAlign.center,
             ),
           ),
           verticalSpaceSmall(),
-          if (button != null && onTap != null)
+          if (onTap != null)
             InkWell(
               onTap: onTap,
               child: Container(

@@ -1,12 +1,12 @@
 import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/presentation/core/side_rounded.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
 class ItemPackage extends StatelessWidget {
   final Package package;
@@ -25,8 +25,7 @@ class ItemPackage extends StatelessWidget {
   _build() {
     return Container(
       padding: EdgeInsets.all(0.0),
-      decoration:
-          decoration(color: CustomTheme.placeholderColor, borderRadius: 8.0),
+      decoration: decoration(color: kPlaceholderColor, borderRadius: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -42,7 +41,7 @@ class ItemPackage extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: CustomTheme.backgroundColor,
+              color: kBackgroundColor,
             ),
           ),
           Container(
@@ -51,7 +50,7 @@ class ItemPackage extends StatelessWidget {
               '${package.name}',
               textAlign: TextAlign.center,
               textStyle: (_) => _.copyWith(
-                  color: CustomTheme.primary,
+                  color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0),
               maxLine: 3,
@@ -64,7 +63,7 @@ class ItemPackage extends StatelessWidget {
               '${package.latest.pubspec.description}',
               textAlign: TextAlign.center,
               textStyle: (_) =>
-                  _.copyWith(color: CustomTheme.subtitleColor, fontSize: 14.0),
+                  _.copyWith(color: kSubtitleTextColor, fontSize: 14.0),
               maxLine: 3,
             ),
           ),
@@ -96,7 +95,7 @@ class ItemPackage extends StatelessWidget {
                   height: 40,
                   width: size.width * .2,
                   child: SideRounded(
-                    color: CustomTheme.primary,
+                    color: kPrimaryColor,
                     child: Txt(
                       '${package.latest.version}',
                       textAlign: TextAlign.center,

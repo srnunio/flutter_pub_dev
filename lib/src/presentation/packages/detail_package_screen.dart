@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
@@ -12,7 +14,6 @@ import 'package:flutter_package/src/presentation/core/base_widget.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -65,13 +66,13 @@ class _Title extends BaseComponent {
             textStyle: (_) => _.copyWith(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: CustomTheme.primary),
+                color: kPrimaryColor),
           ),
           Txt(
             title,
             textAlign: TextAlign.center,
             textSize: 12.0,
-            textColor: CustomTheme.subtitleColor,
+            textColor: kSubtitleTextColor,
           ),
         ],
       ),
@@ -80,11 +81,11 @@ class _Title extends BaseComponent {
   }
 }
 
-/// [_TitleDependencie] dependency visualization model
-class _TitleDependencie extends BaseComponent {
+/// [_TitleDependency] dependency visualization model
+class _TitleDependency extends BaseComponent {
   final Dependency dependencie;
 
-  _TitleDependencie({required this.dependencie});
+  _TitleDependency({required this.dependencie});
 
   @override
   Widget build(BuildContext context) {
@@ -96,22 +97,24 @@ class _TitleDependencie extends BaseComponent {
         children: [
           Txt(
             dependencie.name,
+            maxLine: 2,
             textAlign: TextAlign.left,
-            textStyle: (_) => _.copyWith(
-                fontWeight: FontWeight.bold, color: CustomTheme.primary),
+            textStyle: (_) =>
+                _.copyWith(fontWeight: FontWeight.bold, color: kPrimaryColor),
           ),
           Txt(
             ':',
             textAlign: TextAlign.center,
-            textStyle: (_) => _.copyWith(
-                fontWeight: FontWeight.bold, color: CustomTheme.primary),
+            textStyle: (_) =>
+                _.copyWith(fontWeight: FontWeight.bold, color: kPrimaryColor),
           ),
           horizontalSpaceSmall(),
-          Expanded(
+          Flexible(
               child: Txt(
             dependencie.version,
+            maxLine: 1,
             textAlign: TextAlign.left,
-            textColor: CustomTheme.subtitleColor,
+            textColor: kSubtitleTextColor,
           )),
         ],
       ),
@@ -150,8 +153,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     return Container(
       padding: EdgeInsets.all(16.0),
       margin: EdgeInsets.only(top: 8.0),
-      decoration:
-          decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,8 +191,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       padding: EdgeInsets.all(0.0),
       margin: EdgeInsets.only(top: 8.0),
       width: double.infinity,
-      decoration:
-          decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
       child: ExpansionTile(
         childrenPadding: EdgeInsets.all(0.0),
         tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -222,7 +223,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
 
                     return Chip(
                         padding: EdgeInsets.zero,
-                        backgroundColor: CustomTheme.placeholderColor,
+                        backgroundColor: kPlaceholderColor,
                         label: Container(
                           constraints: BoxConstraints(maxWidth: 65),
                           child: Center(
@@ -248,13 +249,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the readme
-  _bodyReadme() {
+  _bodyReadme(ThemeData themeData) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(_model.loadingReadme ? 16.0 : 0.0),
       margin: EdgeInsets.only(top: 8.0),
-      decoration:
-          decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
       child: (_model.loadingReadme)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -276,7 +276,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 'Readme',
                 textStyle: (_) => _.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: CustomTheme.titleColor,
+                  color: kTitleTextColor,
                   fontSize: 18,
                 ),
               ),
@@ -287,35 +287,35 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     verticalSpaceSmall(),
-                    (_model.hasReadme)
-                        ? Markdown(
-                            selectable: true,
-                            shrinkWrap: true,
-                            data: _model.readme,
-                            physics: NeverScrollableScrollPhysics(),
-                            // imageDirectory: 'https://raw.githubusercontent.com',
-                            padding: EdgeInsets.all(16.0),
-                            styleSheetTheme:
-                                MarkdownStyleSheetBaseTheme.platform,
-                            extensionSet: md.ExtensionSet(
-                                md.ExtensionSet.gitHubFlavored.blockSyntaxes, [
-                              md.EmojiSyntax(),
-                              ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
-                            ]),
-                            onTapLink: (text, href, title) {
-                              if (href == null) return;
-                              Util.openLink(url: href);
-                            },
-                          )
-                        : Container(
-                            padding: EdgeInsets.all(16.0),
-                            child: _TapInfo(
-                              title: 'error_readme'.translate,
-                              onTap: () {
-                                _model.loadReadme();
-                              },
-                            ),
-                          )
+                    if (_model.hasReadme)
+                      Markdown(
+                        selectable: true,
+                        shrinkWrap: true,
+                        data: _model.readme,
+                        styleSheet: MarkdownStyleSheet.fromTheme(themeData),
+                        physics: NeverScrollableScrollPhysics(),
+                        // imageDirectory: 'https://raw.githubusercontent.com',
+                        padding: EdgeInsets.all(16.0),
+                        styleSheetTheme: MarkdownStyleSheetBaseTheme.platform,
+                        extensionSet: md.ExtensionSet(
+                            md.ExtensionSet.gitHubFlavored.blockSyntaxes, [
+                          md.EmojiSyntax(),
+                          ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
+                        ]),
+                        onTapLink: (text, href, title) {
+                          if (href == null) return;
+                          Util.openLink(url: href);
+                        },
+                      ),
+                    if (!_model.hasReadme)
+                      Container(
+                          padding: EdgeInsets.all(16.0),
+                          child: FailureMessageView(
+                            icon: 'info',
+                            sizeIcon: 80,
+                            message: 'error_readme'.translate,
+                            onTap:  _model.loadReadme,
+                          ))
                   ],
                 )
               ],
@@ -330,8 +330,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: 8.0),
-      decoration:
-          decoration(borderRadius: 8.0, color: CustomTheme.backgroundColor),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
       child: ExpansionTile(
         initiallyExpanded: true,
         childrenPadding: EdgeInsets.all(0.0),
@@ -340,7 +339,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           'dependencies'.translate,
           textStyle: (_) => _.copyWith(
             fontWeight: FontWeight.bold,
-            color: CustomTheme.titleColor,
+            color: kTitleTextColor,
             fontSize: 18,
           ),
         ),
@@ -353,7 +352,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
                       _model.package.dependencies.length,
-                      (index) => _TitleDependencie(
+                      (index) => _TitleDependency(
                           dependencie: _model.package.dependencies[index]))
                   .toList(),
             ),
@@ -364,7 +363,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// viewing
-  _build() {
+  _build(ThemeData theme) {
     if (_model.isBusy && !_model.hasData) {
       return Center(child: CustomProgress());
     }
@@ -398,8 +397,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           children: [
             Container(
               padding: EdgeInsets.all(16.0),
-              decoration: decoration(
-                  borderRadius: 8.0, color: CustomTheme.backgroundColor),
+              decoration:
+                  decoration(borderRadius: 8.0, color: kBackgroundColor),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,7 +422,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             _bodyDependencies(),
             _bodyVersions(),
             _bodyScore(),
-            _bodyReadme()
+            _bodyReadme(theme)
           ],
         ),
       ),
@@ -444,47 +443,50 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return Scaffold(
-        backgroundColor: CustomTheme.placeholderColor,
-        appBar: AppBar(
-          brightness: CustomTheme.brightness,
-          centerTitle: false,
-          actions: <Widget>[
-            if (_model.hasData)
-              IconButton(
-                  icon: CustomIcon(
-                    icon: 'download',
-                    size: 20,
-                  ),
-                  onPressed: () =>
-                      Util.openLink(url: _model.package.latest.archive_url)),
-            if (_model.hasData)
-              IconButton(
-                  icon: CustomIcon(
-                    icon: 'share',
-                    size: 20,
-                  ),
-                  onPressed: () => Util.shareProject(package: _model.package)),
-            if (_model.hasData)
-              IconButton(
-                  icon: CustomIcon(
-                    icon: 'github',
-                    size: 20,
-                  ),
-                  onPressed: () => Util.openLink(
-                      url: _model.package.latest.pubspec.homepage))
-          ],
-          elevation: 0.0,
-          title: Txt(
-            'app'.translate,
-            textStyle: (_) => _.copyWith(
-                color: CustomTheme.titleColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0),
+      return ConfigBuilder(builder: (_, theme) {
+        return Scaffold(
+          backgroundColor: kPlaceholderColor,
+          appBar: AppBar(
+            brightness: theme.brightness,
+            centerTitle: false,
+            actions: <Widget>[
+              if (_model.hasData)
+                IconButton(
+                    icon: CustomIcon(
+                      icon: 'download',
+                      size: 20,
+                    ),
+                    onPressed: () =>
+                        Util.openLink(url: _model.package.latest.archive_url)),
+              if (_model.hasData)
+                IconButton(
+                    icon: CustomIcon(
+                      icon: 'share',
+                      size: 20,
+                    ),
+                    onPressed: () =>
+                        Util.shareProject(package: _model.package)),
+              if (_model.hasData)
+                IconButton(
+                    icon: CustomIcon(
+                      icon: 'github',
+                      size: 20,
+                    ),
+                    onPressed: () => Util.openLink(
+                        url: _model.package.latest.pubspec.homepage))
+            ],
+            elevation: 0.0,
+            title: Txt(
+              widget.name,
+              textStyle: (_) => _.copyWith(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0),
+            ),
           ),
-        ),
-        body: _build(),
-      );
+          body: _build(theme),
+        );
+      });
     });
   }
 }

@@ -2,13 +2,14 @@ import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/presentation/search/search_screen.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/presentation/packages/item_package.dart';
 import 'package:flutter_package/src/l18n.dart';
@@ -63,7 +64,7 @@ class PackagesScreenState extends State<PackagesScreen>
               textStyle: (_) => _.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 12.0,
-                  color: CustomTheme.primary),
+                  color: kPrimaryColor),
             )
           ],
         ),
@@ -141,34 +142,36 @@ class PackagesScreenState extends State<PackagesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        brightness: CustomTheme.brightness,
-        centerTitle: false,
-        actions: <Widget>[
-          IconButton(
-              icon: CustomIcon(icon: 'search'),
-              onPressed: () {
-                _model.navigateToPushNamed(routeName: SearchScreen.route);
-              }),
-          IconButton(
-              icon: CustomIcon(icon: 'settings'),
-              onPressed: () {
-                _model.navigateToPushNamed(routeName: SettingScreen.route);
-              }),
-        ],
-        elevation: 0.0,
-        title: Txt(
-          'app'.translate,
-          textStyle: (_) => _.copyWith(
-              color: CustomTheme.primary, fontWeight: FontWeight.bold),
+    return ConfigBuilder(builder: (_, theme) {
+      return Scaffold(
+        appBar: AppBar(
+          brightness: theme.brightness,
+          centerTitle: false,
+          actions: <Widget>[
+            IconButton(
+                icon: CustomIcon(icon: 'search'),
+                onPressed: () {
+                  _model.navigateToPushNamed(routeName: SearchScreen.route);
+                }),
+            IconButton(
+                icon: CustomIcon(icon: 'settings'),
+                onPressed: () {
+                  _model.navigateToPushNamed(routeName: SettingScreen.route);
+                }),
+          ],
+          elevation: 0.0,
+          title: Txt(
+            'app'.translate,
+            textStyle: (_) =>
+                _.copyWith(color: kPrimaryColor, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      body: Container(
-        margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-        child: _build(),
-      ),
-    );
+        body: Container(
+          margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+          child: _build(),
+        ),
+      );
+    });
   }
 
   @override

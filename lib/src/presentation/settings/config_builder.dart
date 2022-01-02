@@ -14,7 +14,7 @@ import '../../utils/constants.dart';
 import '../../utils/size.dart';
 
 class ConfigBuilder extends StatefulWidget {
-  final Widget Function(Locale) builder;
+  final Widget Function(Locale,ThemeData) builder;
 
   ConfigBuilder({required this.builder});
 
@@ -29,7 +29,7 @@ class _ConfigBuilderState extends State<ConfigBuilder>
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => widget.builder(_model.locale),
+      builder: (_) => widget.builder(_model.locale,_model.theme),
     );
   }
 }

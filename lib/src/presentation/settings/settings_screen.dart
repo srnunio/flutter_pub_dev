@@ -8,9 +8,10 @@ import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_switch.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/title_switch.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/l18n.dart';
 import '../../utils/constants.dart';
@@ -29,8 +30,9 @@ class _SettingState extends State<SettingScreen>
 
   CustomSwitchController _switchPTController =
       CustomSwitchController(initialValue: true);
-  CustomSwitchController _switchENController =
-      CustomSwitchController(initialValue: false);
+  CustomSwitchController _switchENController = CustomSwitchController();
+
+  CustomSwitchController _switchThemeController = CustomSwitchController();
 
   /// see github
   onGoGit() async {
@@ -62,9 +64,7 @@ class _SettingState extends State<SettingScreen>
       onTap: onGoGit,
       child: Container(
         padding: EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-            color: CustomTheme.placeholderColor,
-            borderRadius: BorderRadius.circular(8.0)),
+        decoration: decoration(borderRadius: kBorder),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
@@ -86,11 +86,22 @@ class _SettingState extends State<SettingScreen>
     _switchENController.disable();
   }
 
-  /// [onTapEN] run ne translate
+  /// [onTapEN] run en translate
   onTapEN(bool value) {
     _model.changeTranslate(languageCode: 'en');
     _switchPTController.disable();
     _switchENController.enable();
+  }
+
+  /// [onTheme] run theme
+  onTheme() {
+    if (_model.theme.brightness == Brightness.light) {
+      _switchThemeController.enable();
+      _model.enableDarkMode();
+    } else {
+      _switchThemeController.disable();
+      _model.disableDarkMode();
+    }
   }
 
   /// viewing language
@@ -100,7 +111,7 @@ class _SettingState extends State<SettingScreen>
         padding: EdgeInsets.only(left: 16.0, right: 16.0),
         decoration: decoration(borderRadius: kBorder),
         child: ExpansionTile(
-          initiallyExpanded: true,
+          initiallyExpanded: false,
           tilePadding: EdgeInsets.zero,
           title: Container(
             width: double.infinity,
@@ -126,6 +137,20 @@ class _SettingState extends State<SettingScreen>
     });
   }
 
+  /// viewing language
+  _bodyTheme() {
+    return Observer(builder: (_) {
+      return Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: decoration(borderRadius: kBorder),
+        child: TitleSwitch(
+            title: 'dark_mode'.translate,
+            controller: _switchThemeController,
+            onTap: (_) => onTheme()),
+      );
+    });
+  }
+
   /// run configs
   _initialize() {
     if (_model.languageCode == 'pt') {
@@ -135,6 +160,51 @@ class _SettingState extends State<SettingScreen>
       _switchENController.enable();
       _switchPTController.disable();
     }
+
+    if (_model.darkModeIsEnable) {
+      _switchThemeController.enable();
+    } else {
+      _switchThemeController.disable();
+    }
+  }
+
+  _bodyDescriptionApp() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/images/dartlogo.png',
+            width: 80.0,
+            height: 80.0,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Txt(
+          'app'.translate,
+          textAlign: TextAlign.center,
+          textStyle: (_) =>
+              _.copyWith(fontWeight: FontWeight.bold, fontSize: 24.0),
+        ),
+        Txt(
+          'v$VERSION_APP',
+          textAlign: TextAlign.center,
+          textStyle: (_) => _.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 14.0,
+              color: kSubtitleTextColor),
+        ),
+        Txt(
+          'app_desc'.translate,
+          textAlign: TextAlign.center,
+          textStyle: (_) =>
+              _.copyWith(color: kSubtitleTextColor, fontSize: 14.0),
+        )
+      ],
+    );
   }
 
   @override
@@ -146,89 +216,51 @@ class _SettingState extends State<SettingScreen>
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return Scaffold(
-        body: SafeArea(
-            child: Scaffold(
-          backgroundColor: CustomTheme.backgroundColor,
-          appBar: AppBar(
-            elevation: 0.0,
-            brightness: CustomTheme.brightness,
-            backgroundColor: CustomTheme.backgroundColor,
-            title: Txt(
-              'about'.translate,
-              textStyle: (_) => _.copyWith(
-                  fontWeight: FontWeight.bold, color: CustomTheme.titleColor),
+      return ConfigBuilder(builder: (_, theme) {
+        return Scaffold(
+          body: SafeArea(
+              child: Scaffold(
+            appBar: AppBar(
+              elevation: 0.0,
+              brightness: theme.brightness,
+              backgroundColor: theme.backgroundColor,
+              title: Txt(
+                'settings'.translate,
+                textStyle: (_) => _.copyWith(
+                    fontWeight: FontWeight.bold, color: kPrimaryColor),
+              ),
             ),
-          ),
-          body: Container(
-            margin: EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Row(
+            body: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.all(16.0),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Expanded(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Txt(
-                          'app'.translate,
-                          textStyle: (_) =>
-                              _.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Txt(
-                          'v$VERSION_APP',
-                          textStyle: (_) => _.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0,
-                              color: CustomTheme.subtitleColor),
-                        ),
-                        Txt(
-                          'app_desc'.translate,
-                          textStyle: (_) => _.copyWith(
-                              color: CustomTheme.subtitleColor, fontSize: 14.0),
-                        )
-                      ],
-                    )),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          color: CustomTheme.placeholderColor,
-                          shape: BoxShape.circle),
-                      child: Image.asset(
-                        'assets/images/dartlogo.png',
-                        width: 30,
-                        height: 30,
-                        fit: BoxFit.cover,
-                      ),
+                    _bodyDescriptionApp(),
+                    verticalSpaceMedium(),
+                    Divider(
+                      color: kPlaceholderColor,
                     ),
+                    verticalSpaceMedium(),
+                    _bodyLanguage(),
+                    verticalSpaceMedium(),
+                    _bodyTheme(),
+                    verticalSpaceMedium(),
+                    _bodyMoreItem(
+                        onTap: onGoWebsite,
+                        title: 'website'.translate,
+                        iconName: 'globe'),
+                    verticalSpaceMedium(),
+                    Divider(color: kPlaceholderColor),
                   ],
                 ),
-                verticalSpaceMedium(),
-                Divider(
-                  color: CustomTheme.placeholderColor,
-                ),
-                verticalSpaceMedium(),
-                _bodyLanguage(),
-                verticalSpaceMedium(),
-                _bodyMoreItem(
-                    onTap: onGoWebsite,
-                    title: 'website'.translate,
-                    iconName: 'globe'),
-                verticalSpaceMedium(),
-                Divider(color: CustomTheme.placeholderColor),
-              ],
+              ),
             ),
-          ),
-        )),
-      );
+          )),
+        );
+      });
     });
   }
 }
