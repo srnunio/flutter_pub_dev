@@ -41,9 +41,8 @@ abstract class _ConfigViewModel extends BaseViewModel with Store {
   @action
   Future<void> initialize() async {
     setBusy(true);
-    this._themeData =
-        _preference.getIsActiveDarkMode() ? darkTheme() : lightTheme();
-
+    this._darkModeIsEnable = _preference.getIsActiveDarkMode();
+    this._themeData = _darkModeIsEnable ? darkTheme() : lightTheme();
     var codeSaved = _preference.getCurrentLanguageCode();
     var deviceLocale = await Util.defaultLocale();
     var locale = (codeSaved.isEmpty) ? deviceLocale : Locale(codeSaved);

@@ -4,7 +4,7 @@
   "connection_failed": "Falha na conexão",
   "no_internet_access": "Sem ligação a internet",
   "server_failure": "Ocorreu um erro temporário , por favor tenta novamente ",
-  "app": "Packages",
+  "app": "pub.dev",
   "no_results_found": "Nenhum resultado encontrado",
   "error_readme": "Não foi possível carregar as informações deste pacote",
   "update_view": "Desliza para baixo para actualizar",

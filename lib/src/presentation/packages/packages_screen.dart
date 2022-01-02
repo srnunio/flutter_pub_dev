@@ -29,6 +29,13 @@ class PackagesScreenState extends State<PackagesScreen>
     with SingleTickerProviderStateMixin {
   PackagesViewModel _model = PackagesViewModel(inject<IPackageRepository>());
 
+  ScrollController _controllerList = ScrollController();
+
+  void goToTop() {
+    _controllerList.animateTo(0.0,
+        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+  }
+
   /// get error message
   String _message() {
     if (!_model.hasError) return '';
@@ -103,6 +110,7 @@ class PackagesScreenState extends State<PackagesScreen>
       return CustomRefresh(
         refresh: _model.refresh,
         child: StaggeredGridView.countBuilder(
+          controller: _controllerList,
           crossAxisCount: 4,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
@@ -160,10 +168,15 @@ class PackagesScreenState extends State<PackagesScreen>
                 }),
           ],
           elevation: 0.0,
-          title: Txt(
-            'app'.translate,
-            textStyle: (_) =>
-                _.copyWith(color: kPrimaryColor, fontWeight: FontWeight.bold),
+          title: TextButton(
+            onPressed: goToTop,
+            child: Txt(
+              'app'.translate,
+              textStyle: (_) => _.copyWith(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.0),
+            ),
           ),
         ),
         body: Container(

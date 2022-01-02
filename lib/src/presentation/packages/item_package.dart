@@ -79,17 +79,9 @@ class ItemPackage extends StatelessWidget {
                   child: CustomIcon(
                     icon: 'share',
                     size: 18,
-                    color: Colors.black,
+                    color: kIconColor,
                   ),
                   onTap: onShare,
-                ),
-                InkWell(
-                  child: CustomIcon(
-                    icon: 'github',
-                    size: 18,
-                    color: Colors.black,
-                  ),
-                  onTap: () => onLink(package.latest.pubspec.homepage),
                 ),
                 SizedBox(
                   height: 40,

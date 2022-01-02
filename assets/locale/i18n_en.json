@@ -4,7 +4,7 @@
   "connection_failed": "Connection failed",
   "no_internet_access": "No internet access",
   "server_failure": "A temporary error has occurred, please try again",
-  "app": "Packages",
+  "app": "pub.dev",
   "no_results_found": "No results found",
   "error_readme": "The information for this package could not be uploaded",
   "update_view": "Swipes down to update",

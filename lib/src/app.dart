@@ -23,7 +23,6 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return ConfigBuilder(
       builder: (locale, theme) {
-        debugPrint("ConfigBuilder: $locale");
         return MaterialApp(
           navigatorKey: inject<NavigationService>().navigator,
           supportedLocales: <Locale>[
