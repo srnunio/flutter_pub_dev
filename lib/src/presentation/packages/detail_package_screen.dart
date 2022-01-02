@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
+import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/dependency_item.dart';
 import 'package:flutter_package/src/presentation/core/version_item.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
@@ -74,6 +75,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
 
   /// open new package
   openDependency(String name) {
+    if (_model.isBusy) return;
     _model.navigateToPushNamed(
         routeName: DetailPackageScreen.route, arguments: name);
   }
@@ -378,7 +380,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             brightness: theme.brightness,
             centerTitle: false,
             actions: <Widget>[
-              if (_model.hasData)
+              if (_model.hasData && !_model.isBusy)
                 IconButton(
                     icon: CustomIcon(
                       icon: 'download',
@@ -386,7 +388,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     ),
                     onPressed: () =>
                         Util.openLink(url: _model.package.latest.archive_url)),
-              if (_model.hasData)
+              if (_model.hasData && !_model.isBusy)
                 IconButton(
                     icon: CustomIcon(
                       icon: 'share',
@@ -394,7 +396,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     ),
                     onPressed: () =>
                         Util.shareProject(package: _model.package)),
-              if (_model.hasData)
+              if (_model.hasData && !_model.isBusy)
                 IconButton(
                     icon: CustomIcon(
                       icon: 'github',
@@ -412,7 +414,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   fontSize: 16.0),
             ),
           ),
-          body: _build(theme),
+          body: CustomRefresh(
+            refresh: _model.refresh,
+            child: _build(theme),
+            enablePullDown: true,
+            onRefresh: () => _model.load(widget.name),
+          ),
         );
       });
     });

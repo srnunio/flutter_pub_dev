@@ -33,6 +33,7 @@ class PackagesScreenState extends State<PackagesScreen>
   ScrollController _controllerList = ScrollController();
 
   void goToTop() {
+    if (_model.isBusy) return;
     _controllerList.animateTo(0.0,
         duration: Duration(milliseconds: 300), curve: Curves.easeIn);
   }

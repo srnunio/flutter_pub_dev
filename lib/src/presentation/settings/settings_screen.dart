@@ -36,34 +36,8 @@ class _SettingState extends State<SettingScreen>
   /// see github
   onGoGit() => Util.openLink(url: GITHUB);
 
-  /// see playstore
-  onGoPlayStore() => Util.openLink(url: PLAYSTORE);
-
   /// see website
   onGoWebsite() => Util.openLink(url: PUBDEV);
-
-  /// custom action
-  _bodyMoreItem(
-      {required Function() onTap,
-      required String iconName,
-      required String title}) {
-    return InkWell(
-      onTap: onGoGit,
-      child: Container(
-        padding: EdgeInsets.all(16.0),
-        decoration: decoration(borderRadius: kBorder),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(child: Text(title)),
-            CustomIcon(icon: iconName)
-          ],
-        ),
-      ),
-    );
-  }
 
   /// [onTapPT] run pt translate
   onTapPT(bool value) {
@@ -91,6 +65,18 @@ class _SettingState extends State<SettingScreen>
     }
   }
 
+  /// custom action
+  _bodyMoreItem({required Function() onTap, required String iconName}) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: decoration(borderRadius: kBorder),
+        child: CustomIcon(icon: iconName),
+      ),
+    );
+  }
+
   /// viewing language
   _bodyLanguage() {
     return Observer(builder: (_) {
@@ -98,7 +84,7 @@ class _SettingState extends State<SettingScreen>
         padding: EdgeInsets.only(left: 16.0, right: 16.0),
         decoration: decoration(borderRadius: kBorder),
         child: ExpansionTile(
-          initiallyExpanded: false,
+          initiallyExpanded: true,
           tilePadding: EdgeInsets.zero,
           title: Container(
             width: double.infinity,
@@ -219,12 +205,22 @@ class _SettingState extends State<SettingScreen>
               child: Container(
                 margin: EdgeInsets.all(16.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     _bodyDescriptionApp(),
                     verticalSpaceMedium(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        _bodyMoreItem(onTap: onGoWebsite, iconName: 'globe'),
+                        horizontalSpaceSmall(),
+                        _bodyMoreItem(onTap: onGoGit, iconName: 'github'),
+                      ],
+                    ),
                     Divider(
                       color: kPlaceholderColor,
                     ),
@@ -233,12 +229,6 @@ class _SettingState extends State<SettingScreen>
                     verticalSpaceMedium(),
                     _bodyTheme(),
                     verticalSpaceMedium(),
-                    _bodyMoreItem(
-                        onTap: onGoWebsite,
-                        title: 'website'.translate,
-                        iconName: 'globe'),
-                    verticalSpaceMedium(),
-                    Divider(color: kPlaceholderColor),
                   ],
                 ),
               ),
