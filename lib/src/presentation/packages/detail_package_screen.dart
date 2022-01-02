@@ -45,6 +45,7 @@ class _HorizontalTitle extends BaseComponent {
               fontWeight: FontWeight.bold,
             ),
           ),
+          horizontalSpaceSmall(),
           Text(
             value,
             textAlign: TextAlign.center,

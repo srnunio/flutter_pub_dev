@@ -33,7 +33,6 @@ dependencies:
 
   #network
   dio: ^4.0.0
-  http: ^0.13.0
   url_launcher: ^6.0.0-nullsafety 
 
   # Dependency Injection
