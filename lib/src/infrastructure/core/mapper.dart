@@ -34,11 +34,6 @@ abstract class Mapper {
         ? <Version>[]
         : List.from(map['versions']).map((e) => versionFromMap(e)).toList();
 
-    var dependencies =
-        (map['latest']['pubspec']['dependencies'] == null)
-            ? <Dependency>[]
-            : _getDependencies(map['latest']['pubspec']['dependencies']);
-
     var package_url =
         (map['package_url'] != null) ? map['package_url'] as String : '';
 
@@ -47,7 +42,7 @@ abstract class Mapper {
       package_url: package_url,
       url: (map['url'] != null) ? map['url'] as String : '',
       versions: versions,
-      dependencies: dependencies,
+      // dependencies: dependencies,
       latest: versionFromMap(map['latest']),
     );
   }
@@ -58,8 +53,21 @@ abstract class Mapper {
       sdk: map['sdk'] as String,
     );
   }
+
   /// [pubspecFromMap] parse map to pubspec object
   static Pubspec pubspecFromMap(Map<String, dynamic> map) {
+    var dependencies = (map['dependencies'] == null)
+        ? <Dependency>[]
+        : _getDependencies(map['dependencies']);
+
+    var dev_dependencies = (map['dev_dependencies'] == null)
+        ? <Dependency>[]
+        : _getDependencies(map['dev_dependencies']);
+
+    var environment = (map['environment'] == null)
+        ? Environment.empty
+        : environmentFromMap(map['environment']);
+
     return Pubspec(
         name: map['name'] as String,
         version: map['version'] as String,
@@ -67,9 +75,9 @@ abstract class Mapper {
         repository:
             (map['repository'] != null) ? map['repository'] as String : '',
         homepage: (map['homepage'] != null) ? map['homepage'] as String : '',
-        dev_dependencies: [],
-        dependencies: [],
-        environment: Environment.empty);
+        dev_dependencies: dev_dependencies,
+        dependencies: dependencies,
+        environment: environment);
   }
 
   /// [scoreFromMap] parse map to score object
