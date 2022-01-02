@@ -2,21 +2,20 @@ import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'dependency.dart';
 import 'version.dart';
 
+
 class Package {
   final String name;
   final String package_url;
   final String url;
   final List<Version> versions;
   final Version latest;
-  final List<Dependency> dependencies;
 
   const Package(
       {required this.name,
         required this.package_url,
         required this.url,
         required this.latest,
-        required this.versions,
-        required this.dependencies});
+        required this.versions});
 
   Map<String, dynamic> toMap() {
     return {
