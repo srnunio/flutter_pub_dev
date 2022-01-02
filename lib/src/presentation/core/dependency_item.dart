@@ -33,7 +33,13 @@ class DependencyItem extends BaseComponent {
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   style: styleText(
-                      fontWeight: FontWeight.bold, color: kPrimaryColor),
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryColor,
+                      decoration: TextDecoration.underline).copyWith(
+                    decorationStyle: TextDecorationStyle.solid,
+                    decorationThickness: 2,
+
+                  ),
                 ),
                 Text(
                   ':',

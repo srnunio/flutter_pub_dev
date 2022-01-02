@@ -22,12 +22,47 @@ import 'package:flutter_package/src/l18n.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 
-/// [_Title] vertical title visualization model
-class _Title extends BaseComponent {
+/// [_HorizontalTitle] horizontal title visualization model
+class _HorizontalTitle extends BaseComponent {
   final String title;
   final String value;
 
-  _Title({required this.title, required this.value});
+  _HorizontalTitle({required this.title, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '$title:',
+            textAlign: TextAlign.center,
+            style: styleText(
+              color: kPrimaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            value,
+            textAlign: TextAlign.center,
+            style: styleText(color: kSubtitleTextColor),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.all(4.0),
+    );
+  }
+}
+
+/// [_VerticalTitle] vertical title visualization model
+class _VerticalTitle extends BaseComponent {
+  final String title;
+  final String value;
+
+  _VerticalTitle({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -105,17 +140,17 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           Row(
             children: [
               Expanded(
-                  child: _Title(
+                  child: _VerticalTitle(
                 title: 'likes'.translate.toUpperCase(),
                 value: '${_model.score.likeCount}',
               )),
               Expanded(
-                  child: _Title(
+                  child: _VerticalTitle(
                 title: 'points'.translate.toUpperCase(),
                 value: '${_model.score.likeCount}',
               )),
               Expanded(
-                  child: _Title(
+                  child: _VerticalTitle(
                 title: 'popularity'.translate.toUpperCase(),
                 value: _model.score.getPopularity(),
               )),
@@ -288,6 +323,42 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
+  /// responsible for viewing the environment
+  _bodyEnvironment() {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 8.0),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        childrenPadding: EdgeInsets.all(0.0),
+        tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
+        title: Text(
+          'environment'.translate,
+          style: styleText(
+            fontWeight: FontWeight.bold,
+            color: kTitleTextColor,
+            fontSize: 18,
+          ),
+        ),
+        children: [
+          Container(
+            child:
+                _HorizontalTitle(title: 'sdk', value: _model.environment.sdk),
+            margin: EdgeInsets.only(left: 16.0, right: 16.0),
+          ),
+          if (_model.environment.flutter.isNotEmpty)
+            Container(
+              child: _HorizontalTitle(
+                  title: 'flutter', value: _model.environment.flutter),
+              margin: EdgeInsets.only(left: 16.0, right: 16.0),
+            ),
+          verticalSpaceSmall()
+        ],
+      ),
+    );
+  }
+
   /// viewing
   _build(ThemeData theme) {
     if (_model.isBusy && !_model.hasData) {
@@ -344,6 +415,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 ],
               ),
             ),
+            _bodyEnvironment(),
             _bodyDependencies(
                 title: 'dependencies'.translate,
                 dependencies: _model.dependencies),
@@ -417,7 +489,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           body: CustomRefresh(
             refresh: _model.refresh,
             child: _build(theme),
-            enablePullDown: true,
+            enablePullUp: false,
             onRefresh: () => _model.load(widget.name),
           ),
         );

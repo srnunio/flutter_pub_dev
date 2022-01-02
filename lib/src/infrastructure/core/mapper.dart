@@ -49,9 +49,13 @@ abstract class Mapper {
 
   /// [environmentFromMap] parse map to environment object
   static Environment environmentFromMap(Map<String, dynamic> map) {
-    return new Environment(
-      sdk: map['sdk'] as String,
-    );
+    try {
+      return new Environment(
+        sdk: map['sdk'] as String,
+        flutter: map.containsKey("flutter") ? map['flutter'] : '>=1.10.0',
+      );
+    } catch (error) {}
+    return Environment.empty;
   }
 
   /// [pubspecFromMap] parse map to pubspec object

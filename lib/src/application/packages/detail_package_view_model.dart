@@ -1,4 +1,5 @@
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/domain/packages/entities/environment.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
@@ -55,6 +56,9 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @computed
   List<Dependency> get dev_dependencies => _version!.pubspec.dev_dependencies;
+
+  @computed
+  Environment get environment => _version!.pubspec.environment;
 
   @computed
   String get readme => _readme;
