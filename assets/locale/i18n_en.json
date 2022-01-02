@@ -20,6 +20,7 @@
   "popularity": "Popularity",
   "points": "Pub points",
   "dependencies": "Dependencies",
+  "dev_dependencies": "Dev dependencies",
   "search_desc": "Write package name",
   "language": "Language",
   "portuguese": "Portuguese",

@@ -20,6 +20,7 @@
   "popularity": "Popularidade",
   "points": "Pontos",
   "dependencies": "Dependências",
+  "dev_dependencies": "Dependências de teste",
   "search_desc": "Escreva o nome do pacote",
   "language": "Idiomas",
   "portuguese": "Português",
