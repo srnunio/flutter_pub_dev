@@ -1,4 +1,4 @@
-import 'package:customized/customized.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -46,25 +46,24 @@ class ItemPackage extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Txt(
+            child: Text(
               '${package.name}',
               textAlign: TextAlign.center,
-              textStyle: (_) => _.copyWith(
+              style: styleText(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0),
-              maxLine: 3,
+              maxLines: 3,
             ),
           ),
           verticalSpaceSmall(),
           Container(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Txt(
+            child: Text(
               '${package.latest.pubspec.description}',
               textAlign: TextAlign.center,
-              textStyle: (_) =>
-                  _.copyWith(color: kSubtitleTextColor, fontSize: 14.0),
-              maxLine: 3,
+              style: styleText(color: kSubtitleTextColor, fontSize: 14.0),
+              maxLines: 3,
             ),
           ),
           verticalSpaceSmall(),
@@ -88,14 +87,14 @@ class ItemPackage extends StatelessWidget {
                   width: size.width * .2,
                   child: SideRounded(
                     color: kPrimaryColor,
-                    child: Txt(
+                    child: Text(
                       '${package.latest.version}',
                       textAlign: TextAlign.center,
-                      textStyle: (_) => _.copyWith(
+                      style: styleText(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 12.0),
-                      maxLine: 2,
+                      maxLines: 2,
                     ),
                     radious: 30,
                   ),

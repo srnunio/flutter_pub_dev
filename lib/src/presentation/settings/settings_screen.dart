@@ -1,4 +1,3 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -58,7 +57,7 @@ class _SettingState extends State<SettingScreen>
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: Txt(title)),
+            Expanded(child: Text(title)),
             CustomIcon(icon: iconName)
           ],
         ),
@@ -171,25 +170,23 @@ class _SettingState extends State<SettingScreen>
             fit: BoxFit.cover,
           ),
         ),
-        Txt(
+        Text(
           'app'.translate,
           textAlign: TextAlign.center,
-          textStyle: (_) =>
-              _.copyWith(fontWeight: FontWeight.bold, fontSize: 24.0),
+          style: styleText(fontWeight: FontWeight.bold, fontSize: 24.0),
         ),
-        Txt(
+        Text(
           'v$VERSION_APP',
           textAlign: TextAlign.center,
-          textStyle: (_) => _.copyWith(
+          style: styleText(
               fontWeight: FontWeight.bold,
               fontSize: 14.0,
               color: kSubtitleTextColor),
         ),
-        Txt(
+        Text(
           'app_desc'.translate,
           textAlign: TextAlign.center,
-          textStyle: (_) =>
-              _.copyWith(color: kSubtitleTextColor, fontSize: 14.0),
+          style: styleText(color: kSubtitleTextColor, fontSize: 14.0),
         )
       ],
     );
@@ -212,9 +209,9 @@ class _SettingState extends State<SettingScreen>
               elevation: 0.0,
               brightness: theme.brightness,
               backgroundColor: theme.backgroundColor,
-              title: Txt(
+              title: Text(
                 'settings'.translate,
-                textStyle: (_) => _.copyWith(
+                style: styleText(
                     fontWeight: FontWeight.bold, color: kPrimaryColor),
               ),
             ),

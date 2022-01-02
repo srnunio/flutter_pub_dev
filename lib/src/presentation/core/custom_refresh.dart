@@ -1,7 +1,8 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'base_widget.dart';
+import 'custom_progress.dart';
 
 class CustomRefresh extends BaseComponent {
   final bool enablePullDown;

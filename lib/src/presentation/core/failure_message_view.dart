@@ -1,6 +1,6 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/l18n.dart';
@@ -60,9 +60,9 @@ class FailureMessageView extends BaseComponent {
           _icon(),
           (hasIcon) ? verticalSpaceSmall() : empty,
           _center(
-            child: Txt(
+            child: Text(
               value!,
-              textColor: kTitleTextColor,
+              style: styleText(color: kTitleTextColor),
               textAlign: TextAlign.center,
             ),
           ),
@@ -74,9 +74,9 @@ class FailureMessageView extends BaseComponent {
                 width: 200,
                 padding: EdgeInsets.all(8.0),
                 child: _center(
-                  child: Txt(
-                    '${textButton}'.translate,
-                    textStyle: (_) => _.copyWith(
+                  child: Text(
+                    textButton.translate,
+                    style: styleText(
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold,
                     ),

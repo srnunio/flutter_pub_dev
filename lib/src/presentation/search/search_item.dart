@@ -1,4 +1,3 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
@@ -36,12 +35,11 @@ class SearchItem extends BaseComponent {
           ),
           horizontalSpaceSmall(),
           Expanded(
-              child: Txt(
-            '${value}',
+              child: Text(
+            value!,
             textAlign: TextAlign.left,
-            textStyle: (_) =>
-                _.copyWith(color: kTitleTextColor, fontSize: 16.0),
-            maxLine: 1,
+            style: styleText(color: kTitleTextColor, fontSize: 16.0),
+            maxLines: 1,
           )),
         ],
       ),

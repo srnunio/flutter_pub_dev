@@ -1,6 +1,7 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_package/src/presentation/core/custom_progress.dart';
+import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/search/search_screen.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -56,19 +57,18 @@ class PackagesScreenState extends State<PackagesScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Txt(
+            Text(
               _message().translate,
               textAlign: TextAlign.center,
-              textColor: Colors.black,
             ),
             verticalSpaceSmall(),
             CustomIcon(icon: 'swip', size: 80),
             verticalSpaceSmall(),
             verticalSpaceSmall(),
-            Txt(
+            Text(
               'update_view'.translate,
               textAlign: TextAlign.center,
-              textStyle: (_) => _.copyWith(
+              style: styleText(
                   fontWeight: FontWeight.bold,
                   fontSize: 12.0,
                   color: kPrimaryColor),
@@ -170,9 +170,9 @@ class PackagesScreenState extends State<PackagesScreen>
           elevation: 0.0,
           title: TextButton(
             onPressed: goToTop,
-            child: Txt(
+            child: Text(
               'app'.translate,
-              textStyle: (_) => _.copyWith(
+              style: styleText(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 28.0),

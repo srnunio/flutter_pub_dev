@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/constants.dart';
 
+Widget get empty => SizedBox();
+
 /// custom decoration
 BoxDecoration decoration(
     {Color? color,

@@ -1,8 +1,8 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
@@ -34,19 +34,18 @@ class _Title extends BaseComponent {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Txt(
+          Text(
             value,
             textAlign: TextAlign.center,
-            textStyle: (_) => _.copyWith(
+            style: styleText(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: kPrimaryColor),
           ),
-          Txt(
+          Text(
             title,
             textAlign: TextAlign.center,
-            textSize: 12.0,
-            textColor: kSubtitleTextColor,
+            style: styleText(fontSize: 12.0, color: kSubtitleTextColor),
           ),
         ],
       ),
@@ -73,25 +72,25 @@ class _TitleDependency extends BaseComponent {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Txt(
+              Text(
                 dependencie.name.trim(),
-                maxLine: 2,
+                maxLines: 2,
                 textAlign: TextAlign.left,
-                textStyle: (_) => _.copyWith(
+                style: styleText(
                     fontWeight: FontWeight.bold, color: kPrimaryColor),
               ),
-              Txt(
+              Text(
                 ':',
                 textAlign: TextAlign.center,
-                textStyle: (_) => _.copyWith(
+                style: styleText(
                     fontWeight: FontWeight.bold, color: kPrimaryColor),
               ),
               horizontalSpaceSmall(),
-              Txt(
+              Text(
                 dependencie.version,
-                maxLine: 1,
+                maxLines: 1,
                 textAlign: TextAlign.left,
-                textColor: kSubtitleTextColor,
+                style: styleText(color: kSubtitleTextColor),
               ),
             ],
           ),
@@ -174,9 +173,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       child: ExpansionTile(
         childrenPadding: EdgeInsets.all(0.0),
         tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
-        title: Txt(
+        title: Text(
           'versions'.translate,
-          textStyle: (_) => _.copyWith(
+          style: styleText(
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -206,13 +205,13 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         label: Container(
                           constraints: BoxConstraints(maxWidth: 65),
                           child: Center(
-                            child: Txt(
+                            child: Text(
                               item.version,
-                              textStyle: (style) => style.copyWith(
+                              style: styleText(
                                 fontSize: 12.0,
                                 fontWeight: FontWeight.bold,
                               ),
-                              maxLine: 1,
+                              maxLines: 1,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -251,9 +250,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               initiallyExpanded: true,
               childrenPadding: EdgeInsets.all(0.0),
               tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
-              title: Txt(
+              title: Text(
                 'Readme',
-                textStyle: (_) => _.copyWith(
+                style: styleText(
                   fontWeight: FontWeight.bold,
                   color: kTitleTextColor,
                   fontSize: 18,
@@ -314,9 +313,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
         initiallyExpanded: true,
         childrenPadding: EdgeInsets.all(0.0),
         tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
-        title: Txt(
+        title: Text(
           'dependencies'.translate,
-          textStyle: (_) => _.copyWith(
+          style: styleText(
             fontWeight: FontWeight.bold,
             color: kTitleTextColor,
             fontSize: 18,
@@ -383,17 +382,16 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Txt(
+                  Text(
                     '${_model.package.name}\t${_model.package.latest.version}',
-                    textStyle: (_) => _.copyWith(
+                    style: styleText(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                     ),
                   ),
                   verticalSpaceSmall(),
-                  Txt(
+                  Text(
                     '${_model.package.latest.pubspec.description}',
-                    textStyle: (_) => _.copyWith(),
                   ),
                 ],
               ),
@@ -455,9 +453,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         url: _model.package.latest.pubspec.homepage))
             ],
             elevation: 0.0,
-            title: Txt(
+            title: Text(
               widget.name,
-              textStyle: (_) => _.copyWith(
+              style: styleText(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0),

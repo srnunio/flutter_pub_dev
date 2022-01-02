@@ -1,9 +1,10 @@
-import 'package:customized/customized.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/application/search/search_view_model.dart';
 import 'package:flutter_package/src/domain/search/i_search_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
+import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
