@@ -4,23 +4,26 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+
 class I18n {
   I18n(this._locale);
 
-  Locale? _locale;
+  late Locale _locale;
 
-  static Map<dynamic, dynamic>? _localizedValues;
+  static late Map<dynamic, dynamic> _localizedValues;
 
-  static I18n? _current;
+  static late I18n _current;
 
-  static I18n? get instance => _current;
-
-  static I18n? of(BuildContext context) {
-    return Localizations.of<I18n>(context, I18n);
-  }
+  static I18n get instance => _current;
 
   static String text(String key) {
-    return _localizedValues![key] ?? '** $key not found';
+    return _localizedValues[key] ?? '** $key not found';
+  }
+
+  static String key(String text) {
+    var value =
+    _localizedValues.entries.firstWhere((element) => element.value == text);
+    return value.key;
   }
 
   static Future<I18n> load(Locale locale) async {
@@ -28,7 +31,7 @@ class I18n {
     String jsonContent = await rootBundle
         .loadString("assets/locale/i18n_${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
-    return _current = new I18n(locale);
+    return _current = I18n(locale);
   }
 
   static Locale filterLocale(Locale locale) => _filterLocale(locale);
@@ -45,11 +48,13 @@ class I18n {
 
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
 
-  Locale get currentLanguage => _filterLocale(_locale!);
+  Locale get currentLanguage => _filterLocale(_locale);
+
+  String get languageCode => currentLanguage.languageCode;
 }
 
-class I18nDelegate extends LocalizationsDelegate<I18n> {
-  const I18nDelegate();
+class TranslationsDelegate extends LocalizationsDelegate<I18n> {
+  const TranslationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
@@ -60,7 +65,7 @@ class I18nDelegate extends LocalizationsDelegate<I18n> {
   }
 
   @override
-  bool shouldReload(I18nDelegate old) => false;
+  bool shouldReload(TranslationsDelegate old) => false;
 }
 
 extension Str on String {
