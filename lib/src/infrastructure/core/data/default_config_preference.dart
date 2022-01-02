@@ -26,5 +26,5 @@ class DefaultConfigDataPreference extends ConfigDataPreference {
 
   @override
   String getCurrentLanguageCode() =>
-      preferences.getString(_keyLanguage) ?? "pt";
+      preferences.getString(_keyLanguage) ?? "";
 }

@@ -4,12 +4,7 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-
 class I18n {
-  I18n(this._locale);
-
-  late Locale _locale;
-
   static late Map<dynamic, dynamic> _localizedValues;
 
   static late I18n _current;
@@ -22,35 +17,27 @@ class I18n {
 
   static String key(String text) {
     var value =
-    _localizedValues.entries.firstWhere((element) => element.value == text);
+        _localizedValues.entries.firstWhere((element) => element.value == text);
     return value.key;
   }
 
   static Future<I18n> load(Locale locale) async {
-    locale = _filterLocale(locale);
-    String jsonContent = await rootBundle
-        .loadString("assets/locale/i18n_${locale.languageCode}.json");
+    var _filteredLocale = _filterLocale(locale);
+    var file = "assets/locale/i18n_${_filteredLocale.languageCode}.json";
+    String jsonContent = await rootBundle.loadString(file);
     _localizedValues = json.decode(jsonContent);
-    return _current = I18n(locale);
+    return _current = I18n();
   }
 
   static Locale filterLocale(Locale locale) => _filterLocale(locale);
 
   static Locale _filterLocale(Locale locale) {
-    if (locale.languageCode.contains('pt')) {
-      return Locale('pt');
-    } else if (locale.languageCode.contains('en')) {
-      return Locale('en');
-    } else {
-      return Locale('pt');
-    }
+    if (locale.languageCode.toLowerCase().contains('pt')) return Locale('pt');
+    if (locale.languageCode.toLowerCase().contains('en')) return Locale('en');
+    return Locale('pt');
   }
 
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
-
-  Locale get currentLanguage => _filterLocale(_locale);
-
-  String get languageCode => currentLanguage.languageCode;
 }
 
 class TranslationsDelegate extends LocalizationsDelegate<I18n> {
@@ -61,7 +48,7 @@ class TranslationsDelegate extends LocalizationsDelegate<I18n> {
 
   @override
   Future<I18n> load(Locale locale) async {
-    return I18n.load(locale);
+    return I18n.instance;
   }
 
   @override

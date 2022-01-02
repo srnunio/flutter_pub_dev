@@ -22,13 +22,6 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
       (_$themeComputed ??= Computed<ThemeData>(() => super.theme,
               name: '_ConfigViewModel.theme'))
           .value;
-  Computed<String>? _$languageCodeComputed;
-
-  @override
-  String get languageCode =>
-      (_$languageCodeComputed ??= Computed<String>(() => super.languageCode,
-              name: '_ConfigViewModel.languageCode'))
-          .value;
   Computed<bool>? _$darkModeIsEnableComputed;
 
   @override
@@ -120,7 +113,6 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
     return '''
 locale: ${locale},
 theme: ${theme},
-languageCode: ${languageCode},
 darkModeIsEnable: ${darkModeIsEnable}
     ''';
   }

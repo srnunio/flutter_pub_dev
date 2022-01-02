@@ -5,8 +5,6 @@ import 'package:flutter_package/src/application/settings/config_view_model.dart'
 import 'package:flutter_package/src/domain/core/navigation/navigation_service.dart';
 import 'package:flutter_package/src/infrastructure/core/network_builder.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
-import 'package:flutter_package/src/l18n.dart';
-import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'router.dart';
 
