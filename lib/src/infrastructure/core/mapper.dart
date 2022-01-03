@@ -42,7 +42,6 @@ abstract class Mapper {
       package_url: package_url,
       url: (map['url'] != null) ? map['url'] as String : '',
       versions: versions,
-      // dependencies: dependencies,
       latest: versionFromMap(map['latest']),
     );
   }
@@ -99,6 +98,8 @@ abstract class Mapper {
     return new Version(
       version: map['version'] as String,
       archive_url: map['archive_url'] as String,
+      published:
+          (map.containsKey('published')) ? map['published'] as String : '',
       pubspec: pubspecFromMap(map['pubspec']),
     );
   }

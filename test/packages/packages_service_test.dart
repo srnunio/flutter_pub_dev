@@ -5,41 +5,34 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('parseData', () {
     var package = Mapper.packageFromMap({
-      "name": "ijk_player_recorder",
+      "name": "simple_copy_with_generators",
       "latest": {
-        "version": "0.0.5",
+        "version": "0.0.2",
         "pubspec": {
-          "name": "ijk_player_recorder",
-          "description": "IJKPlayerRecorder",
-          "version": "0.0.5",
-          "homepage": null,
-          "environment": {"sdk": ">=2.12.0 <3.0.0", "flutter": ">=1.20.0"},
+          "name": "simple_copy_with_generators",
+          "description": "Generates a copywith method for classes marked @copywith annotation using build_runner",
+          "homepage": "https://github.com/postflow/simple_copy_with_gen",
+          "version": "0.0.2",
+          "environment": {
+            "sdk": ">=2.14.0 <3.0.0"
+          },
           "dependencies": {
-            "flutter": {"sdk": "flutter"},
-            "path_provider": "^2.0.2"
+            "build": "^2.2.1",
+            "source_gen": "^1.2.1",
+            "analyzer": "^3.0.0",
+            "simple_copy_with_annotations": "^0.0.2"
           },
           "dev_dependencies": {
-            "flutter_test": {"sdk": "flutter"}
-          },
-          "flutter": {
-            "plugin": {
-              "platforms": {
-                "android": {
-                  "package": "com.hi.ijk_player_recorder",
-                  "pluginClass": "IjkPlayerRecorderPlugin"
-                },
-                "ios": {"pluginClass": "IjkPlayerRecorderPlugin"}
-              }
-            }
+            "build_runner": null,
+            "build_test": null,
+            "test": "^1.0.0"
           }
         },
-        "archive_url":
-            "https://pub.dartlang.org/packages/ijk_player_recorder/versions/0.0.5.tar.gz",
-        "package_url":
-            "https://pub.dartlang.org/api/packages/ijk_player_recorder",
-        "url":
-            "https://pub.dartlang.org/api/packages/ijk_player_recorder/versions/0.0.5"
+        "archive_url": "https://pub.dartlang.org/packages/simple_copy_with_generators/versions/0.0.2.tar.gz",
+        "package_url": "https://pub.dartlang.org/api/packages/simple_copy_with_generators",
+        "url": "https://pub.dartlang.org/api/packages/simple_copy_with_generators/versions/0.0.2"
       }
     });
+    print('package: $package');
   });
 }

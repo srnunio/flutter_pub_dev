@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/dependency_item.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_package/src/presentation/core/base_widget.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
+import 'package:flutter_package/src/utils/timed.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -360,6 +362,67 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
+  _bodyVersionSelected() {
+    var isLastVersion =
+        (_model.package.latest.version == _model.version.version);
+
+    var timed = Timed.initialize(date: _model.version.date).time;
+
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Row(
+            children: [
+              Text.rich(TextSpan(
+                  text: '${'published'.translate}:',
+                  style: styleText(
+                      color: kPrimaryColor, fontWeight: FontWeight.bold),
+                  children: <InlineSpan>[
+                    TextSpan(
+                      text: '\t$timed',
+                      style: styleText(),
+                    )
+                  ])),
+              if (!isLastVersion) horizontalSpaceSmall(),
+              if (!isLastVersion)
+                Text.rich(TextSpan(
+                    text: '•',
+                    style: styleText(
+                        color: kPrimaryColor, fontWeight: FontWeight.bold),
+                    children: <InlineSpan>[
+                      TextSpan(
+                          text: '\t\t${'latest_version'.translate}',
+                          style: styleText(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                        text: '\t${_model.package.latest.version}',
+                        style: styleText(),
+                      )
+                    ]))
+            ],
+          ),
+          Text(
+            '${_model.package.name}\t${_model.version.version}',
+            style: styleText(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+          verticalSpaceSmall(),
+          Text(
+            '${_model.version.pubspec.description}',
+          ),
+        ],
+      ),
+    );
+  }
+
   /// viewing
   _build(ThemeData theme) {
     if (_model.isBusy && !_model.hasData) {
@@ -393,29 +456,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.all(16.0),
-              decoration:
-                  decoration(borderRadius: 8.0, color: kBackgroundColor),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    '${_model.package.name}\t${_model.version.version}',
-                    style: styleText(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                  verticalSpaceSmall(),
-                  Text(
-                    '${_model.version.pubspec.description}',
-                  ),
-                ],
-              ),
-            ),
+            _bodyVersionSelected(),
             _bodyEnvironment(),
             _bodyDependencies(
                 title: 'dependencies'.translate,

@@ -29,5 +29,21 @@
   "settings": "Configurações",
   "environment": "Environment",
   "latest_version": "Ultima versão",
-  "published": "Publicado há"
+  "published": "Publicado",
+  "time_type": "Há # *",
+  "seconds": "Segundos",
+  "second": "Segundo",
+  "minutes": "Minutos",
+  "minute": "Minuto",
+  "hours": "Horas",
+  "hour": "Hora",
+  "days": "Dias",
+  "day": "Dia",
+  "weeks": "Semanas",
+  "week": "Semana",
+  "months": "Meses",
+  "month": "Mês",
+  "years": "Anos",
+  "year": "Ano",
+  "now": "Agora"
 }

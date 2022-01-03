@@ -29,5 +29,21 @@
   "settings": "Settings",
   "environment": "Environment",
   "latest_version": "Latest",
-  "published": "Published"
+  "published": "Published",
+  "time_type": "# * ago",
+  "seconds": "Seconds",
+  "second": "Second",
+  "minutes": "Minutes",
+  "minute": "Minute",
+  "hours": "Hours",
+  "hour": "Hour",
+  "days": "Days",
+  "day": "Day",
+  "weeks": "Weeks",
+  "week": "Week",
+  "months": "Months",
+  "month": "Month",
+  "years": "Years",
+  "year": "Year",
+  "now": "Now"
 }

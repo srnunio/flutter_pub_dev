@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -104,8 +103,6 @@ class PackageService extends IPackageService {
           ));
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
-
-      debugPrint('${response.data}');
 
       var score = Mapper.scoreFromMap(response.data);
 
