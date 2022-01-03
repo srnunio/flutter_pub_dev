@@ -27,5 +27,7 @@
   "english": "English",
   "dark_mode": "Dark mode",
   "settings": "Settings",
-  "environment": "Environment"
+  "environment": "Environment",
+  "latest_version": "Latest",
+  "published": "Published"
 }
