@@ -129,7 +129,7 @@ class PackagesScreenState extends State<PackagesScreen>
                 onLink: (url) async {
                   Util.openLink(url: url);
                 },
-                onShare: () async {},
+                onShare: () => Util.shareProject(package: package),
                 package: package,
               ),
             );
