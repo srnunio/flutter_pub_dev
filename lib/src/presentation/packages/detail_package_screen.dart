@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/dependency_item.dart';
+import 'package:flutter_package/src/presentation/core/tag.dart';
 import 'package:flutter_package/src/presentation/core/version_item.dart';
 import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -362,6 +364,25 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
+  _bodyTag() {
+    if (!_model.metric.isNotEmpty) return empty;
+
+    var tags = _model.metric.tags;
+    return Container(
+      height: 28.0,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Container(
+            child: Tag(value: tags[index]),
+            margin: EdgeInsets.only(right: 4.0),
+          );
+        },
+        itemCount: tags.length,
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
+
   _bodyVersionSelected() {
     var isLastVersion =
         (_model.package.latest.version == _model.version.version);
@@ -377,7 +398,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
+              if (_model.metric.isNullSafe && isLastVersion) Tag(value: 'null_safe'.translate),
+              if (_model.metric.isNullSafe && isLastVersion) horizontalSpaceSmall(),
               Text.rich(TextSpan(
                   text: '${'published'.translate}:',
                   style: styleText(
@@ -418,6 +444,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           Text(
             '${_model.version.pubspec.description}',
           ),
+          verticalSpaceSmall(),
+          _bodyTag()
         ],
       ),
     );
