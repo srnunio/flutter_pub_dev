@@ -1,5 +1,6 @@
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/domain/packages/entities/environment.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
@@ -28,7 +29,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Version? _version;
 
   @observable
-  Score _score = Score.default_;
+  Metric _metric = Metric.empty;
 
   @observable
   String _readme = '';
@@ -46,7 +47,10 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Package get package => _package!;
 
   @computed
-  Score get score => _score;
+  Score get score => _metric.score;
+
+  @computed
+  Metric get metric => _metric;
 
   @computed
   Version get version => _version!;
@@ -68,9 +72,6 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @computed
   bool get hasReadme => (_readme != null && _readme.isNotEmpty);
-
-  @computed
-  bool get hasScore => (_score != null);
 
   @computed
   bool get loadingReadme => _loadingReadme;
@@ -124,7 +125,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @action
   Future<void> loadScore() async {
-    var response = await _repository.getScorePackage(namePackage: package.name);
-    response.fold((failure) {}, (data) => this._score = data);
+    var response = await _repository.getMetricPackage(package: package.name);
+    response.fold((failure) {}, (metric) => this._metric = metric);
   }
 }

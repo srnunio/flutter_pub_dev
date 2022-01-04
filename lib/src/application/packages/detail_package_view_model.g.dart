@@ -29,6 +29,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   Score get score => (_$scoreComputed ??= Computed<Score>(() => super.score,
           name: '_DetailPackageViewModel.score'))
       .value;
+  Computed<Metric>? _$metricComputed;
+
+  @override
+  Metric get metric =>
+      (_$metricComputed ??= Computed<Metric>(() => super.metric,
+              name: '_DetailPackageViewModel.metric'))
+          .value;
   Computed<Version>? _$versionComputed;
 
   @override
@@ -50,6 +57,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
           Computed<List<Dependency>>(() => super.dev_dependencies,
               name: '_DetailPackageViewModel.dev_dependencies'))
       .value;
+  Computed<Environment>? _$environmentComputed;
+
+  @override
+  Environment get environment =>
+      (_$environmentComputed ??= Computed<Environment>(() => super.environment,
+              name: '_DetailPackageViewModel.environment'))
+          .value;
   Computed<String>? _$readmeComputed;
 
   @override
@@ -69,13 +83,6 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   bool get hasReadme =>
       (_$hasReadmeComputed ??= Computed<bool>(() => super.hasReadme,
               name: '_DetailPackageViewModel.hasReadme'))
-          .value;
-  Computed<bool>? _$hasScoreComputed;
-
-  @override
-  bool get hasScore =>
-      (_$hasScoreComputed ??= Computed<bool>(() => super.hasScore,
-              name: '_DetailPackageViewModel.hasScore'))
           .value;
   Computed<bool>? _$loadingReadmeComputed;
 
@@ -115,18 +122,18 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_scoreAtom = Atom(name: '_DetailPackageViewModel._score');
+  final _$_metricAtom = Atom(name: '_DetailPackageViewModel._metric');
 
   @override
-  Score get _score {
-    _$_scoreAtom.reportRead();
-    return super._score;
+  Metric get _metric {
+    _$_metricAtom.reportRead();
+    return super._metric;
   }
 
   @override
-  set _score(Score value) {
-    _$_scoreAtom.reportWrite(value, super._score, () {
-      super._score = value;
+  set _metric(Metric value) {
+    _$_metricAtom.reportWrite(value, super._metric, () {
+      super._metric = value;
     });
   }
 
@@ -232,13 +239,14 @@ failure: ${failure},
 hasError: ${hasError},
 package: ${package},
 score: ${score},
+metric: ${metric},
 version: ${version},
 dependencies: ${dependencies},
 dev_dependencies: ${dev_dependencies},
+environment: ${environment},
 readme: ${readme},
 hasData: ${hasData},
 hasReadme: ${hasReadme},
-hasScore: ${hasScore},
 loadingReadme: ${loadingReadme}
     ''';
   }
