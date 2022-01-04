@@ -369,12 +369,20 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
 
     var tags = _model.metric.tags;
     return Container(
-      height: 28.0,
+      height: 38.0,
+      padding: EdgeInsets.all(8.0),
+      decoration: decoration(
+        color: kPrimaryColor.withOpacity(.60),
+        borderRadius: kBorder
+      ),
       child: ListView.builder(
         itemBuilder: (context, index) {
+          var separator = (index == 0) ? '' : '\t•\t';
           return Container(
-            child: Tag(value: tags[index]),
-            margin: EdgeInsets.only(right: 4.0),
+            child: Text('$separator${tags[index]}',style: styleText(
+              color: kBackgroundColor,
+              fontWeight: FontWeight.bold
+            ),),
           );
         },
         itemCount: tags.length,
@@ -402,37 +410,48 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              if (_model.metric.isNullSafe && isLastVersion) Tag(value: 'null_safe'.translate),
-              if (_model.metric.isNullSafe && isLastVersion) horizontalSpaceSmall(),
+              if (_model.metric.isNullSafe )
+                Tag(value: 'null_safe'.translate),
+              if (_model.metric.isNullSafe)
+                horizontalSpaceSmall(),
               Text.rich(TextSpan(
                   text: '${'published'.translate}:',
                   style: styleText(
-                      color: kPrimaryColor, fontWeight: FontWeight.bold),
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0),
                   children: <InlineSpan>[
                     TextSpan(
                       text: '\t$timed',
-                      style: styleText(),
+                      style: styleText(fontSize: 14.0),
                     )
                   ])),
-              if (!isLastVersion) horizontalSpaceSmall(),
-              if (!isLastVersion)
-                Text.rich(TextSpan(
-                    text: '•',
-                    style: styleText(
-                        color: kPrimaryColor, fontWeight: FontWeight.bold),
-                    children: <InlineSpan>[
-                      TextSpan(
-                          text: '\t\t${'latest_version'.translate}',
-                          style: styleText(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold)),
-                      TextSpan(
-                        text: '\t${_model.package.latest.version}',
-                        style: styleText(),
-                      )
-                    ]))
             ],
           ),
+          if (!isLastVersion) verticalSpaceSmall(),
+          if (!isLastVersion)
+            Text.rich(
+              TextSpan(
+                  text: '',
+                  style: styleText(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0),
+                  children: <InlineSpan>[
+                    TextSpan(
+                        text: '${'latest_version'.translate}:',
+                        style: styleText(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0)),
+                    TextSpan(
+                      text: '\t${_model.package.latest.version}',
+                      style: styleText(fontSize: 14.0),
+                    )
+                  ]),
+              overflow: TextOverflow.fade,
+              maxLines: 1,),
+          if (!isLastVersion) verticalSpaceSmall(),
           Text(
             '${_model.package.name}\t${_model.version.version}',
             style: styleText(
