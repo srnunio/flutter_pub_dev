@@ -45,5 +45,6 @@
   "month": "Month",
   "years": "Years",
   "year": "Year",
-  "now": "Now"
+  "now": "Now",
+  "null_safe": "Null-safe"
 }

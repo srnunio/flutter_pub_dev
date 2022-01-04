@@ -27,7 +27,7 @@
   "english": "Inglês",
   "dark_mode": "Modo escuro",
   "settings": "Configurações",
-  "environment": "Environment",
+  "environment": "Ambiente",
   "latest_version": "Ultima versão",
   "published": "Publicado",
   "time_type": "Há # *",
@@ -45,5 +45,6 @@
   "month": "Mês",
   "years": "Anos",
   "year": "Ano",
-  "now": "Agora"
+  "now": "Agora",
+  "null_safe": "Null-safe"
 }
