@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
@@ -91,10 +92,10 @@ class PackageService extends IPackageService {
   }
 
   @override
-  Future<Either<RequestFailure, Score>> getScorePackage(
-      {required String namePackage}) async {
+  Future<Either<RequestFailure, Metric>> getMetricPackage(
+      {required String package}) async {
     try {
-      final response = await dio.get('$path/$namePackage/score',
+      final response = await dio.get('$path/$package/metrics',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -104,9 +105,9 @@ class PackageService extends IPackageService {
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
-      var score = Mapper.scoreFromMap(response.data);
+      var metric = Mapper.metricFromMap(response.data);
 
-      return Right(score);
+      return Right(metric);
     } on DioError catch (e) {
       if (e.error is OSError || e.error is SocketException) {
         return left(RequestFailure.networkError());

@@ -1,5 +1,6 @@
 import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
 import 'package:flutter_package/src/domain/packages/entities/environment.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/packages/entities/pubspec.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
@@ -102,5 +103,27 @@ abstract class Mapper {
           (map.containsKey('published')) ? map['published'] as String : '',
       pubspec: pubspecFromMap(map['pubspec']),
     );
+  }
+
+  /// [metricFromMap] parse map to metrics object
+  static Metric metricFromMap(Map<String, dynamic> map) {
+    var score = scoreFromMap(map['score']);
+    var derivedTags = map['scorecard']['derivedTags'] as List<dynamic>;
+
+    var tags = derivedTags
+        .map((tag) => tag
+            .toString()
+            .replaceAll('sdk', '')
+            .replaceAll('platform', '')
+            .replaceAll('plugin', '')
+            .replaceAll('is', '')
+            .replaceAll(':', '').trim())
+        .toList();
+
+    var index = (tags.indexWhere((tag) => tag == 'null-safe'));
+
+    if (index >= 0) tags.removeAt(index);
+
+    return Metric(tags: tags, isNullSafe: (index >= 0), score: score);
   }
 }

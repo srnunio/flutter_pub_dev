@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
@@ -19,7 +20,7 @@ class PackageRepository extends IPackageRepository {
       await service.getPackages(page: page);
 
   @override
-  Future<Either<RequestFailure, Score>> getScorePackage(
-          {required String namePackage}) async =>
-      await service.getScorePackage(namePackage: namePackage);
+  Future<Either<RequestFailure, Metric>> getMetricPackage(
+          {required String package}) async =>
+      await service.getMetricPackage(package: package);
 }

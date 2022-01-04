@@ -4,6 +4,7 @@ import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/api_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 
+import 'entities/metric.dart';
 import 'entities/score.dart';
 
 abstract class IPackageService extends ApiService {
@@ -23,9 +24,9 @@ abstract class IPackageService extends ApiService {
   Future<Either<RequestFailure, Package>> getPackageName(
       {required String namePackage});
 
-  /// [getScorePackage] This method gets the score of a package
-  /// This return [Score] when the request is successful
+  /// [getMetricPackage] This method gets the metrics of a package
+  /// This return [Metric] when the request is successful
   /// and [RequestFailure] when the request is not successful
-  Future<Either<RequestFailure, Score>> getScorePackage(
-      {required String namePackage});
+  Future<Either<RequestFailure, Metric>> getMetricPackage(
+      {required String package});
 }
