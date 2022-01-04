@@ -117,13 +117,19 @@ abstract class Mapper {
             .replaceAll('platform', '')
             .replaceAll('plugin', '')
             .replaceAll('is', '')
-            .replaceAll(':', '').trim())
+            .replaceAll('runtime:web', 'js')
+            .replaceAll('runtime:native-jit', 'native')
+            .replaceAll('runtime:native-aot', 'native')
+            .replaceAll(':', '')
+            .trim())
         .toList();
 
     var index = (tags.indexWhere((tag) => tag == 'null-safe'));
 
     if (index >= 0) tags.removeAt(index);
 
-    return Metric(tags: tags, isNullSafe: (index >= 0), score: score);
+    tags.removeWhere((tag) => tag.trim().isEmpty);
+    return Metric(
+        tags: tags.toSet().toList(), isNullSafe: (index >= 0), score: score);
   }
 }
