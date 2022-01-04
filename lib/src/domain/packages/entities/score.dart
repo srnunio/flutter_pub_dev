@@ -20,7 +20,7 @@ class Score {
     } as Map<String, dynamic>;
   }
 
-  static Score get default_ =>
+  static Score get empty =>
       Score(maxPoints: 0, popularityScore: 0.0, likeCount: 0, grantedPoints: 0);
 }
 
