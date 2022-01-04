@@ -18,4 +18,11 @@ class Metric {
       'score': this.score.toMap(),
     };
   }
+
+  static Metric get empty =>
+      Metric(tags: [], isNullSafe: false, score: Score.default_);
+}
+
+extension MetricEx on Metric {
+  bool get isNotEmpty => tags.isNotEmpty;
 }
