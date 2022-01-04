@@ -20,7 +20,7 @@ class Metric {
   }
 
   static Metric get empty =>
-      Metric(tags: [], isNullSafe: false, score: Score.default_);
+      Metric(tags: [], isNullSafe: false, score: Score.empty);
 }
 
 extension MetricEx on Metric {
