@@ -1,8 +1,12 @@
+import 'package:flutter_package/src/domain/packages/entities/dependency.dart';
+import 'package:flutter_package/src/domain/packages/entities/environment.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
+import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -22,7 +26,10 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Package? _package;
 
   @observable
-  Score _score = Score.default_;
+  Version? _version;
+
+  @observable
+  Metric _metric = Metric.empty;
 
   @observable
   String _readme = '';
@@ -40,7 +47,22 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Package get package => _package!;
 
   @computed
-  Score get score => _score;
+  Score get score => _metric.score;
+
+  @computed
+  Metric get metric => _metric;
+
+  @computed
+  Version get version => _version!;
+
+  @computed
+  List<Dependency> get dependencies => _version!.pubspec.dependencies;
+
+  @computed
+  List<Dependency> get dev_dependencies => _version!.pubspec.dev_dependencies;
+
+  @computed
+  Environment get environment => _version!.pubspec.environment;
 
   @computed
   String get readme => _readme;
@@ -52,9 +74,6 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   bool get hasReadme => (_readme != null && _readme.isNotEmpty);
 
   @computed
-  bool get hasScore => (_score != null);
-
-  @computed
   bool get loadingReadme => _loadingReadme;
 
   @action
@@ -63,13 +82,15 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   }
 
   @action
+  void setVersion(Version version) {
+    this._version = version;
+  }
+
+  @action
   Future<void> load(String namePackage, {bool refresh = false}) async {
-    if (isBusy) {
-      return;
-    }
-    if (refresh) {
-      onRefresh(value: refresh);
-    }
+    if (isBusy) return;
+
+    if (refresh) onRefresh(value: refresh);
 
     setBusy(true);
 
@@ -85,6 +106,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
       (failure) => this.failure = failure,
       (data) {
         setPackage(data);
+        setVersion(data.latest);
         loadReadme();
         loadScore();
       },
@@ -103,7 +125,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @action
   Future<void> loadScore() async {
-    var response = await _repository.getScorePackage(namePackage: package.name);
-    response.fold((failure) {}, (data) => this._score = data);
+    var response = await _repository.getMetricPackage(package: package.name);
+    response.fold((failure) {}, (metric) => this._metric = metric);
   }
 }

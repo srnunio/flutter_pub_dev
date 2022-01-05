@@ -1,7 +1,8 @@
-
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
@@ -15,7 +16,7 @@ class PackageService extends IPackageService {
   Future<Either<RequestFailure, List<Package>>> getPackages(
       {required int page}) async {
     try {
-      final response = await dio.get('${path}?page=${page}',
+      final response = await dio.get('$path?page=$page',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -26,7 +27,6 @@ class PackageService extends IPackageService {
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
       var packages = List.from(response.data['packages']).map<Package>((data) {
-        // print('data: ${json.encode(data)}');
         return Mapper.packageFromMap(data);
       }).toList();
 
@@ -50,7 +50,6 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('getPackages: $error');
       return left(RequestFailure.serverError());
     }
   }
@@ -66,8 +65,6 @@ class PackageService extends IPackageService {
               'Accept': 'application/json',
             },
           ));
-      print('${response.statusCode}');
-
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
       var package = Mapper.packageFromMap(response.data);
@@ -90,16 +87,15 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('$error');
       return left(RequestFailure.serverError());
     }
   }
 
   @override
-  Future<Either<RequestFailure, Score>> getScorePackage(
-      {required String namePackage}) async {
+  Future<Either<RequestFailure, Metric>> getMetricPackage(
+      {required String package}) async {
     try {
-      final response = await dio.get('$path/$namePackage/score',
+      final response = await dio.get('$path/$package/metrics',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -109,9 +105,9 @@ class PackageService extends IPackageService {
 
       if (response.statusCode != 200) return Left(RequestFailure.serverError());
 
-      var score = Mapper.scoreFromMap(response.data);
+      var metric = Mapper.metricFromMap(response.data);
 
-      return Right(score);
+      return Right(metric);
     } on DioError catch (e) {
       if (e.error is OSError || e.error is SocketException) {
         return left(RequestFailure.networkError());
@@ -129,7 +125,6 @@ class PackageService extends IPackageService {
 
       return Left(RequestFailure.serverError());
     } catch (error) {
-      print('$error');
       return left(RequestFailure.serverError());
     }
   }

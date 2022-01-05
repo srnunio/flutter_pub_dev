@@ -31,10 +31,11 @@
         </compilerSettings>
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../../build/app/tmp/kotlin-classes/debug" />
-          <option name="classpath" value="$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fc82f21569e5b31a5c836528f0498791/jetified-libs.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a30d83bfebbbc8109ce5bcff8261ec96/jetified-flutter_embedding_debug-1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a285fbc70d5dbc9aa5c32ec214345c5f/jetified-armeabi_v7a_debug-1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/1108368dd50eced91245560e53ef4818/jetified-arm64_v8a_debug-1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/24b35458db9f5e8640fd365fa725db39/jetified-x86_64_debug-1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/4a25ac5b42ac6b36ac217379effb1990/jetified-x86_debug-1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.2.0/cd3478503da69b1a7e0319bd2d1389943db9b364/lifecycle-common-java8-2.2.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/91152c7c4a2559aad2f103c8c949d9e5/fragment-1.1.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/ce092b2266ee5441c6f5233299398c96/jetified-activity-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/ba59eea9b899fda6b92c1c4cb87b0d72/viewpager-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/114392e325967b185303bff008e9d2db/loader-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/811a1ed665bf1f06ba827311d3a1c260/customview-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/230d06077f6263ef31817c69e5a8d593/core-1.3.1-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/04ef83e5838d557f0430a190a9e8a455/lifecycle-runtime-2.2.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a1f8dbf91dd2548c7d1551b528460010/jetified-savedstate-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/18bbabd923d8f9edcfde01d3ea4e8fe4/lifecycle-livedata-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/7a30000940c1fb5cb7349c87b610d7ca/lifecycle-livedata-core-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.2.0/4ef09a745007778eef83b92f8f23987a8ea59496/lifecycle-common-2.2.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/215c38d6d6d2b303dd340211f306955d/core-runtime-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/43097381b7fbc9c0ecc9d80bff54b121/versionedparcelable-1.1.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/826af6f6768c22be884e246a5cab4046/lifecycle-viewmodel-2.1.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.1.0/e3a6fb2f40e3a3842e6b7472628ba4ce416ea4c8/annotation-1.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/8b3357bb556f04e8b7d781aa5a1fcc64/jetified-kotlin-stdlib-jdk7-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/14dda12203192ee3d5b786972b3437ac/jetified-kotlin-stdlib-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/189dbc73ff1f1c5a2ce23e5247a1e4e3/jetified-kotlin-stdlib-common-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a7b782133b11afff424e5f51c726608e/jetified-annotations-13.0.jar:/Users/edvaldo/Library/Android/sdk/platforms/android-30/android.jar:/Users/edvaldo/Library/Android/sdk/build-tools/29.0.2/core-lambda-stubs.jar" />
+          <option name="classpath" value="$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e8593d3775ef6888196fd936cc920e3e/jetified-armeabi_v7a_debug-1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/d6a210b37f09cb325fd5612e4e8a1e06/jetified-arm64_v8a_debug-1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/c46b9671d31288d15f156bf9a7faff8e/jetified-x86_64_debug-1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/8563659e39e995b1b17a252c8758395f/jetified-x86_debug-1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/417d80b3e237da801cda06f4ca87e870/jetified-flutter_embedding_debug-1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.2.0/cd3478503da69b1a7e0319bd2d1389943db9b364/lifecycle-common-java8-2.2.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/91152c7c4a2559aad2f103c8c949d9e5/fragment-1.1.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/ce092b2266ee5441c6f5233299398c96/jetified-activity-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/ba59eea9b899fda6b92c1c4cb87b0d72/viewpager-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/114392e325967b185303bff008e9d2db/loader-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/811a1ed665bf1f06ba827311d3a1c260/customview-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/230d06077f6263ef31817c69e5a8d593/core-1.3.1-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/04ef83e5838d557f0430a190a9e8a455/lifecycle-runtime-2.2.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a1f8dbf91dd2548c7d1551b528460010/jetified-savedstate-1.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/18bbabd923d8f9edcfde01d3ea4e8fe4/lifecycle-livedata-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/7a30000940c1fb5cb7349c87b610d7ca/lifecycle-livedata-core-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.2.0/4ef09a745007778eef83b92f8f23987a8ea59496/lifecycle-common-2.2.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/215c38d6d6d2b303dd340211f306955d/core-runtime-2.0.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/43097381b7fbc9c0ecc9d80bff54b121/versionedparcelable-1.1.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/826af6f6768c22be884e246a5cab4046/lifecycle-viewmodel-2.1.0-api.jar:/Users/edvaldo/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.1.0/e3a6fb2f40e3a3842e6b7472628ba4ce416ea4c8/annotation-1.1.0.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/8b3357bb556f04e8b7d781aa5a1fcc64/jetified-kotlin-stdlib-jdk7-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/14dda12203192ee3d5b786972b3437ac/jetified-kotlin-stdlib-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/189dbc73ff1f1c5a2ce23e5247a1e4e3/jetified-kotlin-stdlib-common-1.3.50.jar:/Users/edvaldo/.gradle/caches/transforms-2/files-2.1/a7b782133b11afff424e5f51c726608e/jetified-annotations-13.0.jar:/Users/edvaldo/Library/Android/sdk/platforms/android-31/android.jar:/Users/edvaldo/Library/Android/sdk/build-tools/29.0.2/core-lambda-stubs.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="app_debug" />
+          <option name="jvmTarget" value="1.6" />
           <option name="languageVersion" value="1.3" />
           <option name="apiVersion" value="1.3" />
           <option name="pluginOptions">
@@ -79,14 +80,27 @@
     <content url="file://$MODULE_DIR$/../../../../build/app/generated/source/buildConfig/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/app/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.kxml:kxml2:2.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup:javawriter:2.1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-core:3.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:runner:1.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.1.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: ./../build/app/intermediates/flutter/debug/libs.jar" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:x86_64_debug:1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:x86_debug:1.0.0-ae90085a8437c0ae94d6b5ad2741739ebc742cb4" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:x86_64_debug:1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:x86_debug:1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-b3af521a050e6ef076778bcaf16e27b2521df8f8" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.2.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />
@@ -109,22 +123,9 @@
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.kxml:kxml2:2.3.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup:javawriter:2.1.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-core:3.1.1@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:runner:1.1.1@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.1.1@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.1.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.1.1@aar" level="project" />
-    <orderEntry type="module" module-name="android.fluttertoast" />
-    <orderEntry type="module" module-name="android.url_launcher" />
-    <orderEntry type="module" module-name="android.connectivity" />
-    <orderEntry type="module" module-name="android.share" />
+    <orderEntry type="module" module-name="android.shared_preferences_android" />
+    <orderEntry type="module" module-name="android.url_launcher_android" />
+    <orderEntry type="module" module-name="com.example.FlutterToast.android.fluttertoast" />
+    <orderEntry type="module" module-name="io.flutter.plugins.share.android.share" />
   </component>
 </module>

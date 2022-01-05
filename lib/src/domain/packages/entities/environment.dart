@@ -1,15 +1,18 @@
 class Environment {
-  String sdk;
+  final String sdk;
+  final String flutter;
 
-  Environment({required this.sdk});
+  Environment({required this.sdk, required this.flutter});
 
   Map<String, dynamic> toMap() {
     return {
       'sdk': this.sdk,
+      'flutter': this.flutter,
     };
   }
 
-  static Environment get empty => Environment(sdk: '');
+  static Environment get empty =>
+      Environment(sdk: '>=2.12.0 <3.0.0', flutter: '');
 }
 
 extension EnvironmentEx on Environment {

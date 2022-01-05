@@ -1,20 +1,22 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_package/src/presentation/core/custom_progress.dart';
+import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/search/search_screen.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/presentation/packages/item_package.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../settings_screen.dart';
+import '../settings/settings_screen.dart';
 import 'detail_package_screen.dart';
 
 class PackagesScreen extends StatefulWidget {
@@ -28,44 +30,15 @@ class PackagesScreenState extends State<PackagesScreen>
     with SingleTickerProviderStateMixin {
   PackagesViewModel _model = PackagesViewModel(inject<IPackageRepository>());
 
-  @override
-  void initState() {
-    super.initState();
-    _model.load();
+  ScrollController _controllerList = ScrollController();
+
+  void goToTop() {
+    if (_model.isBusy) return;
+    _controllerList.animateTo(0.0,
+        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
-  _viewFailure() {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Txt(
-              _message().translate,
-              textAlign: TextAlign.center,
-              textColor: Colors.black,
-            ),
-            UIHelper.verticalSpaceSmall(),
-            CustomIcon(icon: 'swip', size: 80),
-            UIHelper.verticalSpaceSmall(),
-            UIHelper.verticalSpaceSmall(),
-            Txt(
-              'update_view'.translate,
-              textAlign: TextAlign.center,
-              textStyle: (_) => _.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12.0,
-                  color: CustomTheme.primary),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
+  /// get error message
   String _message() {
     if (!_model.hasError) return '';
 
@@ -75,11 +48,46 @@ class PackagesScreenState extends State<PackagesScreen>
         serverError: () => 'server_failure');
   }
 
+  /// when data empty or has error
+  _viewFailure() {
+    return Center(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              _message().translate,
+              textAlign: TextAlign.center,
+            ),
+            verticalSpaceSmall(),
+            CustomIcon(icon: 'swip', size: 80),
+            verticalSpaceSmall(),
+            verticalSpaceSmall(),
+            Text(
+              'update_view'.translate,
+              textAlign: TextAlign.center,
+              style: styleText(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.0,
+                  color: kPrimaryColor),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// viewing
   _build() {
     return Observer(builder: (_) {
-      if (_model.isBusy && !_model.hasData) {
+      /// when loading and data empty
+      if (_model.isBusy && !_model.hasData)
         return Center(child: CustomProgress());
-      }
+
+      /// when data empty and has error
       if (_model.hasError && !_model.hasData) {
         return CustomRefresh(
           refresh: _model.refresh,
@@ -88,6 +96,8 @@ class PackagesScreenState extends State<PackagesScreen>
           onRefresh: () => _model.load(refresh: true),
         );
       }
+
+      /// when data empty
       if (!_model.hasData) {
         return CustomRefresh(
           refresh: _model.refresh,
@@ -97,9 +107,11 @@ class PackagesScreenState extends State<PackagesScreen>
         );
       }
 
+      /// list results
       return CustomRefresh(
         refresh: _model.refresh,
         child: StaggeredGridView.countBuilder(
+          controller: _controllerList,
           crossAxisCount: 4,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
@@ -117,7 +129,7 @@ class PackagesScreenState extends State<PackagesScreen>
                 onLink: (url) async {
                   Util.openLink(url: url);
                 },
-                onShare: () async {},
+                onShare: () => Util.shareProject(package: package),
                 package: package,
               ),
             );
@@ -132,39 +144,47 @@ class PackagesScreenState extends State<PackagesScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        brightness: CustomTheme.brightness,
-        centerTitle: false,
-        actions: <Widget>[
-          IconButton(
-              icon: CustomIcon(icon: 'search'),
-              onPressed: () {
-                _model.navigateToPushNamed(routeName: SearchScreen.route);
-              }),
-          IconButton(
-              icon: CustomIcon(icon: 'settings'),
-              onPressed: () {
-                _model.navigateToPushNamed(routeName: SettingScreen.route);
-              }),
-        ],
-        elevation: 0.0,
-        title: Txt(
-          'app'.translate,
-          textStyle: (_) => _.copyWith(
-              color: CustomTheme.primary, fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: _build(),
-      ),
-    );
+  void initState() {
+    super.initState();
+    _model.load();
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  Widget build(BuildContext context) {
+    return ConfigBuilder(builder: (_, theme) {
+      return Scaffold(
+        appBar: AppBar(
+          brightness: theme.brightness,
+          centerTitle: false,
+          actions: <Widget>[
+            IconButton(
+                icon: CustomIcon(icon: 'search'),
+                onPressed: () {
+                  _model.navigateToPushNamed(routeName: SearchScreen.route);
+                }),
+            IconButton(
+                icon: CustomIcon(icon: 'settings'),
+                onPressed: () {
+                  _model.navigateToPushNamed(routeName: SettingScreen.route);
+                }),
+          ],
+          elevation: 0.0,
+          title: TextButton(
+            onPressed: goToTop,
+            child: Text(
+              'app'.translate,
+              style: styleText(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.0),
+            ),
+          ),
+        ),
+        body: Container(
+          margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+          child: _build(),
+        ),
+      );
+    });
   }
 }

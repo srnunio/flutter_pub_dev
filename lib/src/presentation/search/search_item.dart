@@ -1,11 +1,11 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/colors.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
+/// [SearchItem]
 class SearchItem extends BaseComponent {
   Function() onTap;
 
@@ -15,8 +15,7 @@ class SearchItem extends BaseComponent {
     return Container(
       padding: EdgeInsets.all(8.0),
       margin: EdgeInsets.all(4.0),
-      decoration:
-          decoration(color: CustomTheme.placeholderColor, borderRadius: 8.0),
+      decoration: decoration(color: kPlaceholderColor, borderRadius: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -31,19 +30,16 @@ class SearchItem extends BaseComponent {
             ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: CustomTheme.backgroundColor,
+              color: kBackgroundColor,
             ),
           ),
-          UIHelper.horizontalSpaceSmall(),
+          horizontalSpaceSmall(),
           Expanded(
-              child: Txt(
-            '${value}',
+              child: Text(
+            value!,
             textAlign: TextAlign.left,
-            textStyle: (_) => _.copyWith(
-                color: CustomTheme.titleColor,
-                // fontWeight: FontWeight.bold,
-                fontSize: 16.0),
-            maxLine: 1,
+            style: styleText(color: kTitleTextColor, fontSize: 16.0),
+            maxLines: 1,
           )),
         ],
       ),

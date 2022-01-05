@@ -14,7 +14,7 @@ class DefaultAdvancedService extends IAdvancedService {
         .replaceAll('https://', '')
         .replaceAll('tree/', '')
         .replaceAll('master/', '');
-    var url = 'https://raw.githubusercontent.com/${gitPath}/master/README.md';
+    var url = 'https://raw.githubusercontent.com/$gitPath/master/README.md';
 
     var network = NetworkBuilder();
     var dio = network.build();
@@ -27,7 +27,6 @@ class DefaultAdvancedService extends IAdvancedService {
     var readme = (response != null &&
         response.toString().trim() != '404: Not Found' &&
         response.toString().trim() != '400: Invalid request');
-
 
     return (readme) ? Right(response) : Left(RequestFailure.serverError());
   }

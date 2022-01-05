@@ -29,6 +29,41 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   Score get score => (_$scoreComputed ??= Computed<Score>(() => super.score,
           name: '_DetailPackageViewModel.score'))
       .value;
+  Computed<Metric>? _$metricComputed;
+
+  @override
+  Metric get metric =>
+      (_$metricComputed ??= Computed<Metric>(() => super.metric,
+              name: '_DetailPackageViewModel.metric'))
+          .value;
+  Computed<Version>? _$versionComputed;
+
+  @override
+  Version get version =>
+      (_$versionComputed ??= Computed<Version>(() => super.version,
+              name: '_DetailPackageViewModel.version'))
+          .value;
+  Computed<List<Dependency>>? _$dependenciesComputed;
+
+  @override
+  List<Dependency> get dependencies => (_$dependenciesComputed ??=
+          Computed<List<Dependency>>(() => super.dependencies,
+              name: '_DetailPackageViewModel.dependencies'))
+      .value;
+  Computed<List<Dependency>>? _$dev_dependenciesComputed;
+
+  @override
+  List<Dependency> get dev_dependencies => (_$dev_dependenciesComputed ??=
+          Computed<List<Dependency>>(() => super.dev_dependencies,
+              name: '_DetailPackageViewModel.dev_dependencies'))
+      .value;
+  Computed<Environment>? _$environmentComputed;
+
+  @override
+  Environment get environment =>
+      (_$environmentComputed ??= Computed<Environment>(() => super.environment,
+              name: '_DetailPackageViewModel.environment'))
+          .value;
   Computed<String>? _$readmeComputed;
 
   @override
@@ -48,13 +83,6 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   bool get hasReadme =>
       (_$hasReadmeComputed ??= Computed<bool>(() => super.hasReadme,
               name: '_DetailPackageViewModel.hasReadme'))
-          .value;
-  Computed<bool>? _$hasScoreComputed;
-
-  @override
-  bool get hasScore =>
-      (_$hasScoreComputed ??= Computed<bool>(() => super.hasScore,
-              name: '_DetailPackageViewModel.hasScore'))
           .value;
   Computed<bool>? _$loadingReadmeComputed;
 
@@ -79,18 +107,33 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_scoreAtom = Atom(name: '_DetailPackageViewModel._score');
+  final _$_versionAtom = Atom(name: '_DetailPackageViewModel._version');
 
   @override
-  Score get _score {
-    _$_scoreAtom.reportRead();
-    return super._score;
+  Version? get _version {
+    _$_versionAtom.reportRead();
+    return super._version;
   }
 
   @override
-  set _score(Score value) {
-    _$_scoreAtom.reportWrite(value, super._score, () {
-      super._score = value;
+  set _version(Version? value) {
+    _$_versionAtom.reportWrite(value, super._version, () {
+      super._version = value;
+    });
+  }
+
+  final _$_metricAtom = Atom(name: '_DetailPackageViewModel._metric');
+
+  @override
+  Metric get _metric {
+    _$_metricAtom.reportRead();
+    return super._metric;
+  }
+
+  @override
+  set _metric(Metric value) {
+    _$_metricAtom.reportWrite(value, super._metric, () {
+      super._metric = value;
     });
   }
 
@@ -179,16 +222,31 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   }
 
   @override
+  void setVersion(Version version) {
+    final _$actionInfo = _$_DetailPackageViewModelActionController.startAction(
+        name: '_DetailPackageViewModel.setVersion');
+    try {
+      return super.setVersion(version);
+    } finally {
+      _$_DetailPackageViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 failure: ${failure},
 hasError: ${hasError},
 package: ${package},
 score: ${score},
+metric: ${metric},
+version: ${version},
+dependencies: ${dependencies},
+dev_dependencies: ${dev_dependencies},
+environment: ${environment},
 readme: ${readme},
 hasData: ${hasData},
 hasReadme: ${hasReadme},
-hasScore: ${hasScore},
 loadingReadme: ${loadingReadme}
     ''';
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_package/src/utils/theme.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'base_widget.dart';
@@ -17,7 +17,7 @@ class CustomIcon extends BaseComponent {
   @override
   Widget build(BuildContext context) {
     size = size ?? 24;
-    color = (isColor) ? null : color ?? CustomTheme.colorIcon;
+    color = (isColor) ? null : color ??  kIconColor;
     return SvgPicture.asset(
       'assets/icons/${value}.svg',
       height: size,

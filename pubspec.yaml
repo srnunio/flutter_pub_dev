@@ -1,6 +1,6 @@
 name: flutter_package
-description: Este é um exemplo usando a api do pub.dev onde o objectivo é listar os pacotes
-author: Edvaldo Martins <edvaldonuniomartins@gmail.com>
+description: This is an example using the pub.dev where the purpose is to list the packages
+author:  Edvaldo Martins <edvaldomartins.developer@gmail.com>
 homepage: https://github.com/EdvaldoMartins/flutter_package_pub_dev
 
 version: 1.0.0+1
@@ -21,9 +21,6 @@ dependencies:
   html: ^0.14.0+2
   pull_to_refresh: ^2.0.0
   flutter_staggered_grid_view: ^0.4.0
-  customized:
-    git:
-      url: https://github.com/EdvaldoMartins/customized
 
   #state
   mobx: ^2.0.1
@@ -36,12 +33,13 @@ dependencies:
 
   #network
   dio: ^4.0.0
-  http: ^0.13.0
-  url_launcher: ^6.0.0-nullsafety
-  data_connection_checker: ^0.3.4
+  url_launcher: ^6.0.0-nullsafety 
 
   # Dependency Injection
   get_it: ^7.1.2
+
+  # Caching
+  shared_preferences: ^2.0.6
 
   #utils
   fluttertoast: ^7.1.5
@@ -70,18 +68,19 @@ dev_dependencies:
 flutter:
   fonts:
     - family: Font
-    - fonts:
-        - asset: fonts/light.ttf
+      fonts:
+        - asset: assets/fonts/DINNextRoundedLTPro-Bold.otf
+        - asset: assets/fonts/DINNextRoundedLTPro-Regular.otf
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
   uses-material-design: true
   assets:
     - assets/locale/
     - assets/icons/
     - assets/images/
-
-
-#    flutter packages pub run build_runner build --delete-conflicting-outputs
 

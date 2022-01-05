@@ -5,7 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_package/src/domain/core/navigation/navigation_service.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/packages/packages_screen.dart';
-import 'package:flutter_package/src/utils/theme.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   static const route = '/';
@@ -31,31 +32,33 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CustomTheme.backgroundColor,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light.copyWith(
-            systemNavigationBarColor: CustomTheme.backgroundColor,
-            statusBarIconBrightness: CustomTheme.brightness),
-        child: Container(
-          color: CustomTheme.backgroundColor,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: Image.asset(
-                  'assets/images/dartlogo.png',
-                  width: 120,
-                  height: 120,
-                  fit: BoxFit.cover,
+    return ConfigBuilder(builder: (_, theme) {
+      return Scaffold(
+        backgroundColor: kBackgroundColor,
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light.copyWith(
+              systemNavigationBarColor: kBackgroundColor,
+              statusBarIconBrightness: theme.brightness),
+          child: Container(
+            color: kBackgroundColor,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: Image.asset(
+                    'assets/images/dartlogo.png',
+                    width: 120,
+                    height: 120,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

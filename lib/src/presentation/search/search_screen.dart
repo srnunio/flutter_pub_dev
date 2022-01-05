@@ -1,17 +1,20 @@
-import 'package:customized/customized.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/application/search/search_view_model.dart';
 import 'package:flutter_package/src/domain/search/i_search_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
+import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/packages/detail_package_screen.dart';
 import 'package:flutter_package/src/presentation/search/search_item.dart';
-import 'package:flutter_package/src/utils/theme.dart';
+import 'package:flutter_package/src/presentation/settings/config_builder.dart';
+import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/l18n.dart';
 
+/// [SearchScreen]
 class SearchScreen extends StatefulWidget {
   static const route = '/search_screen';
 
@@ -29,11 +32,7 @@ class SearchScreenState extends State<SearchScreen>
 
   bool get hasQuery => (_query.isNotEmpty);
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  /// get error message
   String get _message => (!_model.hasError)
       ? 'no_results_found'
       : _model.failure!.when<String>(
@@ -41,34 +40,34 @@ class SearchScreenState extends State<SearchScreen>
           empty: () => 'no_results_found',
           serverError: () => 'server_failure');
 
+  /// viewing
   _build() {
     return Observer(builder: (_) {
-      if (_model.isBusy && !_model.hasData) {
+      /// when loading and data empty
+      if (_model.isBusy && !_model.hasData)
         return Center(child: CustomProgress());
-      }
+
+      /// when data empty and has error
       if (_model.hasError && !_model.hasData) {
         return FailureMessageView(
           isColor: true,
           sizeIcon: 80,
-          message: _message,
-          showButton: _model.hasError,
-          onTap: () {
-            _model.load(query: _query);
-          },
+          message: _message.translate,
+          onTap: () => _model.load(query: _query),
         );
       }
+
+      /// when data empty
       if (!_model.hasData) {
         return FailureMessageView(
           isColor: true,
           sizeIcon: 80,
-          showButton: !_model.hasError,
-          message: _message,
-          onTap: () {
-            _model.load(query: _query);
-          },
+          message: _message.translate,
+          onTap: _model.hasError ? () => _model.load(query: _query) : null,
         );
       }
 
+      /// list results
       return CustomRefresh(
         refresh: _model.refresh,
         child: ListView.builder(
@@ -94,13 +93,13 @@ class SearchScreenState extends State<SearchScreen>
     });
   }
 
+  /// update query
   void updateSearchQuery(String newQuery) {
-    setState(() {
-      _query = newQuery;
-    });
+    setState(() => _query = newQuery);
   }
 
-  _field() {
+  /// search field
+  _bodyField() {
     var hintText = I18n.text('search_desc');
 
     return Container(
@@ -117,13 +116,13 @@ class SearchScreenState extends State<SearchScreen>
             textInputAction: TextInputAction.search,
             controller: _editingController,
             autofocus: true,
-            cursorColor: CustomTheme.primary,
+            cursorColor: kIconColor,
             decoration: InputDecoration(
               hintText: hintText,
               border: InputBorder.none,
-              hintStyle: styleText(color: CustomTheme.subtitleColor),
+              hintStyle: styleText(color: kSubtitleTextColor),
             ),
-            style: styleText(color: CustomTheme.titleColor),
+            style: styleText(color: kTitleTextColor),
             onChanged: updateSearchQuery,
           )),
           InkWell(
@@ -131,37 +130,44 @@ class SearchScreenState extends State<SearchScreen>
                 Icons.cancel,
                 color: (!hasQuery) ? Colors.grey[300] : null,
               ),
-              onTap: (!hasQuery)
-                  ? null
-                  : () {
-                      _model.clear();
-                      _editingController.clear();
-                      setState(() => _query = '');
-                    }),
+              onTap: (!hasQuery) ? null : _clearData),
         ],
       ),
     );
   }
 
+  _clearData() {
+    _model.clear();
+    _editingController.clear();
+    setState(() => _query = '');
+  }
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
-          child: AppBar(
-            backgroundColor: CustomTheme.backgroundColor,
-            brightness: CustomTheme.brightness,
-            elevation: 0,
-            leading: BackButton(),
-            automaticallyImplyLeading: false,
-            title: _field(),
-          )),
-      body: _build(),
-    );
+  void initState() {
+    super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ConfigBuilder(builder: (_, theme) {
+      return Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55),
+            child: AppBar(
+              backgroundColor: kBackgroundColor,
+              brightness: theme.brightness,
+              elevation: 0,
+              leading: BackButton(),
+              automaticallyImplyLeading: false,
+              title: _bodyField(),
+            )),
+        body: _build(),
+      );
+    });
   }
 }

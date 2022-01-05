@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/search/i_search_repository.dart';
@@ -50,9 +49,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
 
   @action
   Future<void> load({required String query, bool refresh = false}) async {
-    if (isBusy) {
-      return;
-    }
+    if (isBusy) return;
     if (refresh) {
       _page = 1;
       onRefresh(value: refresh);
@@ -70,9 +67,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
     onRefresh(value: false);
 
     _response.fold(
-      (failure) {
-        this.failure = failure;
-      },
+      (failure) => this.failure = failure,
       (data) {
         setData(data, refresh);
         _page++;

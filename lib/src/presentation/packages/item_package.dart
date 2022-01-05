@@ -1,12 +1,12 @@
-import 'package:customized/customized.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/utils/colors.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/presentation/core/side_rounded.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
 class ItemPackage extends StatelessWidget {
   final Package package;
@@ -25,8 +25,7 @@ class ItemPackage extends StatelessWidget {
   _build() {
     return Container(
       padding: EdgeInsets.all(0.0),
-      decoration:
-          decoration(color: CustomTheme.placeholderColor, borderRadius: 8.0),
+      decoration: decoration(color: kPlaceholderColor, borderRadius: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -42,33 +41,32 @@ class ItemPackage extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: CustomTheme.backgroundColor,
+              color: kBackgroundColor,
             ),
           ),
           Container(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Txt(
+            child: Text(
               '${package.name}',
               textAlign: TextAlign.center,
-              textStyle: (_) => _.copyWith(
-                  color: CustomTheme.primary,
+              style: styleText(
+                  color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0),
-              maxLine: 3,
+              maxLines: 3,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
+          verticalSpaceSmall(),
           Container(
             padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Txt(
+            child: Text(
               '${package.latest.pubspec.description}',
               textAlign: TextAlign.center,
-              textStyle: (_) =>
-                  _.copyWith(color: CustomTheme.subtitleColor, fontSize: 14.0),
-              maxLine: 3,
+              style: styleText(color: kSubtitleTextColor, fontSize: 14.0),
+              maxLines: 3,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
+          verticalSpaceSmall(),
           Container(
             margin: EdgeInsets.only(left: 10.0),
             child: Row(
@@ -80,31 +78,23 @@ class ItemPackage extends StatelessWidget {
                   child: CustomIcon(
                     icon: 'share',
                     size: 18,
-                    color: Colors.black,
+                    color: kIconColor,
                   ),
                   onTap: onShare,
-                ),
-                InkWell(
-                  child: CustomIcon(
-                    icon: 'github',
-                    size: 18,
-                    color: Colors.black,
-                  ),
-                  onTap: () => onLink(package.latest.pubspec.homepage),
                 ),
                 SizedBox(
                   height: 40,
                   width: size.width * .2,
                   child: SideRounded(
-                    color: CustomTheme.primary,
-                    child: Txt(
+                    color: kPrimaryColor,
+                    child: Text(
                       '${package.latest.version}',
                       textAlign: TextAlign.center,
-                      textStyle: (_) => _.copyWith(
+                      style: styleText(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 12.0),
-                      maxLine: 2,
+                      maxLines: 2,
                     ),
                     radious: 30,
                   ),

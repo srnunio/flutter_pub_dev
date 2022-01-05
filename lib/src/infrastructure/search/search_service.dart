@@ -14,7 +14,7 @@ class SearchService extends ISearchService {
     query = query.trim().toLowerCase();
 
     try {
-      final response = await dio.get('${path}?q=$query&page=${page}',
+      final response = await dio.get('$path?q=$query&page=$page',
           options: Options(
             headers: {
               'Content-Type': 'application/json',

@@ -1,17 +1,16 @@
-import 'package:customized/customized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_package/src/utils/uihelper.dart';
+import 'package:flutter_package/src/presentation/core/styles.dart';
+import 'package:flutter_package/src/utils/colors.dart';
+import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/l18n.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
-import 'package:flutter_package/src/utils/theme.dart';
 
 import 'base_widget.dart';
 
 class FailureMessageView extends BaseComponent {
   final String textButton;
   final Function()? onTap;
-  bool showButton;
   String? icon;
   final double sizeIcon;
   final bool reference;
@@ -25,7 +24,6 @@ class FailureMessageView extends BaseComponent {
       this.onTap,
       this.textButton = 'try_again',
       this.icon,
-      this.showButton = false,
       this.reference = true,
       this.button,
       this.isColor = false,
@@ -58,34 +56,34 @@ class FailureMessageView extends BaseComponent {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          (hasIcon) ? UIHelper.verticalSpaceSmall() : empty,
+          (hasIcon) ? verticalSpaceSmall() : empty,
           _icon(),
-          (hasIcon) ? UIHelper.verticalSpaceSmall() : empty,
+          (hasIcon) ? verticalSpaceSmall() : empty,
           _center(
-            child: Txt(
-              value!.translate,
-              textColor: CustomTheme.titleColor,
+            child: Text(
+              value!,
+              style: styleText(color: kTitleTextColor),
               textAlign: TextAlign.center,
             ),
           ),
-          UIHelper.verticalSpaceSmall(),
-           if(button != null && showButton)
-                  InkWell(
-                    onTap: onTap,
-                    child: Container(
-                      width: 200,
-                      padding: EdgeInsets.all(8.0),
-                      child: _center(
-                        child: Txt(
-                          '${textButton}'.translate,
-                          textStyle: (_) => _.copyWith(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+          verticalSpaceSmall(),
+          if (onTap != null)
+            InkWell(
+              onTap: onTap,
+              child: Container(
+                width: 200,
+                padding: EdgeInsets.all(8.0),
+                child: _center(
+                  child: Text(
+                    textButton.translate,
+                    style: styleText(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )
+                  ),
+                ),
+              ),
+            )
         ],
       ),
     );

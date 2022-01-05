@@ -5,62 +5,54 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class I18n {
-  I18n(this._locale);
+  static late Map<dynamic, dynamic> _localizedValues;
 
-  Locale? _locale;
+  static late I18n _current;
 
-  static Map<dynamic, dynamic>? _localizedValues;
-
-  static I18n? _current;
-
-  static I18n? get instance => _current;
-
-  static I18n? of(BuildContext context) {
-    return Localizations.of<I18n>(context, I18n);
-  }
+  static I18n get instance => _current;
 
   static String text(String key) {
-    return _localizedValues![key] ?? '** $key not found';
+    return _localizedValues[key] ?? '** $key not found';
+  }
+
+  static String key(String text) {
+    var value =
+        _localizedValues.entries.firstWhere((element) => element.value == text);
+    return value.key;
   }
 
   static Future<I18n> load(Locale locale) async {
-    locale = _filterLocale(locale);
-    String jsonContent = await rootBundle
-        .loadString("assets/locale/i18n_${locale.languageCode}.json");
+    var _filteredLocale = _filterLocale(locale);
+    var file = "assets/locale/i18n_${_filteredLocale.languageCode}.json";
+    String jsonContent = await rootBundle.loadString(file);
     _localizedValues = json.decode(jsonContent);
-    return _current = new I18n(locale);
+    return _current = I18n();
   }
 
   static Locale filterLocale(Locale locale) => _filterLocale(locale);
 
   static Locale _filterLocale(Locale locale) {
-    if (locale.languageCode.contains('pt')) {
-      return Locale('pt');
-    } else if (locale.languageCode.contains('en')) {
-      return Locale('en');
-    } else {
-      return Locale('pt');
-    }
+    if (locale.languageCode.toLowerCase().contains('pt')) return Locale('pt');
+    if (locale.languageCode.toLowerCase().contains('en')) return Locale('en');
+    return Locale('pt');
   }
 
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
-
-  Locale get currentLanguage => _filterLocale(_locale!);
 }
 
-class I18nDelegate extends LocalizationsDelegate<I18n> {
-  const I18nDelegate();
+class TranslationsDelegate extends LocalizationsDelegate<I18n> {
+  const TranslationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
 
   @override
   Future<I18n> load(Locale locale) async {
-    return I18n.load(locale);
+    return I18n.instance;
   }
 
   @override
-  bool shouldReload(I18nDelegate old) => false;
+  bool shouldReload(TranslationsDelegate old) => false;
 }
 
 extension Str on String {
