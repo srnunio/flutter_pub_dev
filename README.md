@@ -41,7 +41,7 @@ the https://pub.dartlang.org/api/
 ## 📸 Screenshots
 
 <p float="left;padding=10px">
-<img src="/screenshots/smartmockups_klcem8w7.png" width="894,18" height="1725"> |
+<img src="/screenshots/smartmockups_klcem8w7.png" width="494" height="550"> |
 <img src="/screenshots/smartmockups_klcen4ty.png" width="270" height="480"> |
 <img src="/screenshots/smartmockups_klcesngj.png" width="270" height="480"> |
  </p>
