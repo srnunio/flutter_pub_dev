@@ -39,15 +39,11 @@ the https://pub.dartlang.org/api/
 - [**Share link package**](https://pub.dev/packages)
 
 ## 📸 Screenshots
+![Home](./screenshots/smartmockups_klcem8w7.png)
+![Details1](./screenshots/smartmockups_klceoqtt.png)
+![Details2](./screenshots/smartmockups_klcesngj.png)
+![Search](./screenshots/smartmockups_klcen4ty.png)
 
-<p float="left;padding=10px">
-<img src="/screenshots/smartmockups_klcem8w7.png" width="494" height="550"> |
-<img src="/screenshots/smartmockups_klcen4ty.png" width="270" height="480"> |
-<img src="/screenshots/smartmockups_klcesngj.png" width="270" height="480"> |
- </p>
-<p float="left;padding=10px">
- <img src="/screenshots/smartmockups_klceoqtt.png" width="270" height="480"> 
-</p>
 
 ###### If you have any features you want to see in this package, feel free to make a suggestion. 🎉
 
