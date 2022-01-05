@@ -2,9 +2,14 @@
 
 ![Badge](https://img.shields.io/static/v1?label=playstore&message=v0.0.7&color=blue&?style=flat) ![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=green&?style=flat) ![Badge](https://img.shields.io/static/v1?label=android&message=4.1&color=darkgreen&?style=flat) ![Badge](https://img.shields.io/static/v1?label=iOS&message=13.0&color=orange&?style=flat) ![Badge](https://img.shields.io/static/v1?label=status&message=completed&color=green&?style=flat)
 
-## [**Available on play store**](https://play.google.com/store/apps/details?id=nunioz.app.pub_dev)
+<p float="left;padding=10px">
+<a href="https://apps.apple.com/app/pub.dev/id1526026915"><img src="./apple.png" width="270" height="100"> </a>|
+<a href="https://play.google.com/store/apps/details?id=nunioz.app.pub_dev"><img src="./google-play.png" width="270" height="100"> </a> 
+ </p>  
 
-## [**Available on apple store**](https://apps.apple.com/app/audiun/id1526026915)
+[comment]: <> ([![apple]&#40;./apple.png&#41;]&#40;https://apps.apple.com/app/pub.dev/id1526026915&#41;)
+
+[comment]: <> ([![google]&#40;./google-play.png&#41;]&#40;https://play.google.com/store/apps/details?id=nunioz.app.pub_dev&#41;)
 
 ## [**official website**](https://pub.dev/packages)
 
@@ -35,14 +40,14 @@ the https://pub.dartlang.org/api/
 
 ## 📸 Screenshots
 
-<p float="left;padding=10px">
-<img src="/screenshots/smartmockups_klcem8w7.png" width="270" height="440"> |
-<img src="/screenshots/smartmockups_klcen4ty.png" width="270" height="440"> |
-<img src="/screenshots/smartmockups_klcesngj.png" width="270" height="440"> |
- </p>
-<p float="left;padding=10px">
- <img src="/screenshots/smartmockups_klceoqtt.png" width="270" height="440"> 
-</p>
+<table> 
+  <tr>
+    <td valign="top"><img src="./apple.png" width="270" height="440"></td>
+    <td valign="top"><img src="/screenshots/smartmockups_klcesngj.png" width="270" height="440"></td>
+    <td valign="top"><img src="/screenshots/smartmockups_klceoqtt.png" width="270" height="440"></td>
+    <td valign="top"><img src="/screenshots/smartmockups_klcen4ty.png" width="270" height="440"></td>
+  </tr>
+ </table>
 
 ###### If you have any features you want to see in this package, feel free to make a suggestion. 🎉
 
