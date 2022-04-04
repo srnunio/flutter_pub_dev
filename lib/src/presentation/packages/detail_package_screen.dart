@@ -557,14 +557,18 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     ),
                     onPressed: () =>
                         Util.shareProject(package: _model.package)),
-              if (_model.hasData && !_model.isBusy)
-                IconButton(
-                    icon: CustomIcon(
-                      icon: 'github',
-                      size: 20,
-                    ),
-                    onPressed: () => Util.openLink(
-                        url: _model.package.latest.pubspec.homepage))
+              if (_model.hasData && !_model.isBusy) Builder(builder: (context) {
+                var _homePage = _model.package.latest.pubspec.homepage;
+                if (_homePage.isNotEmpty)
+                  return IconButton(
+                      icon: CustomIcon(
+                        icon: 'github',
+                        size: 20,
+                      ),
+                      onPressed: () => Util.openLink(
+                          url: _homePage));
+                return SizedBox.shrink();
+              })
             ],
             elevation: 0.0,
             title: Text(
