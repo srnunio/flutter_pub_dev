@@ -30,6 +30,7 @@ class _SettingState extends State<SettingScreen>
   CustomSwitchController _switchPTController =
       CustomSwitchController(initialValue: true);
   CustomSwitchController _switchENController = CustomSwitchController();
+  CustomSwitchController _switchZHController = CustomSwitchController();
 
   CustomSwitchController _switchThemeController = CustomSwitchController();
 
@@ -44,6 +45,7 @@ class _SettingState extends State<SettingScreen>
     debugPrint("onTapPT: $value");
     _model.changeTranslate(languageCode: 'pt');
     _switchPTController.enable();
+    _switchZHController.disable();
     _switchENController.disable();
   }
 
@@ -51,7 +53,16 @@ class _SettingState extends State<SettingScreen>
   onTapEN(bool value) {
     _model.changeTranslate(languageCode: 'en');
     _switchENController.enable();
+    _switchZHController.disable();
     _switchPTController.disable();
+  }
+
+  /// [onTapZH] run zh translate
+  onTapZH(bool value) {
+    _model.changeTranslate(languageCode: 'zh');
+    _switchZHController.enable();
+    _switchPTController.disable();
+    _switchENController.disable();
   }
 
   /// [onTheme] run theme
@@ -104,6 +115,11 @@ class _SettingState extends State<SettingScreen>
                 controller: _switchENController,
                 onTap: onTapEN),
             verticalSpace(16.0),
+            TitleSwitch(
+                title: 'china'.translate,
+                controller: _switchZHController,
+                onTap: onTapZH),
+            verticalSpace(16.0),
           ],
         ),
       );
@@ -128,9 +144,15 @@ class _SettingState extends State<SettingScreen>
   _initialize() {
     if (_model.isCurrentLanguage('pt')) {
       _switchPTController.enable();
+      _switchZHController.disable();
       _switchENController.disable();
     } else if (_model.isCurrentLanguage('en')) {
       _switchENController.enable();
+      _switchZHController.disable();
+      _switchPTController.disable();
+    } else if (_model.isCurrentLanguage('zh')) {
+      _switchZHController.enable();
+      _switchENController.disable();
       _switchPTController.disable();
     }
 
