@@ -28,6 +28,7 @@ class _AppState extends State<App> {
           supportedLocales: <Locale>[
             Locale('pt', 'PT'),
             Locale('en', 'EN'),
+            Locale('zh', 'CN'),
             locale
           ],
           localizationsDelegates: const [

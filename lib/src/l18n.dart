@@ -34,17 +34,18 @@ class I18n {
   static Locale _filterLocale(Locale locale) {
     if (locale.languageCode.toLowerCase().contains('pt')) return Locale('pt');
     if (locale.languageCode.toLowerCase().contains('en')) return Locale('en');
+    if (locale.languageCode.toLowerCase().contains('zh')) return Locale('zh');
     return Locale('pt');
   }
 
-  bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'pt', 'zh'].contains(locale.languageCode);
 }
 
 class TranslationsDelegate extends LocalizationsDelegate<I18n> {
   const TranslationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'pt'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'pt', 'zh'].contains(locale.languageCode);
 
   @override
   Future<I18n> load(Locale locale) async {
