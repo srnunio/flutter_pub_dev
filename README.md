@@ -24,6 +24,12 @@ the https://pub.dartlang.org/api/
 - Install the dependicies
 - Run it
 
+> Before that use this line of command to generate code
+
+```sh
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
 ## Features
 
 - **List packages**
