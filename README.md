@@ -41,6 +41,11 @@ flutter pub run build_runner build --delete-conflicting-outputs
     - scores
     - readme
     - dependencies
+- **Dark mode**
+- **Language support**
+  - Portuguese 
+  - English
+  - Chinese
 - **Open package on github**
 - [**Share link package**](https://pub.dev/packages)
 

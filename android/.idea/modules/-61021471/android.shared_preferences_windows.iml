@@ -10,12 +10,11 @@
     </facet>
     <facet type="java-gradle" name="Java-Gradle">
       <configuration>
-        <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/../../../../build/shared_preferences_windows" />
         <option name="BUILDABLE" value="false" />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager">
     <exclude-output />
     <content url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.3/android">
       <excludeFolder url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.3/android/.gradle" />

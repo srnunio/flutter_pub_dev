@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -35,7 +34,7 @@ class I18n {
     if (locale.languageCode.toLowerCase().contains('pt')) return Locale('pt');
     if (locale.languageCode.toLowerCase().contains('en')) return Locale('en');
     if (locale.languageCode.toLowerCase().contains('zh')) return Locale('zh');
-    return Locale('pt');
+    return Locale('en');
   }
 
   bool isSupported(Locale locale) => ['en', 'pt', 'zh'].contains(locale.languageCode);
