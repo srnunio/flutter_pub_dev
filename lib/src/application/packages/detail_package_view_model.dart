@@ -16,9 +16,9 @@ class DetailPackageViewModel = _DetailPackageViewModel
     with _$DetailPackageViewModel;
 
 abstract class _DetailPackageViewModel extends BaseViewModel with Store {
-  _DetailPackageViewModel(this._repository, this._advancedService);
+  _DetailPackageViewModel(this._service, this._advancedService);
 
-  final IPackageRepository _repository;
+  final IPackageService _service;
 
   final IAdvancedService _advancedService;
 
@@ -96,7 +96,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
     failure = null;
 
-    final response = await _repository.getPackageName(namePackage: namePackage);
+    final response = await _service.getPackageName(namePackage: namePackage);
 
     setBusy(false);
 
@@ -125,7 +125,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
   @action
   Future<void> loadScore() async {
-    var response = await _repository.getMetricPackage(package: package.name);
+    var response = await _service.getMetricPackage(package: package.name);
     response.fold((failure) {}, (metric) => this._metric = metric);
   }
 }
