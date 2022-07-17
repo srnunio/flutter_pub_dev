@@ -1,8 +1,9 @@
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../domain/packages/i_package_service.dart';
 
 part 'packages_view_model.g.dart';
 
@@ -19,10 +20,13 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
   ObservableList<Package> _packages = ObservableList.of([]);
 
   @observable
-  RequestFailure? failure = null;
+  RequestFailure? _failure = null;
 
   @computed
-  bool get hasError => failure != null;
+  bool get hasError => _failure != null;
+
+  @computed
+  RequestFailure get failure => _failure!;
 
   @computed
   List<Package> get packages => _packages.toList();
@@ -31,7 +35,7 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
   bool get hasData => _packages.isNotEmpty;
 
   @action
-  void setData(List<Package> list, bool refresh) {
+  void _setData(List<Package> list, bool refresh) {
     if (list.isNotEmpty) {
       if (!hasData || refresh) {
         this._packages = list.asObservable();
@@ -41,11 +45,21 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
     }
   }
 
+  bool _setFailure(RequestFailure? failure) {
+    _failure = failure;
+    return false;
+  }
+
+  bool _onSuccessfully(bool refresh, List<Package> data) {
+    _setData(data, refresh);
+    _page++;
+    return true;
+  }
+
   @action
-  Future<void> load({bool refresh = false}) async {
-    if (isBusy) {
-      return;
-    }
+  Future<bool> load({bool refresh = false}) async {
+    if (isBusy) return false;
+
     if (refresh) {
       _page = 1;
       onRefresh(value: refresh);
@@ -53,7 +67,7 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
 
     setBusy(true);
 
-    failure = null;
+    _failure = null;
 
     final _response = await _service.getPackages(page: _page);
 
@@ -61,14 +75,9 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
 
     onRefresh(value: false);
 
-    _response.fold(
-      (failure) {
-        this.failure = failure;
-      },
-      (data) {
-        setData(data, refresh);
-        _page++;
-      },
+    return _response.fold(
+      _setFailure,
+      (data) => _onSuccessfully(refresh, data),
     );
   }
 }

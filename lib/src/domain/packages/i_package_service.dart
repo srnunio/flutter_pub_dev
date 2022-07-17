@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
-import 'package:flutter_package/src/domain/core/api_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'entities/metric.dart';
+import 'i_package_repository.dart';
 
-abstract class IPackageRepository extends ApiService {
-  IPackageRepository(Dio dio) : super(dio);
+abstract class IPackageService {
+  IPackageService(this.repository);
 
-  final String path = '/packages';
+  final IPackageRepository repository;
 
   /// [getPackages] method responsible for listing the packages
   /// This returns a list of packets [List<Package>] when the request is successful
