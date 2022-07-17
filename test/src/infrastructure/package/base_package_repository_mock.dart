@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart'; 
+import 'package:dartz/dartz.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
