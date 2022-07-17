@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/application/search/search_view_model.dart';
-import 'package:flutter_package/src/domain/search/i_search_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_progress.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
@@ -24,7 +22,7 @@ class SearchScreen extends StatefulWidget {
 
 class SearchScreenState extends State<SearchScreen>
     with SingleTickerProviderStateMixin {
-  SearchViewModel _model = SearchViewModel(inject<ISearchRepository>());
+  final SearchViewModel _model = inject<SearchViewModel>();
 
   String _query = '';
 
