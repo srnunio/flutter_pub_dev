@@ -7,8 +7,9 @@ import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
-import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../domain/packages/i_package_service.dart';
 
 part 'detail_package_view_model.g.dart';
 

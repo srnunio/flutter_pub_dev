@@ -7,7 +7,6 @@ import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/packages_view_model.dart';
-import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/svg_icon.dart';
@@ -28,7 +27,7 @@ class PackagesScreen extends StatefulWidget {
 
 class PackagesScreenState extends State<PackagesScreen>
     with SingleTickerProviderStateMixin {
-  final PackagesViewModel _model = PackagesViewModel(inject<IPackageService>());
+  final PackagesViewModel _model = inject<PackagesViewModel>();
 
   ScrollController _controllerList = ScrollController();
 

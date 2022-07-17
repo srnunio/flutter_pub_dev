@@ -4,6 +4,8 @@ import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../domain/packages/i_package_service.dart';
+
 part 'packages_view_model.g.dart';
 
 class PackagesViewModel = _PackagesViewModel with _$PackagesViewModel;

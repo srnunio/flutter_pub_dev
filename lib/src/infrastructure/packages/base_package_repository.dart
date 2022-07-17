@@ -4,8 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-import 'package:flutter_package/src/domain/packages/i_package_service.dart';
 import 'package:flutter_package/src/infrastructure/core/mapper.dart';
+
+import '../../domain/packages/i_package_repository.dart';
 
 class BasePackageRepository extends IPackageRepository {
   BasePackageRepository(Dio dio) : super(dio);

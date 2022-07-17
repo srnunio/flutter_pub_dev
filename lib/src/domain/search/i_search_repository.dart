@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import '../core/api_service.dart';
 
-abstract class ISearchRepository extends ApiService {
+abstract class ISearchRepository extends Api {
   ISearchRepository(Dio dio) : super(dio);
 
   final String path = '/search';
