@@ -28,7 +28,7 @@ class PackagesScreen extends StatefulWidget {
 
 class PackagesScreenState extends State<PackagesScreen>
     with SingleTickerProviderStateMixin {
-  PackagesViewModel _model = PackagesViewModel(inject<IPackageRepository>());
+  final PackagesViewModel _model = PackagesViewModel(inject<IPackageService>());
 
   ScrollController _controllerList = ScrollController();
 
