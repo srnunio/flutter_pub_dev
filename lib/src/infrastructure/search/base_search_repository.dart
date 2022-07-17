@@ -1,12 +1,12 @@
 import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/dio.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-import 'package:flutter_package/src/domain/search/i_search_service.dart';
+import 'package:flutter_package/src/domain/search/i_search_repository.dart';
 
-class SearchService extends ISearchService {
-  SearchService(Dio dio) : super(dio);
+class BaseSearchRepository extends ISearchRepository {
+  BaseSearchRepository(Dio dio) : super(dio);
 
   @override
   Future<Either<RequestFailure, List<String>>> searchPackage(
@@ -42,7 +42,7 @@ class SearchService extends ISearchService {
         return left(RequestFailure.serverError());
       }
 
-      if (e.response == null ||  e.response!.statusCode == 500) {
+      if (e.response == null || e.response!.statusCode == 500) {
         return Left(RequestFailure.serverError());
       }
 

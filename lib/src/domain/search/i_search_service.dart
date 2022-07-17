@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_package/src/domain/core/api_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 
-abstract class ISearchService extends ApiService {
-  ISearchService(Dio dio) : super(dio);
+import 'i_search_repository.dart';
 
-  final String path = '/search';
+abstract class ISearchService {
+  ISearchService(this.repository);
+
+  final ISearchRepository repository;
 
   /// [searchPackage] Method responsible for searching packages
   /// This returns list of package names when the request is successful
@@ -14,3 +14,5 @@ abstract class ISearchService extends ApiService {
   Future<Either<RequestFailure, List<String>>> searchPackage(
       {required int page, required String query});
 }
+
+
