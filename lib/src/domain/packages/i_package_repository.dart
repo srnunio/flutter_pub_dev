@@ -4,12 +4,10 @@ import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
 import 'package:flutter_package/src/domain/packages/i_package_service.dart';
 
-import 'entities/score.dart';
+abstract class IPackageService {
+  IPackageService(this.repository);
 
-abstract class IPackageRepository {
-  IPackageRepository(this.service) : assert(service != null);
-
-  final IPackageService service;
+  final IPackageRepository repository;
 
   /// [getPackages] method responsible for listing the packages
   /// This returns a list of packets [List<Package>] when the request is successful

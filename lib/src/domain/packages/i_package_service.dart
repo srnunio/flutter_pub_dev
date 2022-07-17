@@ -3,12 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/api_service.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-
 import 'entities/metric.dart';
-import 'entities/score.dart';
 
-abstract class IPackageService extends ApiService {
-  IPackageService(Dio dio) : super(dio);
+abstract class IPackageRepository extends ApiService {
+  IPackageRepository(Dio dio) : super(dio);
 
   final String path = '/packages';
 

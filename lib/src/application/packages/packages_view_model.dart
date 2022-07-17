@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
@@ -10,9 +9,9 @@ part 'packages_view_model.g.dart';
 class PackagesViewModel = _PackagesViewModel with _$PackagesViewModel;
 
 abstract class _PackagesViewModel extends BaseViewModel with Store {
-  _PackagesViewModel(this._repository) : assert(_repository != null);
+  _PackagesViewModel(this._service);
 
-  final IPackageRepository _repository;
+  final IPackageService _service;
 
   int _page = 1;
 
@@ -56,7 +55,7 @@ abstract class _PackagesViewModel extends BaseViewModel with Store {
 
     failure = null;
 
-    final _response = await _repository.getPackages(page: _page);
+    final _response = await _service.getPackages(page: _page);
 
     setBusy(false);
 

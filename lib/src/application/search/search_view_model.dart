@@ -1,6 +1,6 @@
 import 'package:flutter_package/src/application/core/base_view_model.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-import 'package:flutter_package/src/domain/search/i_search_repository.dart';
+import 'package:flutter_package/src/domain/search/i_search_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'search_view_model.g.dart';
@@ -8,9 +8,9 @@ part 'search_view_model.g.dart';
 class SearchViewModel = _SearchViewModel with _$SearchViewModel;
 
 abstract class _SearchViewModel extends BaseViewModel with Store {
-  _SearchViewModel(this._repository) : assert(_repository != null);
+  _SearchViewModel(this._service);
 
-  final ISearchRepository _repository;
+  final ISearchService _service;
 
   int _page = 1;
 
@@ -60,7 +60,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
     failure = null;
 
     final _response =
-        await _repository.searchPackage(page: _page, query: query);
+        await _service.searchPackage(page: _page, query: query);
 
     setBusy(false);
 
