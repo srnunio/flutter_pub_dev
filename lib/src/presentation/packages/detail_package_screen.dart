@@ -13,8 +13,6 @@ import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
-import 'package:flutter_package/src/domain/core/i_advanced_service.dart';
-import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
 import 'package:flutter_package/src/presentation/core/failure_message_view.dart';
@@ -110,8 +108,9 @@ class DetailPackageScreen extends StatefulWidget {
 
 class DetailPackageScreenState extends State<DetailPackageScreen>
     with SingleTickerProviderStateMixin {
-  DetailPackageViewModel _model = DetailPackageViewModel(
-      inject<IPackageRepository>(), inject<IAdvancedService>());
+  final DetailPackageViewModel _model = inject<DetailPackageViewModel>();
+
+
 
   /// open new package
   openDependency(String name) {
