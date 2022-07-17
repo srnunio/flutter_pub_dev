@@ -41,7 +41,7 @@ class PackagesScreenState extends State<PackagesScreen>
   String _message() {
     if (!_model.hasError) return '';
 
-    return _model.failure!.when<String>(
+    return _model.failure.when<String>(
         networkError: () => 'no_internet_access',
         empty: () => 'no_results_found',
         serverError: () => 'server_failure');

@@ -108,7 +108,7 @@ abstract class Mapper {
   /// [metricFromMap] parse map to metrics object
   static Metric metricFromMap(Map<String, dynamic> map) {
     var score = scoreFromMap(map['score']);
-    var derivedTags = map['scorecard']['derivedTags'] as List<dynamic>;
+    var derivedTags = map['score']['tags'] as List<dynamic>;
 
     var tags = derivedTags
         .map((tag) => tag
