@@ -11,12 +11,15 @@ import 'package:flutter_package/src/domain/search/i_search_service.dart';
 import 'package:flutter_package/src/infrastructure/core/data/default_config_preference.dart';
 import 'package:flutter_package/src/infrastructure/core/default_advanced_service.dart';
 import 'package:flutter_package/src/infrastructure/core/navigation/default_navigation_service.dart';
-import 'package:flutter_package/src/infrastructure/packages/package_repository.dart';
-import 'package:flutter_package/src/infrastructure/packages/package_service.dart';
-import 'package:flutter_package/src/infrastructure/search/search_repository.dart';
-import 'package:flutter_package/src/infrastructure/search/search_service.dart';
+import 'package:flutter_package/src/infrastructure/packages/base_package_service.dart';
+import 'package:flutter_package/src/infrastructure/search/base_search_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../application/packages/detail_package_view_model.dart';
+import '../application/packages/packages_view_model.dart';
+import '../application/search/search_view_model.dart';
+import '../infrastructure/packages/base_package_repository.dart';
+import '../infrastructure/search/base_search_service.dart';
 
 T inject<T extends Object>() => InjectorConfig.getInstance().get<T>();
 
@@ -24,9 +27,9 @@ final _injector = GetIt.instance;
 
 class InjectorConfig {
   InjectorConfig._(this._dio, this._preferences) {
-    registerServices();
     registerPreferences();
     registerRepositories();
+    registerServices();
     registerViewModels();
   }
 
@@ -43,8 +46,11 @@ class InjectorConfig {
     _injector.registerLazySingleton<NavigationService>(
         () => DefaultNavigationService(GlobalKey<NavigatorState>()));
 
-    _injector.registerFactory<IPackageService>(() => PackageService(_dio));
-    _injector.registerFactory<ISearchService>(() => SearchService(_dio));
+    _injector.registerFactory<IPackageService>(
+        () => BasePackageService(_injector.get<IPackageRepository>()));
+
+    _injector.registerFactory<ISearchService>(
+        () => BaseSearchService(_injector.get<ISearchRepository>()));
 
     _injector.registerFactory<IAdvancedService>(() => DefaultAdvancedService());
   }
@@ -55,15 +61,24 @@ class InjectorConfig {
   }
 
   void registerRepositories() {
-    _injector.registerFactory<IPackageRepository>(
-        () => PackageRepository(_injector.get<IPackageService>()));
+    _injector
+        .registerFactory<IPackageRepository>(() => BasePackageRepository(_dio));
 
-    _injector.registerFactory<ISearchRepository>(
-        () => SearchRepository(_injector.get<ISearchService>()));
+    _injector
+        .registerFactory<ISearchRepository>(() => BaseSearchRepository(_dio));
   }
 
   void registerViewModels() {
     _injector.registerLazySingleton(
         () => ConfigViewModel(_injector.get<ConfigDataPreference>()));
+
+    _injector.registerFactory(
+        () => SearchViewModel(_injector.get<ISearchService>()));
+
+    _injector.registerFactory(() => DetailPackageViewModel(
+        _injector.get<IPackageService>(), _injector.get<IAdvancedService>()));
+
+    _injector.registerFactory(
+        () => PackagesViewModel(_injector.get<IPackageService>()));
   }
 }
