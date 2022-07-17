@@ -16,6 +16,13 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
       (_$hasErrorComputed ??= Computed<bool>(() => super.hasError,
               name: '_PackagesViewModel.hasError'))
           .value;
+  Computed<RequestFailure>? _$failureComputed;
+
+  @override
+  RequestFailure get failure =>
+      (_$failureComputed ??= Computed<RequestFailure>(() => super.failure,
+              name: '_PackagesViewModel.failure'))
+          .value;
   Computed<List<Package>>? _$packagesComputed;
 
   @override
@@ -45,25 +52,25 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
     });
   }
 
-  final _$failureAtom = Atom(name: '_PackagesViewModel.failure');
+  final _$_failureAtom = Atom(name: '_PackagesViewModel._failure');
 
   @override
-  RequestFailure? get failure {
-    _$failureAtom.reportRead();
-    return super.failure;
+  RequestFailure? get _failure {
+    _$_failureAtom.reportRead();
+    return super._failure;
   }
 
   @override
-  set failure(RequestFailure? value) {
-    _$failureAtom.reportWrite(value, super.failure, () {
-      super.failure = value;
+  set _failure(RequestFailure? value) {
+    _$_failureAtom.reportWrite(value, super._failure, () {
+      super._failure = value;
     });
   }
 
   final _$loadAsyncAction = AsyncAction('_PackagesViewModel.load');
 
   @override
-  Future<void> load({bool refresh = false}) {
+  Future<bool> load({bool refresh = false}) {
     return _$loadAsyncAction.run(() => super.load(refresh: refresh));
   }
 
@@ -71,11 +78,11 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
       ActionController(name: '_PackagesViewModel');
 
   @override
-  void setData(List<Package> list, bool refresh) {
+  void _setData(List<Package> list, bool refresh) {
     final _$actionInfo = _$_PackagesViewModelActionController.startAction(
-        name: '_PackagesViewModel.setData');
+        name: '_PackagesViewModel._setData');
     try {
-      return super.setData(list, refresh);
+      return super._setData(list, refresh);
     } finally {
       _$_PackagesViewModelActionController.endAction(_$actionInfo);
     }
@@ -84,8 +91,8 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
   @override
   String toString() {
     return '''
-failure: ${failure},
 hasError: ${hasError},
+failure: ${failure},
 packages: ${packages},
 hasData: ${hasData}
     ''';
