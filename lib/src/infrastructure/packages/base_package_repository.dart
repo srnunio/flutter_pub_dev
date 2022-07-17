@@ -1,16 +1,14 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_package/src/domain/packages/entities/metric.dart';
 import 'package:flutter_package/src/domain/packages/entities/package.dart';
 import 'package:flutter_package/src/domain/core/request_failure.dart';
-import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/i_package_service.dart';
 import 'package:flutter_package/src/infrastructure/core/mapper.dart';
 
-class PackageService extends IPackageService {
-  PackageService(Dio dio) : super(dio);
+class BasePackageRepository extends IPackageRepository {
+  BasePackageRepository(Dio dio) : super(dio);
 
   @override
   Future<Either<RequestFailure, List<Package>>> getPackages(
