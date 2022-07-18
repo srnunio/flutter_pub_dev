@@ -14,7 +14,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.3/android">
       <excludeFolder url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.3/android/.gradle" />

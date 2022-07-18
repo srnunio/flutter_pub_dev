@@ -6,7 +6,7 @@ import 'package:flutter_package/src/domain/packages/i_package_repository.dart';
 import 'package:flutter_package/src/domain/packages/i_package_service.dart';
 
 class BasePackageService extends IPackageService {
-  BasePackageService(IPackageRepository service) : super(service);
+  BasePackageService(IPackageRepository repository) : super(repository);
 
   @override
   Future<Either<RequestFailure, Package>> getPackageName(

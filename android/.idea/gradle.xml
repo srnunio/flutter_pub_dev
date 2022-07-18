@@ -32,7 +32,6 @@
             <option value="$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-3.0.0/android" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
