@@ -59,12 +59,11 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
 
     failure = null;
 
-    final _response =
-        await _service.searchPackage(page: _page, query: query);
+    final _response = await _service.searchPackage(page: _page, query: query);
 
     setBusy(false);
 
-    onRefresh(value: false);
+    if (refresh) onRefresh(value: false);
 
     _response.fold(
       (failure) => this.failure = failure,
