@@ -6,7 +6,6 @@ import 'package:flutter_package/src/infrastructure/core/default_advanced_service
 import 'package:flutter_package/src/infrastructure/packages/base_package_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
 import '../../infrastructure/core/data/package_fake_data.dart';
 import '../../infrastructure/mocks.mocks.dart';
 
