@@ -101,7 +101,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
     setBusy(false);
 
-    onRefresh(value: false);
+    if (refresh) onRefresh(value: false);
 
     response.fold(
       (failure) => this.failure = failure,
