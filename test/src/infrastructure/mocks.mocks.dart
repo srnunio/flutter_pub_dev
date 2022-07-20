@@ -6,6 +6,8 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:dio/dio.dart' as _i2;
+import 'package:flutter_package/src/domain/core/i_advanced_service.dart'
+    as _i10;
 import 'package:flutter_package/src/domain/core/request_failure.dart' as _i6;
 import 'package:flutter_package/src/domain/packages/entities/metric.dart'
     as _i8;
@@ -109,6 +111,26 @@ class MockISearchRepository extends _i1.Mock implements _i9.ISearchRepository {
               Future<_i3.Either<_i6.RequestFailure, List<String>>>.value(
                   _FakeEither_1<_i6.RequestFailure, List<String>>())) as _i5
           .Future<_i3.Either<_i6.RequestFailure, List<String>>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [IAdvancedService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIAdvancedService extends _i1.Mock implements _i10.IAdvancedService {
+  MockIAdvancedService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.Either<_i6.RequestFailure, String>> getReadme(
+          {String? gitPath}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getReadme, [], {#gitPath: gitPath}),
+              returnValue: Future<_i3.Either<_i6.RequestFailure, String>>.value(
+                  _FakeEither_1<_i6.RequestFailure, String>()))
+          as _i5.Future<_i3.Either<_i6.RequestFailure, String>>);
   @override
   String toString() => super.toString();
 }
