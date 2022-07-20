@@ -9,7 +9,6 @@ import 'package:flutter_package/src/presentation/core/custom_refresh.dart';
 import 'package:flutter_package/src/presentation/core/dependency_item.dart';
 import 'package:flutter_package/src/presentation/core/tag.dart';
 import 'package:flutter_package/src/presentation/core/version_item.dart';
-import 'package:flutter_package/src/presentation/settings/config_builder.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
 import 'package:flutter_package/src/application/packages/detail_package_view_model.dart';
@@ -99,21 +98,25 @@ class _VerticalTitle extends BaseComponent {
 class DetailPackageScreen extends StatefulWidget {
   static const route = '/detail_package_screen';
   final String name;
+  final DetailPackageViewModel viewModel;
 
-  DetailPackageScreen(this.name);
+  DetailPackageScreen(this.name, this.viewModel);
 
   @override
   DetailPackageScreenState createState() => DetailPackageScreenState();
+
+  static Widget initialize({required String name}) {
+    return DetailPackageScreen(name, inject<DetailPackageViewModel>());
+  }
+
 }
 
 class DetailPackageScreenState extends State<DetailPackageScreen>
     with SingleTickerProviderStateMixin {
-  final DetailPackageViewModel _model = inject<DetailPackageViewModel>();
-
-
+  late DetailPackageViewModel _model;
 
   /// open new package
-  openDependency(String name) {
+  void openDependency(String name) {
     if (_model.isBusy) return;
     _model.navigateToPushNamed(
         routeName: DetailPackageScreen.route, arguments: name);
@@ -131,7 +134,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the score
-  _bodyScore() {
+  Widget _bodyScore() {
     return Container(
       padding: EdgeInsets.all(16.0),
       margin: EdgeInsets.only(top: 8.0),
@@ -166,7 +169,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the versions
-  _bodyVersions() {
+  Widget _bodyVersions() {
     if (_model.package.versions.isEmpty) return empty;
 
     return Container(
@@ -212,7 +215,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the readme
-  _bodyReadme(ThemeData themeData) {
+  Widget _bodyReadme() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(_model.loadingReadme ? 16.0 : 0.0),
@@ -255,9 +258,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         selectable: true,
                         shrinkWrap: true,
                         data: _model.readme,
-                        styleSheet: MarkdownStyleSheet.fromTheme(themeData),
+                        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
                         physics: NeverScrollableScrollPhysics(),
-                        // imageDirectory: 'https://raw.githubusercontent.com',
                         padding: EdgeInsets.all(16.0),
                         styleSheetTheme: MarkdownStyleSheetBaseTheme.platform,
                         extensionSet: md.ExtensionSet(
@@ -287,7 +289,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the dependencies
-  _bodyDependencies(
+  Widget _bodyDependencies(
       {required List<Dependency> dependencies, required String title}) {
     if (dependencies.isEmpty) return empty;
 
@@ -328,7 +330,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// responsible for viewing the environment
-  _bodyEnvironment() {
+  Widget _bodyEnvironment() {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: 8.0),
@@ -363,7 +365,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
-  _bodyTag() {
+  Widget _bodyTag() {
     if (!_model.metric.isNotEmpty) return empty;
 
     var tags = _model.metric.tags;
@@ -371,17 +373,16 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       height: 38.0,
       padding: EdgeInsets.all(8.0),
       decoration: decoration(
-        color: kPrimaryColor.withOpacity(.60),
-        borderRadius: kBorder
-      ),
+          color: kPrimaryColor.withOpacity(.60), borderRadius: kBorder),
       child: ListView.builder(
         itemBuilder: (context, index) {
           var separator = (index == 0) ? '' : '\t•\t';
           return Container(
-            child: Text('$separator${tags[index]}',style: styleText(
-              color: kBackgroundColor,
-              fontWeight: FontWeight.bold
-            ),),
+            child: Text(
+              '$separator${tags[index]}',
+              style: styleText(
+                  color: kBackgroundColor, fontWeight: FontWeight.bold),
+            ),
           );
         },
         itemCount: tags.length,
@@ -390,11 +391,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     );
   }
 
-  _bodyVersionSelected() {
+  Widget _bodyVersionSelected() {
     var isLastVersion =
         (_model.package.latest.version == _model.version.version);
 
     var timed = Timed.initialize(date: _model.version.date).time;
+    var title = '${_model.package.name}\t${_model.version.version}'.trim();
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -409,10 +411,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              if (_model.metric.isNullSafe )
-                Tag(value: 'null_safe'.translate),
-              if (_model.metric.isNullSafe)
-                horizontalSpaceSmall(),
+              if (_model.metric.isNullSafe) Tag(value: 'null_safe'.translate),
+              if (_model.metric.isNullSafe) horizontalSpaceSmall(),
               Text.rich(TextSpan(
                   text: '${'published'.translate}:',
                   style: styleText(
@@ -449,10 +449,12 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     )
                   ]),
               overflow: TextOverflow.fade,
-              maxLines: 1,),
+              maxLines: 1,
+            ),
           if (!isLastVersion) verticalSpaceSmall(),
           Text(
-            '${_model.package.name}\t${_model.version.version}',
+            title,
+            key: Key(title),
             style: styleText(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -470,7 +472,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   }
 
   /// viewing
-  _build(ThemeData theme) {
+  Widget _build() {
     if (_model.isBusy && !_model.hasData) {
       return Center(child: CustomProgress());
     }
@@ -495,6 +497,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       );
     }
     return SingleChildScrollView(
+      key: Key('SingleChildScrollView'),
       child: Container(
         margin: EdgeInsets.all(10.0),
         child: Column(
@@ -512,7 +515,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 dependencies: _model.dev_dependencies),
             _bodyVersions(),
             _bodyScore(),
-            _bodyReadme(theme)
+            _bodyReadme( )
           ],
         ),
       ),
@@ -522,41 +525,37 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   @override
   void initState() {
     super.initState();
+    _model = widget.viewModel;
     _model.load(widget.name);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return ConfigBuilder(builder: (_, theme) {
-        return Scaffold(
-          backgroundColor: kPlaceholderColor,
-          appBar: AppBar(
-            brightness: theme.brightness,
-            centerTitle: false,
-            actions: <Widget>[
-              if (_model.hasData && !_model.isBusy)
-                IconButton(
-                    icon: CustomIcon(
-                      icon: 'download',
-                      size: 20,
-                    ),
-                    onPressed: () =>
-                        Util.openLink(url: _model.package.latest.archive_url)),
-              if (_model.hasData && !_model.isBusy)
-                IconButton(
-                    icon: CustomIcon(
-                      icon: 'share',
-                      size: 20,
-                    ),
-                    onPressed: () =>
-                        Util.shareProject(package: _model.package)),
-              if (_model.hasData && !_model.isBusy) Builder(builder: (context) {
+      return Scaffold(
+        backgroundColor: kPlaceholderColor,
+        appBar: AppBar(
+          // brightness: theme.brightness,
+          centerTitle: false,
+          actions: <Widget>[
+            if (_model.hasData && !_model.isBusy)
+              IconButton(
+                  icon: CustomIcon(
+                    icon: 'download',
+                    size: 20,
+                  ),
+                  onPressed: () =>
+                      Util.openLink(url: _model.package.latest.archive_url)),
+            if (_model.hasData && !_model.isBusy)
+              IconButton(
+                  icon: CustomIcon(
+                    icon: 'share',
+                    size: 20,
+                  ),
+                  onPressed: () =>
+                      Util.shareProject(package: _model.package)),
+            if (_model.hasData && !_model.isBusy)
+              Builder(builder: (context) {
                 var _homePage = _model.package.latest.pubspec.homepage;
                 if (_homePage.isNotEmpty)
                   return IconButton(
@@ -564,28 +563,26 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         icon: 'github',
                         size: 20,
                       ),
-                      onPressed: () => Util.openLink(
-                          url: _homePage));
+                      onPressed: () => Util.openLink(url: _homePage));
                 return SizedBox.shrink();
               })
-            ],
-            elevation: 0.0,
-            title: Text(
-              widget.name,
-              style: styleText(
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
-            ),
+          ],
+          elevation: 0.0,
+          title: Text(
+            widget.name,
+            style: styleText(
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0),
           ),
-          body: CustomRefresh(
-            refresh: _model.refresh,
-            child: _build(theme),
-            enablePullUp: false,
-            onRefresh: () => _model.load(widget.name),
-          ),
-        );
-      });
+        ),
+        body: CustomRefresh(
+          refresh: _model.refresh,
+          child: _build(),
+          enablePullUp: false,
+          onRefresh: () => _model.load(widget.name),
+        ),
+      );
     });
   }
 }
