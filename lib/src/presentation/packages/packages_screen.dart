@@ -117,8 +117,8 @@ class PackagesScreenState extends State<PackagesScreen>
           itemCount: _model.packages.length,
           itemBuilder: (context, index) {
             var package = _model.packages[index];
-
             return Container(
+              key: Key(index.toString()),
               child: ItemPackage(
                 onTap: () async {
                   _model.navigateToPushNamed(
@@ -157,6 +157,8 @@ class PackagesScreenState extends State<PackagesScreen>
           centerTitle: false,
           actions: <Widget>[
             IconButton(
+                tooltip: 'search',
+                key: Key('search'),
                 icon: CustomIcon(icon: 'search'),
                 onPressed: () {
                   _model.navigateToPushNamed(routeName: SearchScreen.route);

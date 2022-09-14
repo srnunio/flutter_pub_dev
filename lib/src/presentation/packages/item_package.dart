@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -20,7 +19,8 @@ class ItemPackage extends StatelessWidget {
       {required this.package,
       required this.onLink,
       required this.onShare,
-      required this.onTap});
+      required this.onTap})
+      : super(key: Key(package.name));
 
   _build() {
     return Container(
