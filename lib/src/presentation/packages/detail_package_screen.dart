@@ -356,7 +356,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                             icon: 'info',
                             sizeIcon: 80,
                             message: 'error_readme'.translate,
-                            onTap: _model.loadReadme,
+                            onTap: _model.loadChangelog,
                           ))
                   ],
                 )
@@ -446,25 +446,23 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     if (!_model.metric.isNotEmpty) return empty;
 
     var tags = _model.metric.tags;
-    return Container(
-      height: 38.0,
-      padding: EdgeInsets.all(8.0),
-      decoration: decoration(
-          color: kPrimaryColor.withOpacity(.60), borderRadius: kBorder),
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          var separator = (index == 0) ? '' : '\t•\t';
-          return Container(
-            child: Text(
-              '$separator${tags[index]}',
-              style: styleText(
-                  color: kBackgroundColor, fontWeight: FontWeight.bold),
-            ),
-          );
-        },
-        itemCount: tags.length,
-        scrollDirection: Axis.horizontal,
-      ),
+
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      runSpacing: 8.0,
+      spacing: 8.0,
+      children: List.generate(tags.length, (index) {
+        return Container(
+          padding: EdgeInsets.all(8.0),
+          decoration: decoration(borderRadius: kBorder, color: kPrimaryColor),
+          constraints: BoxConstraints(minWidth: 60.0),
+          child: Text(
+            '${tags[index]}',
+            textAlign: TextAlign.center,
+            style: styleText(color: kTitleTextColor, fontSize: kSubtitleSize),
+          ),
+        );
+      }),
     );
   }
 
@@ -534,29 +532,6 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             ),
           if (!isLastVersion) verticalSpaceSmall(),
           Divider(),
-          Text.rich(
-            TextSpan(
-                text: '',
-                style: styleText(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0),
-                children: <InlineSpan>[
-                  TextSpan(
-                      text: '${'publisher'.translate}:',
-                      style: styleText(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0)),
-                  TextSpan(
-                    text: '\t$publisher',
-                    style: styleText(fontSize: 14.0),
-                  )
-                ]),
-            overflow: TextOverflow.fade,
-            maxLines: 1,
-          ),
-          Divider(),
           Text(
             title,
             key: Key(title),
@@ -564,6 +539,11 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               fontWeight: FontWeight.bold,
               fontSize: 24,
             ),
+          ),
+          Text(
+            publisher,
+            key: Key(publisher),
+            style: styleText(fontSize: 14.0, color: kSubtitleTextColor),
           ),
           verticalSpaceSmall(),
           Text(
@@ -649,7 +629,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           ),
           centerTitle: false,
           actions: <Widget>[
-            if (_model.hasData && !_model.isBusy)
+            if (_model.hasData)
               IconButton(
                   icon: CustomIcon(
                     icon: 'download',
@@ -657,14 +637,14 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   ),
                   onPressed: () =>
                       Util.openLink(url: _model.package.latest.archive_url)),
-            if (_model.hasData && !_model.isBusy)
+            if (_model.hasData)
               IconButton(
                   icon: CustomIcon(
                     icon: 'share',
                     size: 20,
                   ),
                   onPressed: () => Util.shareProject(package: _model.package)),
-            if (_model.hasData && !_model.isBusy)
+            if (_model.hasData)
               Builder(builder: (context) {
                 var _homePage = _model.package.latest.pubspec.homepage;
                 if (_homePage.isNotEmpty)
@@ -690,7 +670,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           refresh: _model.refresh,
           child: _build(),
           enablePullUp: false,
-          onRefresh: () => _model.load(widget.name),
+          onRefresh: () => _model.load(widget.name, refresh: true),
         ),
       );
     });
