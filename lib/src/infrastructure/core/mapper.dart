@@ -6,6 +6,8 @@ import 'package:flutter_package/src/domain/packages/entities/pubspec.dart';
 import 'package:flutter_package/src/domain/packages/entities/score.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
 
+import '../../utils/constants.dart';
+
 /// [Mapper] parsed values
 abstract class Mapper {
   /// [dependencyFromMap] parse map to dependency object
@@ -129,6 +131,12 @@ abstract class Mapper {
     if (index >= 0) tags.removeAt(index);
 
     tags.removeWhere((tag) => tag.trim().isEmpty);
+
+    tags.removeWhere((tag) =>
+        tagList.indexWhere((element) =>
+            tag.trim().toLowerCase() == element.trim().toLowerCase()) <
+        0);
+
     return Metric(
         tags: tags.toSet().toList(), isNullSafe: (index >= 0), score: score);
   }
