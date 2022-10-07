@@ -106,19 +106,21 @@ class PackagesScreenState extends State<PackagesScreen>
         );
       }
 
+      var length = _model.packages.length;
+      var packages = _model.packages;
+
       /// list results
       return CustomRefresh(
         refresh: _model.refresh,
-        child: StaggeredGridView.countBuilder(
-          controller: _controllerList,
-          crossAxisCount: 4,
+        child: StaggeredGrid.count(
+          key: ValueKey('StaggeredGridList'),
+          crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          itemCount: _model.packages.length,
-          itemBuilder: (context, index) {
-            var package = _model.packages[index];
+          children: List.generate(length, (index) {
+            var package = packages[index];
             return Container(
-              key: Key(index.toString()),
+              key: ValueKey('package_$index'),
               child: ItemPackage(
                 onTap: () async {
                   _model.navigateToPushNamed(
@@ -132,8 +134,7 @@ class PackagesScreenState extends State<PackagesScreen>
                 package: package,
               ),
             );
-          },
-          staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+          }),
         ),
         enablePullDown: true,
         onRefresh: () => _model.load(refresh: true),
