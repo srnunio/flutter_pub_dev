@@ -108,7 +108,6 @@ class DetailPackageScreen extends StatefulWidget {
   static Widget initialize({required String name}) {
     return DetailPackageScreen(name, inject<DetailPackageViewModel>());
   }
-
 }
 
 class DetailPackageScreenState extends State<DetailPackageScreen>
@@ -259,7 +258,8 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         selectable: true,
                         shrinkWrap: true,
                         data: _model.readme,
-                        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
+                        styleSheet:
+                            MarkdownStyleSheet.fromTheme(Theme.of(context)),
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.all(16.0),
                         styleSheetTheme: MarkdownStyleSheetBaseTheme.platform,
@@ -274,6 +274,82 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                         },
                       ),
                     if (!_model.hasReadme)
+                      Container(
+                          padding: EdgeInsets.all(16.0),
+                          child: FailureMessageView(
+                            icon: 'info',
+                            sizeIcon: 80,
+                            message: 'error_readme'.translate,
+                            onTap: _model.loadReadme,
+                          ))
+                  ],
+                )
+              ],
+            ),
+    );
+  }
+
+  /// responsible for viewing the changelog
+  Widget _bodyChangelog() {
+    return Container(
+      key: ValueKey('ChangelogKey'),
+      width: double.infinity,
+      padding: EdgeInsets.all(_model.loadingChangelog ? 16.0 : 0.0),
+      margin: EdgeInsets.only(top: 8.0),
+      decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
+      child: (_model.loadingChangelog)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  child: CustomProgress(),
+                  width: 20,
+                  height: 20,
+                )
+              ],
+            )
+          : ExpansionTile(
+              initiallyExpanded: true,
+              childrenPadding: EdgeInsets.all(0.0),
+              tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
+              title: Text(
+                'changelog'.translate,
+                style: styleText(
+                  fontWeight: FontWeight.bold,
+                  color: kTitleTextColor,
+                  fontSize: 18,
+                ),
+              ),
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    verticalSpaceSmall(),
+                    if (_model.hasChangelog)
+                      Markdown(
+                        selectable: true,
+                        shrinkWrap: true,
+                        data: _model.changelog,
+                        styleSheet:
+                            MarkdownStyleSheet.fromTheme(Theme.of(context)),
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(16.0),
+                        styleSheetTheme: MarkdownStyleSheetBaseTheme.platform,
+                        extensionSet: md.ExtensionSet(
+                            md.ExtensionSet.gitHubFlavored.blockSyntaxes, [
+                          md.EmojiSyntax(),
+                          ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
+                        ]),
+                        onTapLink: (text, href, title) {
+                          if (href == null) return;
+                          Util.openLink(url: href);
+                        },
+                      ),
+                    if (!_model.hasChangelog)
                       Container(
                           padding: EdgeInsets.all(16.0),
                           child: FailureMessageView(
@@ -398,6 +474,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
 
     var timed = Timed.initialize(date: _model.version.date).time;
     var title = '${_model.package.name}\t${_model.version.version}'.trim();
+    var publisher = _model.publisher;
+    publisher =
+        publisher.isNotEmpty ? publisher : 'publisher_not_found'.translate;
 
     return Container(
       key: ValueKey('BodyVersionSelectedKey'),
@@ -413,23 +492,23 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              if (_model.metric.isNullSafe) Tag(value: 'null_safe'.translate),
-              if (_model.metric.isNullSafe) horizontalSpaceSmall(),
-              Text.rich(TextSpan(
-                  text: '${'published'.translate}:',
-                  style: styleText(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0),
-                  children: <InlineSpan>[
+              Expanded(
+                  child: Text.rich(TextSpan(
+                      text: '${'published'.translate}:',
+                      style: styleText(
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0),
+                      children: <InlineSpan>[
                     TextSpan(
                       text: '\t$timed',
                       style: styleText(fontSize: 14.0),
                     )
-                  ])),
+                  ]))),
+              if (_model.metric.isNullSafe) Tag(value: 'null_safe'.translate),
+              // if (_model.metric.isNullSafe) horizontalSpaceSmall(),
             ],
           ),
-          if (!isLastVersion) verticalSpaceSmall(),
           if (!isLastVersion)
             Text.rich(
               TextSpan(
@@ -454,6 +533,30 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               maxLines: 1,
             ),
           if (!isLastVersion) verticalSpaceSmall(),
+          Divider(),
+          Text.rich(
+            TextSpan(
+                text: '',
+                style: styleText(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0),
+                children: <InlineSpan>[
+                  TextSpan(
+                      text: '${'publisher'.translate}:',
+                      style: styleText(
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0)),
+                  TextSpan(
+                    text: '\t$publisher',
+                    style: styleText(fontSize: 14.0),
+                  )
+                ]),
+            overflow: TextOverflow.fade,
+            maxLines: 1,
+          ),
+          Divider(),
           Text(
             title,
             key: Key(title),
@@ -519,7 +622,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 dependencies: _model.dev_dependencies),
             _bodyVersions(),
             _bodyScore(),
-            _bodyReadme( )
+            _bodyReadme(),
+            _bodyChangelog(),
+            verticalSpaceMedium()
           ],
         ),
       ),
@@ -539,7 +644,9 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return Scaffold(
         backgroundColor: kPlaceholderColor,
         appBar: AppBar(
-          leading: BackButton(key: ValueKey('BackButton'),),
+          leading: BackButton(
+            key: ValueKey('BackButton'),
+          ),
           centerTitle: false,
           actions: <Widget>[
             if (_model.hasData && !_model.isBusy)
@@ -556,8 +663,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     icon: 'share',
                     size: 20,
                   ),
-                  onPressed: () =>
-                      Util.shareProject(package: _model.package)),
+                  onPressed: () => Util.shareProject(package: _model.package)),
             if (_model.hasData && !_model.isBusy)
               Builder(builder: (context) {
                 var _homePage = _model.package.latest.pubspec.homepage;
