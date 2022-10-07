@@ -10,8 +10,8 @@ class BasePackageService extends IPackageService {
 
   @override
   Future<Either<RequestFailure, Package>> getPackageName(
-          {required String namePackage}) async =>
-      await repository.getPackageName(namePackage: namePackage);
+          {required String packageName}) async =>
+      await repository.getPackageName(packageName: packageName);
 
   @override
   Future<Either<RequestFailure, List<Package>>> getPackages(
@@ -22,4 +22,9 @@ class BasePackageService extends IPackageService {
   Future<Either<RequestFailure, Metric>> getMetricPackage(
           {required String package}) async =>
       await repository.getMetricPackage(package: package);
+
+  @override
+  Future<Either<RequestFailure, String>> getPublisher(
+          {required String packageName}) async =>
+      await repository.getPublisher(packageName: packageName);
 }

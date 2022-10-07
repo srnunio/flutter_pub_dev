@@ -17,11 +17,17 @@ abstract class IPackageRepository extends Api {
   Future<Either<RequestFailure, List<Package>>> getPackages(
       {required int page});
 
+  /// [getPublisher] get publisher of package [packageName]
+  /// This return String when the request is successful
+  /// and [RequestFailure] when the request is not successful
+  Future<Either<RequestFailure, String>> getPublisher(
+      {required String packageName});
+
   /// [getPackageName] This method searches for a package by name
   /// This return [Package] when the request is successful
   /// and [RequestFailure] when the request is not successful
   Future<Either<RequestFailure, Package>> getPackageName(
-      {required String namePackage});
+      {required String packageName});
 
   /// [getMetricPackage] This method gets the metrics of a package
   /// This return [Metric] when the request is successful
