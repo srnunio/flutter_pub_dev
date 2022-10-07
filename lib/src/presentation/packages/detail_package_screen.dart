@@ -217,6 +217,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
   /// responsible for viewing the readme
   Widget _bodyReadme() {
     return Container(
+      key: ValueKey('BodyReadmeKey'),
       width: double.infinity,
       padding: EdgeInsets.all(_model.loadingReadme ? 16.0 : 0.0),
       margin: EdgeInsets.only(top: 8.0),
@@ -399,6 +400,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     var title = '${_model.package.name}\t${_model.version.version}'.trim();
 
     return Container(
+      key: ValueKey('BodyVersionSelectedKey'),
       padding: EdgeInsets.all(16.0),
       decoration: decoration(borderRadius: 8.0, color: kBackgroundColor),
       child: Column(
@@ -478,6 +480,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     }
     if (_model.hasError && !_model.hasData) {
       return FailureMessageView(
+        key: ValueKey('FailureMessageViewFailure'),
         isColor: true,
         sizeIcon: 80,
         message: _message(),
@@ -488,6 +491,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
     }
     if (!_model.hasData) {
       return FailureMessageView(
+        key: ValueKey('FailureMessageViewNotFound'),
         isColor: true,
         sizeIcon: 80,
         message: _message(),
@@ -497,7 +501,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       );
     }
     return SingleChildScrollView(
-      key: Key('SingleChildScrollView'),
+      key: ValueKey('SingleChildScrollViewKey'),
       child: Container(
         margin: EdgeInsets.all(10.0),
         child: Column(
@@ -535,7 +539,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
       return Scaffold(
         backgroundColor: kPlaceholderColor,
         appBar: AppBar(
-          // brightness: theme.brightness,
+          leading: BackButton(key: ValueKey('BackButton'),),
           centerTitle: false,
           actions: <Widget>[
             if (_model.hasData && !_model.isBusy)

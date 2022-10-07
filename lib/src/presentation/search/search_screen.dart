@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen>
       return CustomRefresh(
         refresh: _model.refresh,
         child: ListView.builder(
-            key: Key('search-result'),
+            key: const ValueKey('search-result'),
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             itemCount: _model.results.length,
