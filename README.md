@@ -30,6 +30,10 @@ the https://pub.dartlang.org/api/
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
+```sh
+flutter test integration_test/app_test.dart 
+```
+
 ## Features
 
 - **List packages**
@@ -50,11 +54,15 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - [**Share link package**](https://pub.dev/packages)
 
 ## 📸 Screenshots
-![Home](./screenshots/smartmockups_klcem8w7.png)
-![Details1](./screenshots/smartmockups_klceoqtt.png)
-![Details2](./screenshots/smartmockups_klcesngj.png)
-![Search](./screenshots/smartmockups_klcen4ty.png)
 
+<table style="padding:10px">
+    <tr>
+    <td><img src="./screenshots/smartmockups_klcem8w7.png"  alt="1" width = 269px height = 556px ></td>
+    <td><img src="./screenshots/smartmockups_klceoqtt.png" align="right" alt="2" width = 269px height = 556px></td>
+    <td><img src="./screenshots/smartmockups_klcesngj.png" align="right" alt="2" width = 269px height = 556px></td>
+    <td><img src="./screenshots/smartmockups_klcen4ty.png" align="right" alt="2" width = 289px height = 556px></td>
+    </tr>
+</table>
 
 ###### If you have any features you want to see in this package, feel free to make a suggestion. 🎉
 
