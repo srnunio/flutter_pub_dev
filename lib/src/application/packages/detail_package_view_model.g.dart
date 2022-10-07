@@ -71,6 +71,20 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
       (_$readmeComputed ??= Computed<String>(() => super.readme,
               name: '_DetailPackageViewModel.readme'))
           .value;
+  Computed<String>? _$changelogComputed;
+
+  @override
+  String get changelog =>
+      (_$changelogComputed ??= Computed<String>(() => super.changelog,
+              name: '_DetailPackageViewModel.changelog'))
+          .value;
+  Computed<String>? _$publisherComputed;
+
+  @override
+  String get publisher =>
+      (_$publisherComputed ??= Computed<String>(() => super.publisher,
+              name: '_DetailPackageViewModel.publisher'))
+          .value;
   Computed<bool>? _$hasDataComputed;
 
   @override
@@ -84,6 +98,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
       (_$hasReadmeComputed ??= Computed<bool>(() => super.hasReadme,
               name: '_DetailPackageViewModel.hasReadme'))
           .value;
+  Computed<bool>? _$hasChangelogComputed;
+
+  @override
+  bool get hasChangelog =>
+      (_$hasChangelogComputed ??= Computed<bool>(() => super.hasChangelog,
+              name: '_DetailPackageViewModel.hasChangelog'))
+          .value;
   Computed<bool>? _$loadingReadmeComputed;
 
   @override
@@ -91,6 +112,13 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
       (_$loadingReadmeComputed ??= Computed<bool>(() => super.loadingReadme,
               name: '_DetailPackageViewModel.loadingReadme'))
           .value;
+  Computed<bool>? _$loadingChangelogComputed;
+
+  @override
+  bool get loadingChangelog => (_$loadingChangelogComputed ??= Computed<bool>(
+          () => super.loadingChangelog,
+          name: '_DetailPackageViewModel.loadingChangelog'))
+      .value;
 
   final _$_packageAtom = Atom(name: '_DetailPackageViewModel._package');
 
@@ -152,6 +180,36 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
+  final _$_publisherAtom = Atom(name: '_DetailPackageViewModel._publisher');
+
+  @override
+  String get _publisher {
+    _$_publisherAtom.reportRead();
+    return super._publisher;
+  }
+
+  @override
+  set _publisher(String value) {
+    _$_publisherAtom.reportWrite(value, super._publisher, () {
+      super._publisher = value;
+    });
+  }
+
+  final _$_changelogAtom = Atom(name: '_DetailPackageViewModel._changelog');
+
+  @override
+  String get _changelog {
+    _$_changelogAtom.reportRead();
+    return super._changelog;
+  }
+
+  @override
+  set _changelog(String value) {
+    _$_changelogAtom.reportWrite(value, super._changelog, () {
+      super._changelog = value;
+    });
+  }
+
   final _$_loadingReadmeAtom =
       Atom(name: '_DetailPackageViewModel._loadingReadme');
 
@@ -165,6 +223,22 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   set _loadingReadme(bool value) {
     _$_loadingReadmeAtom.reportWrite(value, super._loadingReadme, () {
       super._loadingReadme = value;
+    });
+  }
+
+  final _$_loadingChangelogAtom =
+      Atom(name: '_DetailPackageViewModel._loadingChangelog');
+
+  @override
+  bool get _loadingChangelog {
+    _$_loadingChangelogAtom.reportRead();
+    return super._loadingChangelog;
+  }
+
+  @override
+  set _loadingChangelog(bool value) {
+    _$_loadingChangelogAtom.reportWrite(value, super._loadingChangelog, () {
+      super._loadingChangelog = value;
     });
   }
 
@@ -186,9 +260,18 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   final _$loadAsyncAction = AsyncAction('_DetailPackageViewModel.load');
 
   @override
-  Future<void> load(String namePackage, {bool refresh = false}) {
+  Future<void> load(String packageName, {bool refresh = false}) {
     return _$loadAsyncAction
-        .run(() => super.load(namePackage, refresh: refresh));
+        .run(() => super.load(packageName, refresh: refresh));
+  }
+
+  final _$loadPublisherAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadPublisher');
+
+  @override
+  Future<void> loadPublisher(String namePackage) {
+    return _$loadPublisherAsyncAction
+        .run(() => super.loadPublisher(namePackage));
   }
 
   final _$loadReadmeAsyncAction =
@@ -197,6 +280,14 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   @override
   Future<void> loadReadme() {
     return _$loadReadmeAsyncAction.run(() => super.loadReadme());
+  }
+
+  final _$loadChangelogAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadChangelog');
+
+  @override
+  Future<void> loadChangelog() {
+    return _$loadChangelogAsyncAction.run(() => super.loadChangelog());
   }
 
   final _$loadScoreAsyncAction =
@@ -245,9 +336,13 @@ dependencies: ${dependencies},
 dev_dependencies: ${dev_dependencies},
 environment: ${environment},
 readme: ${readme},
+changelog: ${changelog},
+publisher: ${publisher},
 hasData: ${hasData},
 hasReadme: ${hasReadme},
-loadingReadme: ${loadingReadme}
+hasChangelog: ${hasChangelog},
+loadingReadme: ${loadingReadme},
+loadingChangelog: ${loadingChangelog}
     ''';
   }
 }

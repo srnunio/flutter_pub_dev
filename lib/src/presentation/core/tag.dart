@@ -14,7 +14,7 @@ class Tag extends BaseComponent {
       padding: EdgeInsets.all(4.0),
       constraints: BoxConstraints(minWidth: 40.0),
       decoration: decoration(
-          color: kPrimaryColor, borderRadius: kBorder),
+          color: kPrimaryColor, borderRadius: kBorder/2),
       child: Center(
         child: Text(
           value!,
