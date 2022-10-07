@@ -47,5 +47,8 @@
   "years": "Anos",
   "year": "Ano",
   "now": "Agora",
-  "null_safe": "Null-safe"
+  "null_safe": "Null-safe",
+  "changelog": "Changelog",
+  "publisher": "Editor",
+  "publisher_not_found": "Uploader não verificado"
 }
