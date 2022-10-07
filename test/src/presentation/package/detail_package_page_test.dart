@@ -42,6 +42,9 @@ void main() {
     when(repository.getMetricPackage(package: namePackage))
         .thenAnswer((_) async => Right(defaultMetric));
 
+    when(repository.getPublisher(packageName: namePackage))
+        .thenAnswer((_) async => Right('srnunio@default.com'));
+
     when(iAdvancedService.readFile(
             gitPath: defaultPackage.latest.pubspec.homepage,
             fileName: 'README.md'))
