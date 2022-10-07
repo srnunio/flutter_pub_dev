@@ -56,11 +56,16 @@ flutter test integration_test/app_test.dart
 ## 📸 Screenshots
 
 <table style="padding:10px">
+  <tr>
+    <td><img src="./screenshots/smartmockups_klcem8w7.png"  alt="1" width = 280px height = 556px ></td>
+    <td><img src="./screenshots/smartmockups_klceoqtt.png" align="right" alt="2" width = 280px height = 556px></td>
+  </tr>
+</table>
+
+<table style="padding:10px">
     <tr>
-    <td><img src="./screenshots/smartmockups_klcem8w7.png"  alt="1" width = 269px height = 556px ></td>
-    <td><img src="./screenshots/smartmockups_klceoqtt.png" align="right" alt="2" width = 269px height = 556px></td>
-    <td><img src="./screenshots/smartmockups_klcesngj.png" align="right" alt="2" width = 269px height = 556px></td>
-    <td><img src="./screenshots/smartmockups_klcen4ty.png" align="right" alt="2" width = 289px height = 556px></td>
+    <td><img src="./screenshots/smartmockups_klcesngj.png" align="right" alt="2" width = 280px height = 556px></td>
+    <td><img src="./screenshots/smartmockups_klcen4ty.png" align="right" alt="2" width = 280px height = 556px></td>
     </tr>
 </table>
 
