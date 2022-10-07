@@ -67,10 +67,18 @@ class MockIPackageRepository extends _i1.Mock
                   _FakeEither_1<_i6.RequestFailure, List<_i7.Package>>()))
           as _i5.Future<_i3.Either<_i6.RequestFailure, List<_i7.Package>>>);
   @override
-  _i5.Future<_i3.Either<_i6.RequestFailure, _i7.Package>> getPackageName(
-          {String? namePackage}) =>
+  _i5.Future<_i3.Either<_i6.RequestFailure, String>> getPublisher(
+          {String? packageName}) =>
       (super.noSuchMethod(
-          Invocation.method(#getPackageName, [], {#namePackage: namePackage}),
+              Invocation.method(#getPublisher, [], {#packageName: packageName}),
+              returnValue: Future<_i3.Either<_i6.RequestFailure, String>>.value(
+                  _FakeEither_1<_i6.RequestFailure, String>()))
+          as _i5.Future<_i3.Either<_i6.RequestFailure, String>>);
+  @override
+  _i5.Future<_i3.Either<_i6.RequestFailure, _i7.Package>> getPackageName(
+          {String? packageName}) =>
+      (super.noSuchMethod(
+          Invocation.method(#getPackageName, [], {#packageName: packageName}),
           returnValue:
               Future<_i3.Either<_i6.RequestFailure, _i7.Package>>.value(
                   _FakeEither_1<_i6.RequestFailure, _i7.Package>())) as _i5
@@ -124,10 +132,11 @@ class MockIAdvancedService extends _i1.Mock implements _i10.IAdvancedService {
   }
 
   @override
-  _i5.Future<_i3.Either<_i6.RequestFailure, String>> getReadme(
-          {String? gitPath}) =>
+  _i5.Future<_i3.Either<_i6.RequestFailure, String>> readFile(
+          {String? gitPath, String? fileName}) =>
       (super.noSuchMethod(
-              Invocation.method(#getReadme, [], {#gitPath: gitPath}),
+              Invocation.method(
+                  #readFile, [], {#gitPath: gitPath, #fileName: fileName}),
               returnValue: Future<_i3.Either<_i6.RequestFailure, String>>.value(
                   _FakeEither_1<_i6.RequestFailure, String>()))
           as _i5.Future<_i3.Either<_i6.RequestFailure, String>>);

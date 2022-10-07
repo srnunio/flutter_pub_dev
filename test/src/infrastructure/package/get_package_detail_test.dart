@@ -20,19 +20,19 @@ void main() {
   });
 
   test('when get package detail is successfully', () async {
-    when(mockIPackageRepository.getPackageName(namePackage: namePackage))
+    when(mockIPackageRepository.getPackageName(packageName: namePackage))
         .thenAnswer((_) async => Right(defaultPackage));
 
-    var result = await iPackageService.getPackageName(namePackage: namePackage);
+    var result = await iPackageService.getPackageName(packageName: namePackage);
 
     expect(result, equals(Right(defaultPackage)));
   });
 
   test('when get package detail has failure', () async {
-    when(mockIPackageRepository.getPackageName(namePackage: namePackage))
+    when(mockIPackageRepository.getPackageName(packageName: namePackage))
         .thenAnswer((_) async => Left(RequestFailure.serverError()));
 
-    var result = await iPackageService.getPackageName(namePackage: namePackage);
+    var result = await iPackageService.getPackageName(packageName: namePackage);
 
     expect(result, equals(Left(RequestFailure.serverError())));
   });

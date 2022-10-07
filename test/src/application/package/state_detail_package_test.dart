@@ -25,7 +25,7 @@ void main() {
 
   test('change state when get package is successfully', () async {
     var name = 'avatar_letter';
-    when(repository.getPackageName(namePackage: name))
+    when(repository.getPackageName(packageName: name))
         .thenAnswer((_) async => Right(defaultPackage));
 
     when(repository.getMetricPackage(package: name))
@@ -42,7 +42,7 @@ void main() {
 
   test('change state when get package has fail', () async {
     var name = 'avatar_letter';
-    when(repository.getPackageName(namePackage: name))
+    when(repository.getPackageName(packageName: name))
         .thenAnswer((_) async => Left(RequestFailure.empty()));
 
     when(repository.getMetricPackage(package: name))

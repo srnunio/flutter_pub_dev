@@ -36,14 +36,20 @@ void main() {
   }
 
   testWidgets('test has data for detail', (tester) async {
-    when(repository.getPackageName(namePackage: namePackage))
+    when(repository.getPackageName(packageName: namePackage))
         .thenAnswer((_) async => Right(defaultPackage));
 
     when(repository.getMetricPackage(package: namePackage))
         .thenAnswer((_) async => Right(defaultMetric));
 
-    when(iAdvancedService.getReadme(
-            gitPath: defaultPackage.latest.pubspec.homepage))
+    when(iAdvancedService.readFile(
+            gitPath: defaultPackage.latest.pubspec.homepage,
+            fileName: 'README.md'))
+        .thenAnswer((_) async => Right(defaultReadme));
+
+    when(iAdvancedService.readFile(
+            gitPath: defaultPackage.latest.pubspec.homepage,
+            fileName: 'CHANGELOG.md'))
         .thenAnswer((_) async => Right(defaultReadme));
 
     await tester.pumpWidget(createWidgetForTest());
