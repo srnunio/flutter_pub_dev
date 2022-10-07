@@ -30,6 +30,7 @@ the https://pub.dartlang.org/api/
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
+> Before that, use this command line to run automated tests
 ```sh
 flutter test integration_test/app_test.dart 
 ```
@@ -41,6 +42,7 @@ flutter test integration_test/app_test.dart
 - **Package details**
     - name package
     - description for package
+    - publisher
     - versions
     - scores
     - readme
@@ -55,19 +57,13 @@ flutter test integration_test/app_test.dart
 
 ## 📸 Screenshots
 
-<table style="padding:10px">
-  <tr>
-    <td><img src="./screenshots/smartmockups_klcem8w7.png"  alt="1" width = 280px height = 556px ></td>
-    <td><img src="./screenshots/smartmockups_klceoqtt.png" align="right" alt="2" width = 280px height = 556px></td>
-  </tr>
-</table>
+<p float="left">
 
-<table style="padding:10px">
-    <tr>
-    <td><img src="./screenshots/smartmockups_klcesngj.png" align="right" alt="2" width = 280px height = 556px></td>
-    <td><img src="./screenshots/smartmockups_klcen4ty.png" align="right" alt="2" width = 280px height = 556px></td>
-    </tr>
-</table>
+  <img src="./screenshots/smartmockups_klcem8w7.png" width=400 />
+  <img src="./screenshots/smartmockups_klceoqtt.png" width=400 />
+  <img src="./screenshots/smartmockups_klcesngj.png" width=400 /> 
+</p>
+ 
 
 ###### If you have any features you want to see in this package, feel free to make a suggestion. 🎉
 
