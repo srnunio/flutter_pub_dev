@@ -311,7 +311,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
               ],
             )
           : ExpansionTile(
-              initiallyExpanded: true,
+              initiallyExpanded: false,
               childrenPadding: EdgeInsets.all(0.0),
               tilePadding: EdgeInsets.only(left: 16.0, right: 16.0),
               title: Text(
@@ -459,7 +459,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           child: Text(
             '${tags[index]}',
             textAlign: TextAlign.center,
-            style: styleText(color: kTitleTextColor, fontSize: kSubtitleSize),
+            style: styleText(color: Colors.white, fontSize: kSubtitleSize),
           ),
         );
       }),
@@ -593,17 +593,17 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _bodyVersionSelected(),
-            _bodyEnvironment(),
+            _bodyScore(),
+            _bodyReadme(),
+            _bodyChangelog(),
             _bodyDependencies(
                 title: 'dependencies'.translate,
                 dependencies: _model.dependencies),
             _bodyDependencies(
                 title: 'dev_dependencies'.translate,
                 dependencies: _model.dev_dependencies),
+            _bodyEnvironment(),
             _bodyVersions(),
-            _bodyScore(),
-            _bodyReadme(),
-            _bodyChangelog(),
             verticalSpaceMedium()
           ],
         ),
