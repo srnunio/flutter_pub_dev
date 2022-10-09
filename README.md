@@ -1,7 +1,7 @@
 # pub.dev (mobile)
 
 ![Badge](https://img.shields.io/static/v1?label=playstore&message=v0.0.10&color=blue&?style=flat) ![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=green&?style=flat) ![Badge](https://img.shields.io/static/v1?label=android&message=4.1&color=darkgreen&?style=flat) ![Badge](https://img.shields.io/static/v1?label=iOS&message=15.5&color=orange&?style=flat) ![Badge](https://img.shields.io/static/v1?label=status&message=completed&color=green&?style=flat)
-
+ 
 <p float="left;padding=10px">
 <a href="https://apps.apple.com/app/pub.dev/id1526026915"><img src="./apple.png" width="270" height="100"> </a> 
 <a href="https://play.google.com/store/apps/details?id=nunioz.app.pub_dev"><img src="./google-play.png" width="270" height="100"> </a> 
