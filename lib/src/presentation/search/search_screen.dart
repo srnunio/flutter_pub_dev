@@ -17,10 +17,10 @@ class SearchScreen extends StatefulWidget {
   static const route = '/search_screen';
 
   @override
-  SearchScreenState createState() => SearchScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class SearchScreenState extends State<SearchScreen>
+class _SearchScreenState extends State<SearchScreen>
     with SingleTickerProviderStateMixin {
   final SearchViewModel _model = inject<SearchViewModel>();
 
@@ -39,7 +39,7 @@ class SearchScreenState extends State<SearchScreen>
           serverError: () => 'server_failure');
 
   /// viewing
-  _build() {
+  Widget _build() {
     return Observer(builder: (_) {
       /// when loading and data empty
       if (_model.isBusy && !_model.hasData)
@@ -69,6 +69,7 @@ class SearchScreenState extends State<SearchScreen>
       return CustomRefresh(
         refresh: _model.refresh,
         child: ListView.builder(
+            key: const ValueKey('search-result'),
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             itemCount: _model.results.length,
@@ -96,6 +97,9 @@ class SearchScreenState extends State<SearchScreen>
     setState(() => _query = newQuery);
   }
 
+  void onSubmitted(String value) =>
+      _model.load(query: value, refresh: _model.hasData);
+
   /// search field
   _bodyField() {
     var hintText = I18n.text('search_desc');
@@ -108,9 +112,7 @@ class SearchScreenState extends State<SearchScreen>
         children: [
           Expanded(
               child: TextField(
-            onSubmitted: (value) {
-              _model.load(query: value, refresh: _model.hasData);
-            },
+            onSubmitted: onSubmitted,
             textInputAction: TextInputAction.search,
             controller: _editingController,
             autofocus: true,
@@ -141,16 +143,6 @@ class SearchScreenState extends State<SearchScreen>
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ConfigBuilder(builder: (_, theme) {
       return Scaffold(
@@ -164,7 +156,9 @@ class SearchScreenState extends State<SearchScreen>
               automaticallyImplyLeading: false,
               title: _bodyField(),
             )),
-        body: _build(),
+        body: Container(
+          child: _build(),
+        ),
       );
     });
   }

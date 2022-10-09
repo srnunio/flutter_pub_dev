@@ -36,7 +36,16 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   String _readme = '';
 
   @observable
+  String _publisher = '';
+
+  @observable
+  String _changelog = '';
+
+  @observable
   bool _loadingReadme = false;
+
+  @observable
+  bool _loadingChangelog = false;
 
   @observable
   RequestFailure? failure = null;
@@ -69,18 +78,28 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   String get readme => _readme;
 
   @computed
+  String get changelog => _changelog;
+
+  @computed
+  String get publisher => _publisher;
+
+  @computed
   bool get hasData => _package != null;
 
   @computed
-  bool get hasReadme => (_readme != null && _readme.isNotEmpty);
+  bool get hasReadme => (_readme.isNotEmpty);
+
+  @computed
+  bool get hasChangelog => (_changelog.isNotEmpty);
 
   @computed
   bool get loadingReadme => _loadingReadme;
 
+  @computed
+  bool get loadingChangelog => _loadingChangelog;
+
   @action
-  void setPackage(Package package) {
-    this._package = package;
-  }
+  void setPackage(Package package) => this._package = package;
 
   @action
   void setVersion(Version version) {
@@ -88,7 +107,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   }
 
   @action
-  Future<void> load(String namePackage, {bool refresh = false}) async {
+  Future<void> load(String packageName, {bool refresh = false}) async {
     if (isBusy) return;
 
     if (refresh) onRefresh(value: refresh);
@@ -97,31 +116,55 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
 
     failure = null;
 
-    final response = await _service.getPackageName(namePackage: namePackage);
+    final response = await _service.getPackageName(packageName: packageName);
 
     setBusy(false);
 
-    onRefresh(value: false);
+    if (refresh) onRefresh(value: false);
 
     response.fold(
       (failure) => this.failure = failure,
       (data) {
         setPackage(data);
         setVersion(data.latest);
+        loadPublisher(packageName);
         loadReadme();
+        loadChangelog();
         loadScore();
       },
     );
   }
 
   @action
+  Future<void> loadPublisher(String namePackage) async {
+    final response = await _service.getPublisher(packageName: namePackage);
+
+    setBusy(false);
+
+    response.fold(
+      (failure) => this.failure = failure,
+      (data) => _publisher = data,
+    );
+  }
+
+  @action
   Future<void> loadReadme() async {
     _loadingReadme = true;
-    var response = await _advancedService.getReadme(
-        gitPath: package.latest.pubspec.homepage);
+    var response = await _advancedService.readFile(
+        gitPath: package.latest.pubspec.homepage, fileName: 'README.md');
     _loadingReadme = false;
     response.fold(
         (failure) => this._readme = '', (data) => this._readme = data);
+  }
+
+  @action
+  Future<void> loadChangelog() async {
+    _loadingChangelog = true;
+    var response = await _advancedService.readFile(
+        gitPath: package.latest.pubspec.homepage, fileName: 'CHANGELOG.md');
+    _loadingChangelog = false;
+    response.fold(
+        (failure) => this._changelog = '', (data) => this._changelog = data);
   }
 
   @action

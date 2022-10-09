@@ -1,7 +1,7 @@
 # pub.dev (mobile)
 
-![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=green&?style=flat) ![Badge](https://img.shields.io/static/v1?label=android&message=4.1&color=darkgreen&?style=flat) ![Badge](https://img.shields.io/static/v1?label=iOS&message=15.0&color=orange&?style=flat) ![Badge](https://img.shields.io/static/v1?label=status&message=completed&color=green&?style=flat)
-
+![Badge](https://img.shields.io/static/v1?label=playstore&message=v0.0.10&color=blue&?style=flat) ![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=green&?style=flat) ![Badge](https://img.shields.io/static/v1?label=android&message=4.1&color=darkgreen&?style=flat) ![Badge](https://img.shields.io/static/v1?label=iOS&message=15.5&color=orange&?style=flat) ![Badge](https://img.shields.io/static/v1?label=status&message=completed&color=green&?style=flat)
+ 
 <p float="left;padding=10px">
 <a href="https://apps.apple.com/app/pub.dev/id1526026915"><img src="./apple.png" width="270" height="100"> </a> 
 <a href="https://play.google.com/store/apps/details?id=nunioz.app.pub_dev"><img src="./google-play.png" width="270" height="100"> </a> 
@@ -30,6 +30,11 @@ the https://pub.dartlang.org/api/
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
+> Before that, use this command line to run automated tests
+```sh
+flutter test integration_test/app_test.dart 
+```
+
 ## Features
 
 - **List packages**
@@ -37,6 +42,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - **Package details**
     - name package
     - description for package
+    - publisher
     - versions
     - scores
     - readme
@@ -50,11 +56,14 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - [**Share link package**](https://pub.dev/packages)
 
 ## 📸 Screenshots
-![Home](./screenshots/smartmockups_klcem8w7.png)
-![Details1](./screenshots/smartmockups_klceoqtt.png)
-![Details2](./screenshots/smartmockups_klcesngj.png)
-![Search](./screenshots/smartmockups_klcen4ty.png)
 
+<p float="left">
+
+  <img src="./screenshots/smartmockups_klcem8w7.png" width=400 />
+  <img src="./screenshots/smartmockups_klceoqtt.png" width=400 />
+  <img src="./screenshots/smartmockups_klcesngj.png" width=400 /> 
+</p>
+ 
 
 ###### If you have any features you want to see in this package, feel free to make a suggestion. 🎉
 

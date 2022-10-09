@@ -21,6 +21,7 @@ class FailureMessageView extends BaseComponent {
 
   FailureMessageView(
       {required String message,
+      Key? key,
       this.onTap,
       this.textButton = 'try_again',
       this.icon,
@@ -28,7 +29,7 @@ class FailureMessageView extends BaseComponent {
       this.button,
       this.isColor = false,
       this.sizeIcon = 50.0})
-      : super(value: message);
+      : super(value: message,key: key);
 
   Center _center({required Widget child}) {
     return Center(

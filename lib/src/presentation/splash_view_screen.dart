@@ -39,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
               systemNavigationBarColor: kBackgroundColor,
               statusBarIconBrightness: theme.brightness),
           child: Container(
+            key: Key('dartlogo'),
             color: kBackgroundColor,
             child: Column(
               mainAxisSize: MainAxisSize.max,

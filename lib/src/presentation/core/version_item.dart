@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
+import 'package:flutter_package/src/utils/size.dart';
 
 class VersionItem extends StatelessWidget {
   final Version version;
@@ -14,10 +15,12 @@ class VersionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
+    return Container(
         padding: EdgeInsets.zero,
-        backgroundColor: selected ? kPrimaryColor : kPlaceholderColor,
-        label: InkWell(
+        decoration: decoration(
+            color: selected ? kPrimaryColor : kPlaceholderColor,
+            borderRadius: kBorder),
+        child: InkWell(
           onTap: onTap,
           child: Container(
             constraints: BoxConstraints(maxWidth: 100.0),

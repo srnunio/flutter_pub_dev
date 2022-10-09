@@ -5,7 +5,8 @@ import 'package:flutter_package/src/infrastructure/core/network_builder.dart';
 
 class DefaultAdvancedService extends IAdvancedService {
   @override
-  Future<Either<RequestFailure, String>> getReadme({String? gitPath}) async {
+  Future<Either<RequestFailure, String>> readFile(
+      {String? gitPath, String? fileName}) async {
     if (gitPath == null || gitPath.isEmpty)
       return Left(RequestFailure.serverError());
 
@@ -14,7 +15,7 @@ class DefaultAdvancedService extends IAdvancedService {
         .replaceAll('https://', '')
         .replaceAll('tree/', '')
         .replaceAll('master/', '');
-    var url = 'https://raw.githubusercontent.com/$gitPath/master/README.md';
+    var url = 'https://raw.githubusercontent.com/$gitPath/master/$fileName';
 
     var network = NetworkBuilder();
     var dio = network.build();

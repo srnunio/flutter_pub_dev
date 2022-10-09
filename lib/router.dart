@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/packages/packages_screen.dart';
@@ -21,20 +23,31 @@ class AnimationRouterPager extends MaterialPageRoute {
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    Widget page;
+
     switch (settings.name) {
       case '/':
-        return AnimationRouterPager(builder: (_) => SplashScreen());
+        page = SplashScreen();
+        break;
       case PackagesScreen.route:
-        return AnimationRouterPager(builder: (_) => PackagesScreen());
+        page = PackagesScreen();
+        break;
       case DetailPackageScreen.route:
         var name = settings.arguments as String;
-        return AnimationRouterPager(builder: (_) => DetailPackageScreen(name));
+        page = DetailPackageScreen.initialize(name: name);
+        break;
       case SettingScreen.route:
-        return AnimationRouterPager(builder: (_) => SettingScreen());
+        page = SettingScreen();
+        break;
       case SearchScreen.route:
-        return AnimationRouterPager(builder: (_) => SearchScreen());
+        page = SearchScreen();
+        break;
       default:
-        return AnimationRouterPager(builder: (_) => SplashScreen());
+        page = SplashScreen();
+        break;
     }
+    return Platform.isIOS
+        ? CupertinoPageRoute(builder: (context) => page)
+        : AnimationRouterPager(builder: (_) => page);
   }
 }
