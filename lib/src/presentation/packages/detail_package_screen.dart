@@ -601,7 +601,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                 dependencies: _model.dependencies),
             _bodyDependencies(
                 title: 'dev_dependencies'.translate,
-                dependencies: _model.dev_dependencies),
+                dependencies: _model.devDependencies),
             _bodyEnvironment(),
             _bodyVersions(),
             verticalSpaceMedium()
@@ -636,7 +636,7 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                     size: 20,
                   ),
                   onPressed: () =>
-                      Util.openLink(url: _model.package.latest.archive_url)),
+                      Util.openLink(url: _model.package.latest.archiveUrl)),
             if (_model.hasData)
               IconButton(
                   icon: CustomIcon(

@@ -1,4 +1,3 @@
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 const String host = 'pub.dartlang.org';
@@ -15,11 +14,6 @@ class NetworkBuilder {
   Dio build() {
     final dio = Dio();
     dio.options.baseUrl = (_baseUrl.isEmpty) ? apiBaseUrl : _baseUrl;
-    final defaultClient = DefaultHttpClientAdapter();
-    defaultClient.onHttpClientCreate = (httpClient) {
-      httpClient.badCertificateCallback = (_, host, __) => host == apiBaseUrl;
-    };
-    dio.httpClientAdapter = defaultClient;
     return dio;
   }
 }

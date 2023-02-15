@@ -48,7 +48,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   bool _loadingChangelog = false;
 
   @observable
-  RequestFailure? failure = null;
+  RequestFailure? failure;
 
   @computed
   bool get hasError => failure != null;
@@ -69,7 +69,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   List<Dependency> get dependencies => _version!.pubspec.dependencies;
 
   @computed
-  List<Dependency> get dev_dependencies => _version!.pubspec.dev_dependencies;
+  List<Dependency> get devDependencies => _version!.pubspec.devDependencies;
 
   @computed
   Environment get environment => _version!.pubspec.environment;

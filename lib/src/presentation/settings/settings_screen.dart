@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_package/src/application/settings/config_view_model.dart';
 import 'package:flutter_package/src/injection/injection_config.dart';
@@ -14,7 +12,6 @@ import 'package:flutter_package/src/presentation/core/svg_icon.dart';
 import 'package:flutter_package/src/utils/util.dart';
 import 'package:flutter_package/src/l18n.dart';
 import '../../utils/constants.dart';
-import '../../utils/size.dart';
 
 class SettingScreen extends StatefulWidget {
   static const route = '/settings_screen';
@@ -215,8 +212,8 @@ class _SettingState extends State<SettingScreen>
               child: Scaffold(
             appBar: AppBar(
               elevation: 0.0,
-              brightness: theme.brightness,
-              backgroundColor: theme.backgroundColor,
+              systemOverlayStyle: theme.appBarTheme.systemOverlayStyle,
+              backgroundColor: theme.appBarTheme.backgroundColor,
               title: Text(
                 'settings'.translate,
                 style: styleText(

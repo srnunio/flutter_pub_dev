@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/constants.dart';
 
@@ -7,10 +8,10 @@ Widget get empty => SizedBox();
 /// custom decoration
 BoxDecoration decoration(
     {Color? color,
-    BoxBorder? border,
-    double borderRadius = 0,
-    DecorationImage? image,
-    BoxShape shape = BoxShape.rectangle}) {
+      BoxBorder? border,
+      double borderRadius = 0,
+      DecorationImage? image,
+      BoxShape shape = BoxShape.rectangle}) {
   return BoxDecoration(
       image: image,
       color: (color == null) ? kPlaceholderColor : color,
@@ -45,30 +46,32 @@ ThemeData lightTheme() {
   kTitleTextColor = Colors.black;
   kSubtitleTextColor = Colors.black;
   return ThemeData(
-    brightness: Brightness.light,
     textTheme: TextTheme(
-      headline1: styleText(),
-      headline2: styleText(),
-      headline3: styleText(),
-      headline4: styleText(),
-      headline5: styleText(),
-      headline6: styleText(),
-      bodyText1: styleText(),
-      bodyText2: styleText(),
-      subtitle1: styleText(),
-      subtitle2: styleText(),
-      caption: styleText(),
+      displayLarge: styleText(),
+      displayMedium: styleText(),
+      displaySmall: styleText(),
+      headlineMedium: styleText(),
+      headlineSmall: styleText(),
+      titleLarge: styleText(),
+      bodyLarge: styleText(),
+      bodyMedium: styleText(),
+      titleMedium: styleText(),
+      titleSmall: styleText(),
+      bodySmall: styleText(),
     ).apply(bodyColor: kTitleTextColor, displayColor: kTitleTextColor),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: kBackgroundColor),
-    accentColor: kPrimaryColor,
+    colorScheme: ColorScheme.dark(
+      background: kBackgroundColor,
+      secondary: kBackgroundColor,
+      brightness: Brightness.light,
+    ),
     primaryColor: kPrimaryColor,
-    backgroundColor: kBackgroundColor,
     scaffoldBackgroundColor: kBackgroundColor,
     dialogBackgroundColor: kBackgroundColor,
     fontFamily: fontName,
     iconTheme: IconThemeData(color: kIconColor),
     appBarTheme: AppBarTheme(
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         color: kBackgroundColor,
         iconTheme: IconThemeData(color: kIconColor)),
   );
@@ -82,30 +85,32 @@ ThemeData darkTheme() {
   kTitleTextColor = Colors.white;
   kSubtitleTextColor = Colors.white;
   return ThemeData(
-    brightness: Brightness.dark,
     textTheme: TextTheme(
-      headline1: styleText(),
-      headline2: styleText(),
-      headline3: styleText(),
-      headline4: styleText(),
-      headline5: styleText(),
-      headline6: styleText(),
-      bodyText1: styleText(),
-      bodyText2: styleText(),
-      subtitle1: styleText(),
-      subtitle2: styleText(),
-      caption: styleText(),
+      displayLarge: styleText(),
+      displayMedium: styleText(),
+      displaySmall: styleText(),
+      headlineMedium: styleText(),
+      headlineSmall: styleText(),
+      titleLarge: styleText(),
+      bodyLarge: styleText(),
+      bodyMedium: styleText(),
+      titleMedium: styleText(),
+      titleSmall: styleText(),
+      bodySmall: styleText(),
     ).apply(bodyColor: kTitleTextColor, displayColor: kTitleTextColor),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: kBackgroundColor),
-    accentColor: kBackgroundColor,
+    colorScheme: ColorScheme.light(
+      secondary: kBackgroundColor,
+      background: kBackgroundColor,
+      brightness: Brightness.dark,
+    ),
     primaryColor: kPrimaryColor,
-    backgroundColor: kBackgroundColor,
     scaffoldBackgroundColor: kBackgroundColor,
     dialogBackgroundColor: kBackgroundColor,
     fontFamily: fontName,
     iconTheme: IconThemeData(color: kIconColor),
     appBarTheme: AppBarTheme(
-        brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         color: kBackgroundColor,
         iconTheme: IconThemeData(color: kIconColor)),
   );

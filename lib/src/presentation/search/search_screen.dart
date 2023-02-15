@@ -150,7 +150,7 @@ class _SearchScreenState extends State<SearchScreen>
             preferredSize: Size.fromHeight(55),
             child: AppBar(
               backgroundColor: kBackgroundColor,
-              brightness: theme.brightness,
+              systemOverlayStyle: theme.appBarTheme.systemOverlayStyle,
               elevation: 0,
               leading: BackButton(),
               automaticallyImplyLeading: false,

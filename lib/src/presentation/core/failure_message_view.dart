@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/styles.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -11,7 +10,7 @@ import 'base_widget.dart';
 class FailureMessageView extends BaseComponent {
   final String textButton;
   final Function()? onTap;
-  String? icon;
+  final String? icon;
   final double sizeIcon;
   final bool reference;
   final bool isColor;

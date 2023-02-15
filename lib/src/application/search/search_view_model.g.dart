@@ -6,7 +6,7 @@ part of 'search_view_model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SearchViewModel on _SearchViewModel, Store {
   Computed<bool>? _$hasErrorComputed;
@@ -30,7 +30,8 @@ mixin _$SearchViewModel on _SearchViewModel, Store {
           Computed<bool>(() => super.hasData, name: '_SearchViewModel.hasData'))
       .value;
 
-  final _$_resultsAtom = Atom(name: '_SearchViewModel._results');
+  late final _$_resultsAtom =
+      Atom(name: '_SearchViewModel._results', context: context);
 
   @override
   ObservableList<String> get _results {
@@ -45,7 +46,8 @@ mixin _$SearchViewModel on _SearchViewModel, Store {
     });
   }
 
-  final _$failureAtom = Atom(name: '_SearchViewModel.failure');
+  late final _$failureAtom =
+      Atom(name: '_SearchViewModel.failure', context: context);
 
   @override
   RequestFailure? get failure {
@@ -60,7 +62,8 @@ mixin _$SearchViewModel on _SearchViewModel, Store {
     });
   }
 
-  final _$loadAsyncAction = AsyncAction('_SearchViewModel.load');
+  late final _$loadAsyncAction =
+      AsyncAction('_SearchViewModel.load', context: context);
 
   @override
   Future<void> load({required String query, bool refresh = false}) {
@@ -68,8 +71,8 @@ mixin _$SearchViewModel on _SearchViewModel, Store {
         .run(() => super.load(query: query, refresh: refresh));
   }
 
-  final _$_SearchViewModelActionController =
-      ActionController(name: '_SearchViewModel');
+  late final _$_SearchViewModelActionController =
+      ActionController(name: '_SearchViewModel', context: context);
 
   @override
   void setData(List<String> list, bool refresh) {
