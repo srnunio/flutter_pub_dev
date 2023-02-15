@@ -27,7 +27,7 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
     await tester.pumpAndSettle();
 
-    var _find = await find.byWidgetPredicate((widget) =>
+    var _find = find.byWidgetPredicate((widget) =>
         widget.key != null && widget.key == ValueKey('search-result'));
     expect(_find, findsWidgets);
   });

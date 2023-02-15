@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'base_widget.dart';
 
 class CustomIcon extends BaseComponent {
-  double? size;
-  Color? color;
+  final double? size;
+  final Color? color;
   final isColor;
 
-  CustomIcon(
-      {this.size, this.color, required String icon, this.isColor = false})
-      : super(value: icon);
+  CustomIcon({this.size, this.color, required String icon, this.isColor = false}) : super(value: icon);
 
   @override
   Widget build(BuildContext context) {
-    size = size ?? 24;
-    color = (isColor) ? null : color ??  kIconColor;
+    final size = this.size ?? 24;
+    final color = (isColor) ? null : this.color;
     return SvgPicture.asset(
-      'assets/icons/${value}.svg',
+      'assets/icons/$value.svg',
+      colorFilter: ColorFilter.mode(color ?? kIconColor, BlendMode.srcIn),
       height: size,
       width: size,
-      color: color,
     );
   }
 }
@@ -40,7 +37,7 @@ class SvgImage extends BaseComponent {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      'assets/icons/${value}.svg',
+      'assets/icons/$value.svg',
       height: height,
       width: width,
       fit: BoxFit.cover,

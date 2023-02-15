@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/utils/colors.dart';
 import 'package:flutter_package/src/utils/size.dart';
@@ -13,7 +12,7 @@ class ItemPackage extends StatelessWidget {
   final Function() onShare;
   final Function() onTap;
 
-  Size size = Size(0.0, 0.0);
+  final Size size = Size(0.0, 0.0);
 
   ItemPackage(
       {required this.package,
@@ -109,8 +108,6 @@ class ItemPackage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    size = MediaQuery.of(context).size;
     return InkWell(
       borderRadius: BorderRadius.all(Radius.circular(8.0)),
       child: _build(),

@@ -37,7 +37,7 @@ class BasePackageRepository extends IPackageRepository {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.connectTimeout ||
+      if (e.type == DioErrorType.connectionTimeout ||
           e.type == DioErrorType.receiveTimeout ||
           e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
@@ -74,7 +74,7 @@ class BasePackageRepository extends IPackageRepository {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.connectTimeout ||
+      if (e.type == DioErrorType.connectionTimeout ||
           e.type == DioErrorType.receiveTimeout ||
           e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
@@ -112,7 +112,7 @@ class BasePackageRepository extends IPackageRepository {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.connectTimeout ||
+      if (e.type == DioErrorType.connectionTimeout ||
           e.type == DioErrorType.receiveTimeout ||
           e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());
@@ -149,7 +149,7 @@ class BasePackageRepository extends IPackageRepository {
         return left(RequestFailure.networkError());
       }
 
-      if (e.type == DioErrorType.connectTimeout ||
+      if (e.type == DioErrorType.connectionTimeout ||
           e.type == DioErrorType.receiveTimeout ||
           e.type == DioErrorType.sendTimeout) {
         return left(RequestFailure.serverError());

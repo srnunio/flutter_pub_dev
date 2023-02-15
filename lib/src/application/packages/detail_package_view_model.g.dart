@@ -6,7 +6,7 @@ part of 'detail_package_view_model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   Computed<bool>? _$hasErrorComputed;
@@ -53,8 +53,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
   Computed<List<Dependency>>? _$dev_dependenciesComputed;
 
   @override
-  List<Dependency> get dev_dependencies => (_$dev_dependenciesComputed ??=
-          Computed<List<Dependency>>(() => super.dev_dependencies,
+  List<Dependency> get devDependencies => (_$dev_dependenciesComputed ??=
+          Computed<List<Dependency>>(() => super.devDependencies,
               name: '_DetailPackageViewModel.dev_dependencies'))
       .value;
   Computed<Environment>? _$environmentComputed;
@@ -120,7 +120,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
           name: '_DetailPackageViewModel.loadingChangelog'))
       .value;
 
-  final _$_packageAtom = Atom(name: '_DetailPackageViewModel._package');
+  late final _$_packageAtom =
+      Atom(name: '_DetailPackageViewModel._package', context: context);
 
   @override
   Package? get _package {
@@ -135,7 +136,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_versionAtom = Atom(name: '_DetailPackageViewModel._version');
+  late final _$_versionAtom =
+      Atom(name: '_DetailPackageViewModel._version', context: context);
 
   @override
   Version? get _version {
@@ -150,7 +152,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_metricAtom = Atom(name: '_DetailPackageViewModel._metric');
+  late final _$_metricAtom =
+      Atom(name: '_DetailPackageViewModel._metric', context: context);
 
   @override
   Metric get _metric {
@@ -165,7 +168,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_readmeAtom = Atom(name: '_DetailPackageViewModel._readme');
+  late final _$_readmeAtom =
+      Atom(name: '_DetailPackageViewModel._readme', context: context);
 
   @override
   String get _readme {
@@ -180,7 +184,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_publisherAtom = Atom(name: '_DetailPackageViewModel._publisher');
+  late final _$_publisherAtom =
+      Atom(name: '_DetailPackageViewModel._publisher', context: context);
 
   @override
   String get _publisher {
@@ -195,7 +200,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_changelogAtom = Atom(name: '_DetailPackageViewModel._changelog');
+  late final _$_changelogAtom =
+      Atom(name: '_DetailPackageViewModel._changelog', context: context);
 
   @override
   String get _changelog {
@@ -210,8 +216,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_loadingReadmeAtom =
-      Atom(name: '_DetailPackageViewModel._loadingReadme');
+  late final _$_loadingReadmeAtom =
+      Atom(name: '_DetailPackageViewModel._loadingReadme', context: context);
 
   @override
   bool get _loadingReadme {
@@ -226,8 +232,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$_loadingChangelogAtom =
-      Atom(name: '_DetailPackageViewModel._loadingChangelog');
+  late final _$_loadingChangelogAtom =
+      Atom(name: '_DetailPackageViewModel._loadingChangelog', context: context);
 
   @override
   bool get _loadingChangelog {
@@ -242,7 +248,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$failureAtom = Atom(name: '_DetailPackageViewModel.failure');
+  late final _$failureAtom =
+      Atom(name: '_DetailPackageViewModel.failure', context: context);
 
   @override
   RequestFailure? get failure {
@@ -257,7 +264,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
     });
   }
 
-  final _$loadAsyncAction = AsyncAction('_DetailPackageViewModel.load');
+  late final _$loadAsyncAction =
+      AsyncAction('_DetailPackageViewModel.load', context: context);
 
   @override
   Future<void> load(String packageName, {bool refresh = false}) {
@@ -265,8 +273,8 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
         .run(() => super.load(packageName, refresh: refresh));
   }
 
-  final _$loadPublisherAsyncAction =
-      AsyncAction('_DetailPackageViewModel.loadPublisher');
+  late final _$loadPublisherAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadPublisher', context: context);
 
   @override
   Future<void> loadPublisher(String namePackage) {
@@ -274,32 +282,32 @@ mixin _$DetailPackageViewModel on _DetailPackageViewModel, Store {
         .run(() => super.loadPublisher(namePackage));
   }
 
-  final _$loadReadmeAsyncAction =
-      AsyncAction('_DetailPackageViewModel.loadReadme');
+  late final _$loadReadmeAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadReadme', context: context);
 
   @override
   Future<void> loadReadme() {
     return _$loadReadmeAsyncAction.run(() => super.loadReadme());
   }
 
-  final _$loadChangelogAsyncAction =
-      AsyncAction('_DetailPackageViewModel.loadChangelog');
+  late final _$loadChangelogAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadChangelog', context: context);
 
   @override
   Future<void> loadChangelog() {
     return _$loadChangelogAsyncAction.run(() => super.loadChangelog());
   }
 
-  final _$loadScoreAsyncAction =
-      AsyncAction('_DetailPackageViewModel.loadScore');
+  late final _$loadScoreAsyncAction =
+      AsyncAction('_DetailPackageViewModel.loadScore', context: context);
 
   @override
   Future<void> loadScore() {
     return _$loadScoreAsyncAction.run(() => super.loadScore());
   }
 
-  final _$_DetailPackageViewModelActionController =
-      ActionController(name: '_DetailPackageViewModel');
+  late final _$_DetailPackageViewModelActionController =
+      ActionController(name: '_DetailPackageViewModel', context: context);
 
   @override
   void setPackage(Package package) {
@@ -333,7 +341,7 @@ score: ${score},
 metric: ${metric},
 version: ${version},
 dependencies: ${dependencies},
-dev_dependencies: ${dev_dependencies},
+dev_dependencies: ${devDependencies},
 environment: ${environment},
 readme: ${readme},
 changelog: ${changelog},

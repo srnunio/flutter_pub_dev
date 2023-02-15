@@ -1,12 +1,12 @@
 name: flutter_package
 description: This is an example using the pub.dev where the purpose is to list the packages
-author:  Edvaldo Martins <edvaldomartins.developer@gmail.com>
 homepage: https://github.com/EdvaldoMartins/flutter_package_pub_dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=2.19.0 <3.0.0'
+  flutter: ">=3.7.0"
 
 dependencies:
   flutter:
@@ -15,31 +15,30 @@ dependencies:
     sdk: flutter
 
   #ui
-  cupertino_icons: ^0.1.3
-  flutter_markdown: ^0.6.2
-  flutter_svg: ^0.22.0
-  html: ^0.14.0+2
+  cupertino_icons: ^1.0.5
+  flutter_markdown: ^0.6.14
+  flutter_svg: ^2.0.1
+  html: ^0.15.1
   pull_to_refresh: ^2.0.0
   flutter_staggered_grid_view: ^0.6.2
 
   #state
-  mobx: ^2.0.1
-  flutter_mobx: ^2.0.0
+  mobx: ^2.1.3+1
+  flutter_mobx: ^2.0.6+5
 
   #data class
-  freezed_annotation: ^0.14.1
-  freezed: ^0.14.1+3
-  equatable: ^2.0.2
+  freezed_annotation: ^2.2.0
+  equatable: ^2.0.5
 
   #network
-  dio: ^4.0.0
-  url_launcher: ^6.0.0-nullsafety 
+  dio: ^5.0.0
+  url_launcher: ^6.0.0-nullsafety
 
   # Dependency Injection
-  get_it: ^7.1.2
+  get_it: ^7.2.0
 
   # Caching
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.0.17
 
   #utils
   fluttertoast: ^7.1.5
@@ -48,20 +47,18 @@ dependencies:
   intl: ^0.17.0
 
   # Testing
-  mockito: ^5.0.10
-
-
+  mockito: ^5.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  mobx_codegen: ^2.0.1+3
-  build_runner: ^2.0.1
-  json_serializable: ^4.1.1
-  build_resolvers: ^2.0.1
-
+  freezed: ^2.3.2
+  mobx_codegen: ^2.1.1
+  build_runner:
+  json_serializable: ^6.6.1
+  build_resolvers: ^2.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -85,4 +82,3 @@ flutter:
     - assets/locale/
     - assets/icons/
     - assets/images/
-

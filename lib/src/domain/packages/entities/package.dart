@@ -1,18 +1,15 @@
 import 'package:flutter_package/src/domain/packages/entities/version.dart';
-import 'dependency.dart';
-import 'version.dart';
-
 
 class Package {
   final String name;
-  final String package_url;
+  final String packageUrl;
   final String url;
   final List<Version> versions;
   final Version latest;
 
   const Package(
       {required this.name,
-        required this.package_url,
+        required this.packageUrl,
         required this.url,
         required this.latest,
         required this.versions});
@@ -20,7 +17,7 @@ class Package {
   Map<String, dynamic> toMap() {
     return {
       'name': this.name,
-      'package_url': this.package_url,
+      'package_url': this.packageUrl,
       'url': this.url,
       'versions': this.versions,
       'latest': this.latest,

@@ -9,7 +9,7 @@ class Pubspec {
   final String repository;
   final Environment environment;
   final List<Dependency> dependencies;
-  final List<Dependency> dev_dependencies;
+  final List<Dependency> devDependencies;
 
   Pubspec(
       {required this.name,
@@ -19,7 +19,7 @@ class Pubspec {
       required this.repository,
       required this.environment,
       required this.dependencies,
-      required this.dev_dependencies});
+      required this.devDependencies});
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +29,7 @@ class Pubspec {
       'repository': this.repository,
       'homepage': this.homepage,
       'dependencies': this.dependencies,
-      'dev_dependencies': this.dev_dependencies,
+      'dev_dependencies': this.devDependencies,
     };
   }
 

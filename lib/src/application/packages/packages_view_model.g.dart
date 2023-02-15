@@ -6,7 +6,7 @@ part of 'packages_view_model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$PackagesViewModel on _PackagesViewModel, Store {
   Computed<bool>? _$hasErrorComputed;
@@ -37,7 +37,8 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
           name: '_PackagesViewModel.hasData'))
       .value;
 
-  final _$_packagesAtom = Atom(name: '_PackagesViewModel._packages');
+  late final _$_packagesAtom =
+      Atom(name: '_PackagesViewModel._packages', context: context);
 
   @override
   ObservableList<Package> get _packages {
@@ -52,7 +53,8 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
     });
   }
 
-  final _$_failureAtom = Atom(name: '_PackagesViewModel._failure');
+  late final _$_failureAtom =
+      Atom(name: '_PackagesViewModel._failure', context: context);
 
   @override
   RequestFailure? get _failure {
@@ -67,15 +69,16 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
     });
   }
 
-  final _$loadAsyncAction = AsyncAction('_PackagesViewModel.load');
+  late final _$loadAsyncAction =
+      AsyncAction('_PackagesViewModel.load', context: context);
 
   @override
   Future<bool> load({bool refresh = false}) {
     return _$loadAsyncAction.run(() => super.load(refresh: refresh));
   }
 
-  final _$_PackagesViewModelActionController =
-      ActionController(name: '_PackagesViewModel');
+  late final _$_PackagesViewModelActionController =
+      ActionController(name: '_PackagesViewModel', context: context);
 
   @override
   void _setData(List<Package> list, bool refresh) {

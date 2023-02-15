@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package/src/presentation/core/base_widget.dart';
 import 'package:flutter_package/src/utils/colors.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_package/src/presentation/core/styles.dart';
 
 /// [SearchItem]
 class SearchItem extends BaseComponent {
-  Function() onTap;
+  final Function() onTap;
 
   SearchItem({required String name, required this.onTap}) : super(value: name);
 

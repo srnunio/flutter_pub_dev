@@ -31,7 +31,7 @@ class Util {
 
   /// [shareProject] share the package address
   static shareProject({required Package package}) {
-    var url = package.latest.archive_url
+    var url = package.latest.archiveUrl
         .replaceAll('/versions/${package.latest.version}.tar.gz', '');
     Share.share(url);
   }

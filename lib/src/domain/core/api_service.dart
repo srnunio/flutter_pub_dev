@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
 abstract class Api {
-  const Api(this.dio) : assert(dio != null);
+  const Api(this.dio);
   final Dio dio;
 }

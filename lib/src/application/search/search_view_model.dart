@@ -18,7 +18,7 @@ abstract class _SearchViewModel extends BaseViewModel with Store {
   ObservableList<String> _results = ObservableList.of([]);
 
   @observable
-  RequestFailure? failure = null;
+  RequestFailure? failure;
 
   @computed
   bool get hasError => failure != null;

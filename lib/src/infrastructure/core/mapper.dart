@@ -37,12 +37,12 @@ abstract class Mapper {
         ? <Version>[]
         : List.from(map['versions']).map((e) => versionFromMap(e)).toList();
 
-    var package_url =
+    var packageUrl =
         (map['package_url'] != null) ? map['package_url'] as String : '';
 
     return Package(
       name: map['name'] as String,
-      package_url: package_url,
+      packageUrl: packageUrl,
       url: (map['url'] != null) ? map['url'] as String : '',
       versions: versions,
       latest: versionFromMap(map['latest']),
@@ -66,7 +66,7 @@ abstract class Mapper {
         ? <Dependency>[]
         : _getDependencies(map['dependencies']);
 
-    var dev_dependencies = (map['dev_dependencies'] == null)
+    var devDependencies = (map['dev_dependencies'] == null)
         ? <Dependency>[]
         : _getDependencies(map['dev_dependencies']);
 
@@ -81,7 +81,7 @@ abstract class Mapper {
         repository:
             (map['repository'] != null) ? map['repository'] as String : '',
         homepage: (map['homepage'] != null) ? map['homepage'] as String : '',
-        dev_dependencies: dev_dependencies,
+        devDependencies: devDependencies,
         dependencies: dependencies,
         environment: environment);
   }
@@ -100,7 +100,7 @@ abstract class Mapper {
   static Version versionFromMap(Map<String, dynamic> map) {
     return new Version(
       version: map['version'] as String,
-      archive_url: map['archive_url'] as String,
+      archiveUrl: map['archive_url'] as String,
       published:
           (map.containsKey('published')) ? map['published'] as String : '',
       pubspec: pubspecFromMap(map['pubspec']),
