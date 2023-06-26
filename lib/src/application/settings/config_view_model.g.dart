@@ -6,7 +6,7 @@ part of 'config_view_model.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ConfigViewModel on _ConfigViewModel, Store {
   Computed<Locale>? _$localeComputed;
@@ -30,8 +30,8 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
           name: '_ConfigViewModel.darkModeIsEnable'))
       .value;
 
-  final _$_darkModeIsEnableAtom =
-      Atom(name: '_ConfigViewModel._darkModeIsEnable');
+  late final _$_darkModeIsEnableAtom =
+      Atom(name: '_ConfigViewModel._darkModeIsEnable', context: context);
 
   @override
   bool get _darkModeIsEnable {
@@ -46,7 +46,8 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
     });
   }
 
-  final _$_themeDataAtom = Atom(name: '_ConfigViewModel._themeData');
+  late final _$_themeDataAtom =
+      Atom(name: '_ConfigViewModel._themeData', context: context);
 
   @override
   ThemeData? get _themeData {
@@ -61,7 +62,8 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
     });
   }
 
-  final _$_localeAtom = Atom(name: '_ConfigViewModel._locale');
+  late final _$_localeAtom =
+      Atom(name: '_ConfigViewModel._locale', context: context);
 
   @override
   Locale? get _locale {
@@ -76,15 +78,16 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
     });
   }
 
-  final _$initializeAsyncAction = AsyncAction('_ConfigViewModel.initialize');
+  late final _$initializeAsyncAction =
+      AsyncAction('_ConfigViewModel.initialize', context: context);
 
   @override
   Future<void> initialize() {
     return _$initializeAsyncAction.run(() => super.initialize());
   }
 
-  final _$changeTranslateAsyncAction =
-      AsyncAction('_ConfigViewModel.changeTranslate');
+  late final _$changeTranslateAsyncAction =
+      AsyncAction('_ConfigViewModel.changeTranslate', context: context);
 
   @override
   Future<void> changeTranslate({required String languageCode}) {
@@ -92,16 +95,16 @@ mixin _$ConfigViewModel on _ConfigViewModel, Store {
         .run(() => super.changeTranslate(languageCode: languageCode));
   }
 
-  final _$enableDarkModeAsyncAction =
-      AsyncAction('_ConfigViewModel.enableDarkMode');
+  late final _$enableDarkModeAsyncAction =
+      AsyncAction('_ConfigViewModel.enableDarkMode', context: context);
 
   @override
   Future<void> enableDarkMode() {
     return _$enableDarkModeAsyncAction.run(() => super.enableDarkMode());
   }
 
-  final _$disableDarkModeAsyncAction =
-      AsyncAction('_ConfigViewModel.disableDarkMode');
+  late final _$disableDarkModeAsyncAction =
+      AsyncAction('_ConfigViewModel.disableDarkMode', context: context);
 
   @override
   Future<void> disableDarkMode() {
