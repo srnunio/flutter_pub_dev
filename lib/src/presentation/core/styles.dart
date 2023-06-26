@@ -60,15 +60,18 @@ ThemeData lightTheme() {
       caption: styleText(),
     ).apply(bodyColor: kTitleTextColor, displayColor: kTitleTextColor),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: kBackgroundColor),
-    accentColor: kPrimaryColor,
     primaryColor: kPrimaryColor,
     backgroundColor: kBackgroundColor,
     scaffoldBackgroundColor: kBackgroundColor,
     dialogBackgroundColor: kBackgroundColor,
     fontFamily: fontName,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: kPrimaryColor,
+      primary: kPrimaryColor,
+      brightness: Brightness.light,
+    ),
     iconTheme: IconThemeData(color: kIconColor),
     appBarTheme: AppBarTheme(
-        brightness: Brightness.dark,
         color: kBackgroundColor,
         iconTheme: IconThemeData(color: kIconColor)),
   );
@@ -97,15 +100,19 @@ ThemeData darkTheme() {
       caption: styleText(),
     ).apply(bodyColor: kTitleTextColor, displayColor: kTitleTextColor),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: kBackgroundColor),
-    accentColor: kBackgroundColor,
     primaryColor: kPrimaryColor,
     backgroundColor: kBackgroundColor,
     scaffoldBackgroundColor: kBackgroundColor,
     dialogBackgroundColor: kBackgroundColor,
     fontFamily: fontName,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: kPrimaryColor,
+      primary: kPrimaryColor,
+      brightness: Brightness.dark,
+    ),
+
     iconTheme: IconThemeData(color: kIconColor),
     appBarTheme: AppBarTheme(
-        brightness: Brightness.light,
         color: kBackgroundColor,
         iconTheme: IconThemeData(color: kIconColor)),
   );
