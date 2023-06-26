@@ -646,14 +646,14 @@ class DetailPackageScreenState extends State<DetailPackageScreen>
                   onPressed: () => Util.shareProject(package: _model.package)),
             if (_model.hasData)
               Builder(builder: (context) {
-                var _homePage = _model.package.latest.pubspec.homepage;
-                if (_homePage.isNotEmpty)
+                var repository = _model.package.latest.pubspec.repository;
+                if (repository.isNotEmpty)
                   return IconButton(
                       icon: CustomIcon(
-                        icon: 'github',
+                        icon: 'repository',
                         size: 20,
                       ),
-                      onPressed: () => Util.openLink(url: _homePage));
+                      onPressed: () => Util.openLink(url: repository));
                 return SizedBox.shrink();
               })
           ],
