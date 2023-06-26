@@ -154,7 +154,6 @@ class PackagesScreenState extends State<PackagesScreen>
     return ConfigBuilder(builder: (_, theme) {
       return Scaffold(
         appBar: AppBar(
-          brightness: theme.brightness,
           centerTitle: false,
           actions: <Widget>[
             IconButton(
