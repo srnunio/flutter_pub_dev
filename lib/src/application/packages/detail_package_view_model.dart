@@ -151,7 +151,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Future<void> loadReadme() async {
     _loadingReadme = true;
     var response = await _advancedService.readFile(
-        gitPath: package.latest.pubspec.homepage, fileName: 'README.md');
+        gitPath: package.latest.pubspec.repository, fileName: 'README.md');
     _loadingReadme = false;
     response.fold(
         (failure) => this._readme = '', (data) => this._readme = data);
@@ -161,7 +161,7 @@ abstract class _DetailPackageViewModel extends BaseViewModel with Store {
   Future<void> loadChangelog() async {
     _loadingChangelog = true;
     var response = await _advancedService.readFile(
-        gitPath: package.latest.pubspec.homepage, fileName: 'CHANGELOG.md');
+        gitPath: package.latest.pubspec.repository, fileName: 'CHANGELOG.md');
     _loadingChangelog = false;
     response.fold(
         (failure) => this._changelog = '', (data) => this._changelog = data);
