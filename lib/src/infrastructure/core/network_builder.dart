@@ -1,5 +1,5 @@
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 
 const String host = 'pub.dartlang.org';
 const String apiBaseUrl = 'https://$host/api';
